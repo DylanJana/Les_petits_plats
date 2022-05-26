@@ -1,1 +1,147 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+body {
+  color: #000;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+.visibility--hidden {
+  visibility: hidden;
+}
+
+.ly--full-container {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0;
+}
+
+.ly--lg-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1380px;
+  padding-right: 30px;
+  padding-left: 30px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*** Gestion du flex ***/
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.justify-content--center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.align-items--center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/*** Rows & Column ***/
+.row--has-columns-sm {
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.row--has-columns-sm .column {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+/*** Gestion des margins & padding ***/
+.mt--md {
+  margin-top: 40px;
+}
+
+.mt--lg {
+  margin-top: 64px;
+}
+
+.ptb--sm {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.search__box {
+  position: relative;
+}
+
+.search__box input {
+  background-color: #E7E7E7;
+}
+
+.search__box input::-webkit-input-placeholder {
+  color: #000;
+  opacity: 0.25;
+}
+
+.search__box input:-ms-input-placeholder {
+  color: #000;
+  opacity: 0.25;
+}
+
+.search__box input::-ms-input-placeholder {
+  color: #000;
+  opacity: 0.25;
+}
+
+.search__box input::placeholder {
+  color: #000;
+  opacity: 0.25;
+}
+
+.search__box input:focus {
+  background-color: #fff;
+  border-color: #D04F4F;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem #fc9595;
+          box-shadow: 0 0 0 0.2rem #fc9595;
+}
+
+.search__box span {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1.75rem;
+}
+
+.btn--plain {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 4px;
+}
+
+.btn--plain span {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.btn--plain.btn--tiers {
+  color: #fff;
+  font-weight: 700;
+  background-color: #3282F7;
+}
+
+.btn--plain.btn--quarts {
+  color: #fff;
+  font-weight: 700;
+  background-color: #68D9A4;
+}
+
+.btn--plain.btn--fifth {
+  color: #fff;
+  font-weight: 700;
+  background-color: #ED6454;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */

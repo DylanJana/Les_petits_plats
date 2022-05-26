@@ -1,0 +1,59 @@
+.search__box {
+    position: relative;
+
+    input {
+        background-color: $color-primary;
+
+        &::placeholder {
+            color: $color-text;
+            opacity: 0.25;
+        }
+
+        &:focus {
+            background-color: $white;
+            border-color: $color-secondary;
+            outline: 0;
+            box-shadow: 0 0 0 .2rem $color-secondary-ghost;
+        }
+    }
+    
+    span {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 1.75rem;
+    }
+}
+
+.btn--plain {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 4px;
+
+    span {
+        font-size: 16px;
+        margin-left: 8px;
+    }
+
+    &.btn--tiers {
+        color: $white;
+        font-weight: 700;
+        background-color: $color-tiers;
+    }
+
+    &.btn--quarts {
+        color: $white;
+        font-weight: 700;
+        background-color: $color-quarts;
+    }
+
+    &.btn--fifth {
+        color: $white;
+        font-weight: 700;
+        background-color: $color-fifth;
+    }
+}
+
+.dropdown-toggle::after {
+    display: none;
+}

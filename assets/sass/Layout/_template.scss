@@ -1,0 +1,53 @@
+.ly--full-container {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0;
+}
+
+.ly--lg-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1380px;
+    padding-right: 30px;
+    padding-left: 30px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*** Gestion du flex ***/
+.flex {
+    display: flex;
+}
+
+.justify-content--center {
+    justify-content: center;
+}
+
+.align-items--center {
+    align-items: center;
+}
+
+/*** Rows & Column ***/
+.row--has-columns-sm {
+    margin-right: -5px;
+    margin-left: -5px;
+
+    .column {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}
+
+/*** Gestion des margins & padding ***/
+.mt--md {
+    margin-top: 40px;
+}
+
+.mt--lg {
+    margin-top: 64px;
+}
+
+.ptb--sm {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
