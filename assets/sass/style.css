@@ -146,6 +146,31 @@ body {
   font-size: 1.75rem;
 }
 
+/*** Tags ***/
+.box__tag__content {
+  padding: 8px 16px;
+  border-radius: 4px;
+  width: 104px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.box__tag__content span:hover {
+  cursor: pointer;
+}
+
+.box__tag__content.tag--tiers {
+  background-color: #3282F7;
+}
+
+.box__tag__content.tag--quarts {
+  background-color: #68D9A4;
+}
+
+.box__tag__content.tag--fifth {
+  background-color: #ED6454;
+}
+
 .btn--plain {
   padding-top: 16px;
   padding-bottom: 16px;

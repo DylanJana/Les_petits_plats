@@ -25,6 +25,32 @@
     }
 }
 
+/*** Tags ***/
+
+.box__tag__content {
+    padding: 8px 16px;
+    border-radius: 4px;
+    width: 104px;
+    color: $white;
+    font-weight: 700;
+
+    span:hover {
+        cursor: pointer;
+    }
+
+    &.tag--tiers {
+        background-color: $color-tiers;
+    }
+
+    &.tag--quarts  {
+        background-color: $color-quarts;
+    }
+
+    &.tag--fifth {
+        background-color: $color-fifth;
+    }
+}
+
 .btn--plain {
     padding-top: 16px;
     padding-bottom: 16px;
