@@ -19,6 +19,10 @@
     display: flex;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .justify-content--center {
     justify-content: center;
 }
@@ -27,7 +31,21 @@
     align-items: center;
 }
 
+.justify-content--space-between {
+    justify-content: space-between;
+}
+
 /*** Rows & Column ***/
+.row--has-columns-md {
+    margin-right: -15px;
+    margin-left: -15px;
+
+    .column {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
 .row--has-columns-sm {
     margin-right: -5px;
     margin-left: -5px;
@@ -39,12 +57,20 @@
 }
 
 /*** Gestion des margins & padding ***/
+.mt--sm {
+    margin-top: 32px;
+}
+
 .mt--md {
     margin-top: 40px;
 }
 
 .mt--lg {
     margin-top: 64px;
+}
+
+.mb--xs {
+    margin-bottom: 16px;
 }
 
 .ptb--sm {

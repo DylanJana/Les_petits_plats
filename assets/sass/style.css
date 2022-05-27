@@ -2,11 +2,16 @@
 body {
   color: #000;
   font-family: 'Lato', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .visibility--hidden {
   visibility: hidden;
+}
+
+/*** Text ***/
+.paragraph {
+  margin: 0;
 }
 
 .ly--full-container {
@@ -32,6 +37,11 @@ body {
   display: flex;
 }
 
+.flex-wrap {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .justify-content--center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -44,7 +54,23 @@ body {
           align-items: center;
 }
 
+.justify-content--space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 /*** Rows & Column ***/
+.row--has-columns-md {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row--has-columns-md .column {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .row--has-columns-sm {
   margin-right: -5px;
   margin-left: -5px;
@@ -56,12 +82,20 @@ body {
 }
 
 /*** Gestion des margins & padding ***/
+.mt--sm {
+  margin-top: 32px;
+}
+
 .mt--md {
   margin-top: 40px;
 }
 
 .mt--lg {
   margin-top: 64px;
+}
+
+.mb--xs {
+  margin-bottom: 16px;
 }
 
 .ptb--sm {
@@ -143,5 +177,65 @@ body {
 
 .dropdown-toggle::after {
   display: none;
+}
+
+/*** Card recipes ***/
+.card__recipe {
+  border-radius: 8px;
+}
+
+.card__recipe img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  height: 178px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card__recipe span:not(i.far.fa-clock) {
+  font-weight: 700;
+}
+
+.card__recipe span:not(i.far.fa-clock) i.far.fa-clock {
+  margin-right: 8px;
+}
+
+.card__recipe__body {
+  padding: 24px;
+  background-color: #E7E7E7;
+  border-radius: 0 0 8px 8px;
+}
+
+.recipe__list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.75rem;
+}
+
+.recipe__desc {
+  font-size: 0.75rem;
+}
+
+.card__recipe__title span {
+  text-align: right;
+}
+
+/*** Queries ***/
+@media (max-width: 992px) {
+  .card__recipe {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 575px) {
+  .btn--plain {
+    margin-bottom: 16px;
+  }
+  .card__recipe__title p {
+    margin-bottom: 8px;
+  }
+  .card__recipe__title span {
+    text-align: left;
+  }
 }
 /*# sourceMappingURL=style.css.map */

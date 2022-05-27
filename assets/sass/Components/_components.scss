@@ -57,3 +57,68 @@
 .dropdown-toggle::after {
     display: none;
 }
+
+/*** Card recipes ***/
+.card__recipe {
+    border-radius: 8px;
+
+    img {
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+        height: 178px;
+        object-fit: cover;
+    }
+
+    span:not(i.far.fa-clock) {
+        font-weight: 700;
+        
+        i.far.fa-clock {
+            margin-right: 8px;
+        }
+    }
+}
+
+.card__recipe__body {
+    padding: 24px;
+    background-color: $color-primary;
+    border-radius: 0 0 8px 8px;
+}
+
+.recipe__list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.75rem;
+}
+
+.recipe__desc {
+    font-size: 0.75rem;
+}
+
+.card__recipe__title {
+    span {
+        text-align: right;
+    }
+}
+
+/*** Queries ***/
+@media (max-width: 992px) {
+    .card__recipe {
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 575px) {
+	.btn--plain {
+        margin-bottom: 16px;
+    }
+
+    .card__recipe__title {
+        p {
+            margin-bottom: 8px;
+        }
+
+        span {
+            text-align: left;
+        }
+    }
+}
