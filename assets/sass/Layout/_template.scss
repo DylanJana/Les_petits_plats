@@ -23,6 +23,10 @@
     flex-wrap: wrap;
 }
 
+.flex--column {
+    flex-direction: column;
+}
+
 .justify-content--center {
     justify-content: center;
 }
@@ -37,12 +41,12 @@
 
 /*** Rows & Column ***/
 .row--has-columns-md {
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: -16px;
+    margin-left: -16px;
 
     .column {
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 16px;
+        padding-left: 16px;
     }
 }
 
@@ -71,6 +75,10 @@
 
 .mb--xs {
     margin-bottom: 16px;
+}
+
+.mb--sm {
+    margin-bottom: 32px;
 }
 
 .ptb--sm {

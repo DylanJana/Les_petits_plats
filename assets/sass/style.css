@@ -42,6 +42,13 @@ body {
       flex-wrap: wrap;
 }
 
+.flex--column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .justify-content--center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -62,13 +69,13 @@ body {
 
 /*** Rows & Column ***/
 .row--has-columns-md {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: -16px;
+  margin-left: -16px;
 }
 
 .row--has-columns-md .column {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
 .row--has-columns-sm {
@@ -96,6 +103,10 @@ body {
 
 .mb--xs {
   margin-bottom: 16px;
+}
+
+.mb--sm {
+  margin-bottom: 32px;
 }
 
 .ptb--sm {
@@ -229,6 +240,7 @@ body {
   padding: 24px;
   background-color: #E7E7E7;
   border-radius: 0 0 8px 8px;
+  height: 100%;
 }
 
 .recipe__list {
