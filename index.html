@@ -38,21 +38,22 @@
         </section>
         <section class="ly--lg-container">
             <div class="row--has-columns-sm">
-                <div class="btn-group column">
-                    <button class="btn btn-lg dropdown-toggle btn--plain btn--tiers" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="btn-group column" id="firstGroup">
+                    <div href="javascript:void(0);" class="btn btn-lg dropdown-toggle btn--plain btn--tiers" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button">
                         Ingredients
                         <span class="fas fa-chevron-down"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      ...
-                    </ul>
+                    </div>
+                    <div class="dropdown-menu dropdown--tiers row--has-columns-md">
+                        <ul class="flex flex-wrap">
+                        </ul>
+                    </div>
                 </div>
                 <div class="btn-group column">
                     <button class="btn btn-lg dropdown-toggle btn--plain btn--quarts" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Appareils
                         <span class="fas fa-chevron-down"></span>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown--quarts">
                       ...
                     </ul>
                 </div>  
@@ -61,7 +62,7 @@
                         Ustensiles
                         <span class="fas fa-chevron-down"></span>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown--fifth">
                       ...
                     </ul>
                 </div>  

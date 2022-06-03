@@ -9,6 +9,10 @@ body {
   visibility: hidden;
 }
 
+ul {
+  padding-left: 0;
+}
+
 /*** Text ***/
 .paragraph {
   margin: 0;
@@ -99,6 +103,10 @@ body {
 
 .mt--lg {
   margin-top: 64px;
+}
+
+.mb--xxs {
+  margin-bottom: 8px;
 }
 
 .mb--xs {
@@ -213,6 +221,66 @@ body {
 
 .dropdown-toggle::after {
   display: none;
+}
+
+.dropdown-menu {
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 488px;
+}
+
+.dropdown-menu.dropdown--tiers {
+  background-color: #3282F7;
+  border: 0;
+  border-radius: 0;
+}
+
+.dropdown-menu.dropdown--quarts {
+  background-color: #68D9A4;
+}
+
+.dropdown-menu.dropdown--fifth {
+  background-color: #ED6454;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+}
+
+.dropdown-menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown__search-box {
+  position: relative;
+}
+
+#firstGroup .btn {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+#searchDropdown {
+  background: transparent;
+  border: 0;
+  color: white;
+}
+
+#searchDropdown::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#searchDropdown:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#searchDropdown::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#searchDropdown::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /*** Card recipes ***/

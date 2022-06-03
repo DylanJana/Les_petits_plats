@@ -4,6 +4,7 @@ const wrapperRecipes = document.querySelector(".wrapper");
 
 export let recipes= [];
 export let recipesIngredients = [];
+export let firstDropDown = [];
 
 fetchRecipesJSON()
     .then(data =>{
@@ -11,6 +12,7 @@ fetchRecipesJSON()
             recipes[i] = data.recipes[i];
             addRecipeInDOM(recipes[i]);
         }
+        addIngredientsInDropdown(data.recipes);
     })
 
 const addRecipeInDOM = (recipe) =>{
@@ -54,5 +56,41 @@ const addRecipeIngredientsInDOM = (recipesIngredients) => {
         for(let j = 0; j < list.length; j++) {
             list[j].appendChild(createLi);
         }
+    }
+}
+
+const addIngredientsInDropdown = (listIngredients) => {
+    let dropDownIngredients = document.querySelector('.btn.btn--tiers');
+    let dropDown = document.querySelector('.btn.btn--tiers + .dropdown-menu');
+    let dropDownList = document.querySelector('ul');
+    
+    dropDownIngredients.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropDownIngredients.innerHTML = `
+        <div class="flex align-items--center justify-content--space-between dropdown__search-box">
+            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un ingrédient">
+            <span class="fas fa-chevron-up"></span>
+        </div>
+        `;
+        dropDownIngredients.style.width= "488px";
+        dropDownIngredients.style.borderRadius = "4px 4px 0 0";
+        dropDown.style.display= "block";
+    })
+    for(let i = 0; i < listIngredients.length; i++) {
+        let arrayIngredient = listIngredients[i].ingredients;
+        for(let j = 0; j < arrayIngredient.length; j++ ) {
+            if(firstDropDown.indexOf(arrayIngredient[j].ingredient) < 0) {
+                firstDropDown.push(arrayIngredient[j].ingredient);
+            }
+        }
+        console.log(firstDropDown)
+    }
+    for(let i = 0; i < firstDropDown.length; i++) {
+        let liItemIngredient = document.createElement('li');
+        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+        liItemIngredient.innerHTML = `
+            <a href="javascript:void(0);"> ${firstDropDown[i]}</a>
+        `
+            dropDownList.appendChild(liItemIngredient);
     }
 }

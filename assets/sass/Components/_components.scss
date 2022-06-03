@@ -84,6 +84,57 @@
     display: none;
 }
 
+.dropdown-menu {
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 488px;
+
+    &.dropdown--tiers {
+        background-color: $color-tiers;
+        border: 0;
+        border-radius: 0;
+    }
+
+    &.dropdown--quarts {
+        background-color: $color-quarts;
+    }
+
+    &.dropdown--fifth {
+        background-color: $color-fifth;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        color: $white;
+        text-decoration: none;
+    }
+}
+
+.dropdown__search-box {
+    position: relative;
+}
+
+#firstGroup {
+
+    .btn {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+#searchDropdown {
+    background: transparent;
+    border: 0;
+    color: white;
+
+    &::placeholder {
+        color: rgba($color: $white, $alpha: 0.5)
+    }
+}
+
 /*** Card recipes ***/
 .card__recipe {
     border-radius: 8px;
