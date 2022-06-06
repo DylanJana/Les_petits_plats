@@ -78,6 +78,11 @@
         font-weight: 700;
         background-color: $color-fifth;
     }
+
+    &.btn--dropdown {
+        width: 488px;
+        border-radius: 4px 4px 0 0;
+    }
 }
 
 .dropdown-toggle::after {

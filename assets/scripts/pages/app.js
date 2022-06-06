@@ -5,6 +5,7 @@ const wrapperRecipes = document.querySelector(".wrapper");
 export let recipes= [];
 export let recipesIngredients = [];
 export let firstDropDown = [];
+export let secondDropDown = [];
 
 fetchRecipesJSON()
     .then(data =>{
@@ -12,7 +13,7 @@ fetchRecipesJSON()
             recipes[i] = data.recipes[i];
             addRecipeInDOM(recipes[i]);
         }
-        addIngredientsInDropdown(data.recipes);
+        addInDropdown(data.recipes);
     })
 
 const addRecipeInDOM = (recipe) =>{
@@ -59,31 +60,48 @@ const addRecipeIngredientsInDOM = (recipesIngredients) => {
     }
 }
 
-const addIngredientsInDropdown = (listIngredients) => {
-    let dropDownIngredients = document.querySelector('.btn.btn--tiers');
-    let dropDown = document.querySelector('.btn.btn--tiers + .dropdown-menu');
-    let dropDownList = document.querySelector('ul');
+const addInDropdown = (recipeData) => {
+    let dropDownIngredients = document.querySelector('.btn.dropdown-toggle');
+    let dropDown = document.querySelector('.dropdown-menu');
     
     dropDownIngredients.addEventListener('click', (e) => {
         e.preventDefault();
         dropDownIngredients.innerHTML = `
-        <div class="flex align-items--center justify-content--space-between dropdown__search-box">
+        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="closeDropwDown">
             <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un ingrédient">
             <span class="fas fa-chevron-up"></span>
         </div>
         `;
-        dropDownIngredients.style.width= "488px";
-        dropDownIngredients.style.borderRadius = "4px 4px 0 0";
-        dropDown.style.display= "block";
+        dropDownIngredients.classList.add('btn--dropdown');
+        dropDown.classList.add("d--block");
     })
-    for(let i = 0; i < listIngredients.length; i++) {
-        let arrayIngredient = listIngredients[i].ingredients;
+
+    let dropDownDevice = document.querySelector('.btn.btn--quarts.dropdown-toggle');
+    let listDevice = document.querySelector('.dropdown--quarts');
+    dropDownDevice.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropDownDevice.innerHTML = `
+        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="closeDropwDown">
+            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un Appareil">
+            <span class="fas fa-chevron-up"></span>
+        </div>
+        `;
+        dropDownDevice.classList.add('btn--dropdown');
+        listDevice.classList.add("d--block");
+    })
+    addIngredientInDropDown(recipeData);
+    addDeviceInDropDown(recipeData);
+}
+
+const addIngredientInDropDown = (recipeData) => {
+    let dropDownList = document.querySelector('.dropdown--tiers ul');
+    for(let i = 0; i < recipeData.length; i++) {
+        let arrayIngredient = recipeData[i].ingredients;
         for(let j = 0; j < arrayIngredient.length; j++ ) {
             if(firstDropDown.indexOf(arrayIngredient[j].ingredient) < 0) {
                 firstDropDown.push(arrayIngredient[j].ingredient);
             }
         }
-        console.log(firstDropDown)
     }
     for(let i = 0; i < firstDropDown.length; i++) {
         let liItemIngredient = document.createElement('li');
@@ -94,3 +112,52 @@ const addIngredientsInDropdown = (listIngredients) => {
             dropDownList.appendChild(liItemIngredient);
     }
 }
+
+const addDeviceInDropDown = (recipeData) => {
+    let dropDownList = document.querySelector('.dropdown--quarts ul');
+    let applianceArray = [];
+    for(let i = 0; i < recipeData.length; i++) {
+        let applianceItem = recipeData[i].appliance;
+        applianceArray.push(applianceItem);
+        for(let j = 0; j < applianceArray.length; j++ ) {
+            if(secondDropDown.indexOf(applianceArray[j]) < 0) {
+                secondDropDown.push(applianceArray[j]);
+            }
+        }
+    }
+
+    for(let i = 0; i < secondDropDown.length; i++) {
+        let liItemIngredient = document.createElement('li');
+        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+        liItemIngredient.innerHTML = `
+            <a href="javascript:void(0);"> ${secondDropDown[i]}</a>
+        `
+            dropDownList.appendChild(liItemIngredient);
+    }
+}
+
+window.onclick = function(event) {
+            if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {
+              let dropdowns = document.querySelectorAll(".dropdown-content");
+              let dropDownIngredients = document.querySelector('.btn.btn--tiers');
+              let dropDownDevice = document.querySelector('.btn.btn--quarts');
+              dropDownIngredients.innerHTML = `
+              Ingredients
+              <span class="fas fa-chevron-down"></span>
+              `
+            dropDownDevice.innerHTML = `
+            Appareils
+            <span class="fas fa-chevron-down"></span>
+            `
+              for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('d--block')) {
+                  openDropdown.classList.remove('d--block');
+                  dropDownIngredients.classList.remove('btn--dropdown');
+                  dropDownDevice.classList.remove('btn--dropdown');
+                  firstDropDown = [];
+                  secondDropDown = [];
+                }
+              }
+            }
+          }
