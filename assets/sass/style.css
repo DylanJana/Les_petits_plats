@@ -36,7 +36,11 @@ ul {
 
 /*** Gestion des blocks ***/
 .d--block {
-  display: block;
+  display: block !important;
+}
+
+.d--none {
+  display: none !important;
 }
 
 /*** Gestion du flex ***/
@@ -247,10 +251,14 @@ ul {
 
 .dropdown-menu.dropdown--quarts {
   background-color: #68D9A4;
+  border: 0;
+  border-radius: 0;
 }
 
 .dropdown-menu.dropdown--fifth {
   background-color: #ED6454;
+  border: 0;
+  border-radius: 0;
 }
 
 .dropdown-menu ul {
@@ -275,6 +283,7 @@ ul {
   background: transparent;
   border: 0;
   color: white;
+  width: 100%;
 }
 
 #searchDropdown::-webkit-input-placeholder {
@@ -291,6 +300,11 @@ ul {
 
 #searchDropdown::placeholder {
   color: rgba(255, 255, 255, 0.5);
+}
+
+#closeDropDown {
+  display: none;
+  width: 94%;
 }
 
 /*** Card recipes ***/

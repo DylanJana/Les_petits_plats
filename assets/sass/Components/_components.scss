@@ -102,10 +102,14 @@
 
     &.dropdown--quarts {
         background-color: $color-quarts;
+        border: 0;
+        border-radius: 0;
     }
 
     &.dropdown--fifth {
         background-color: $color-fifth;
+        border: 0;
+        border-radius: 0;
     }
 
     ul {
@@ -134,10 +138,16 @@
     background: transparent;
     border: 0;
     color: white;
+    width: 100%;
 
     &::placeholder {
         color: rgba($color: $white, $alpha: 0.5)
     }
+}
+
+#closeDropDown {
+    display: none;
+    width: 94%;
 }
 
 /*** Card recipes ***/
