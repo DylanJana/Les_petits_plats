@@ -68,6 +68,12 @@ ul {
           justify-content: center;
 }
 
+.align-items--start {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+}
+
 .align-items--center {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -178,9 +184,12 @@ ul {
 .box__tag__content {
   padding: 8px 16px;
   border-radius: 4px;
-  width: 104px;
   color: #fff;
   font-weight: 700;
+}
+
+.box__tag__content span {
+  margin-top: 4px;
 }
 
 .box__tag__content span:hover {
@@ -317,6 +326,11 @@ ul {
 #searchInstrumentDropDown {
   display: none;
   width: 94%;
+}
+
+.list__item {
+  max-width: 128px;
+  display: inline-block;
 }
 
 /*** Card recipes ***/

@@ -1,3 +1,4 @@
+import { findValueClick } from "../pages/app.js";
 export let searchBox = document.querySelector('#closeDropDown');
 export let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
 export let firstDropDown = [];
@@ -16,7 +17,7 @@ export const addIngredientInDropDown = (recipeData) => {
         let liItemIngredient = document.createElement('li');
         liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
         liItemIngredient.innerHTML = `
-            <a href="javascript:void(0);"> ${firstDropDown[i]}</a>
+            <a href="javascript:void(0);" class="list__item" onclick="findValueClick(this.innerText)"> ${firstDropDown[i]}</a>
         `
             dropDownList.appendChild(liItemIngredient);
     }

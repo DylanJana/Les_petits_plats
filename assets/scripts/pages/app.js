@@ -1,12 +1,13 @@
 import { fetchRecipesJSON } from "../api/getData.js";
 import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../dropdowns/dropdown-ingredients.js";
 import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../dropdowns/dropdown-devices.js";
-import { searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../dropdowns/dropdown-instruments.js";
+import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../dropdowns/dropdown-instruments.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
 
 export let recipes= [];
 export let recipesIngredients = [];
+export let itemsArray = [];
 
 fetchRecipesJSON()
     .then(data =>{
@@ -35,12 +36,12 @@ const addRecipeInDOM = (recipe) =>{
         </div>
     </div>`;
     recipesIngredients = recipe["ingredients"];
-    addRecipeIngredientsInDOM(recipesIngredients);
+    addRecipeIngredientsInCard(recipesIngredients);
 }
 
 
 
-const addRecipeIngredientsInDOM = (recipesIngredients) => {
+const addRecipeIngredientsInCard = (recipesIngredients) => {
     let list = document.querySelectorAll('.recipe__list');
 
     for(let i = 0; i < recipesIngredients.length; i++) {
@@ -70,6 +71,7 @@ const addInDropdown = (recipeData) => {
     addInstrumentInDropDown(recipeData);
 }
 
+// Close dropdown on click on window
 window.onclick = function(event) {
     if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {
         closeDropDownIngredient();
@@ -86,3 +88,39 @@ window.onclick = function(event) {
         closeDropDownDevice();
     }
 }
+
+window.findValueClick = findValueClick;
+
+export function findValueClick(filterValue) {
+    let tagBoxContainer = document.querySelector('.box__tag__container');
+    let tagBoxDiv = document.createElement('div');
+    tagBoxDiv.classList.add('column', 'col-sm-2');
+    tagBoxContainer.appendChild(tagBoxDiv);
+    let tagBox = `
+        <div class="box__tag__content flex align-items--start justify-content--space-between">
+            <p class="paragraph">${filterValue}</p>
+            <span class="far fa-times-circle"></span>
+        </div>
+    `
+    tagBoxDiv.innerHTML = tagBox;
+    if(firstDropDown.includes(filterValue) === true) {
+        let tagsTiers = document.querySelectorAll('.box__tag__content:not(.tag--quarts):not(.tag--fifth)');
+
+        for(let i = 0; i < tagsTiers.length; i++) {
+            tagsTiers[i].classList.add('tag--tiers');
+        }
+    } else if(secondDropDown.includes(filterValue) === true) {
+        let tagsQuarts = document.querySelectorAll('.box__tag__content:not(.tag--tiers):not(.tag--fifth)');
+
+        for(let i = 0; i < tagsQuarts.length; i++) {
+            tagsQuarts[i].classList.add('tag--quarts');
+        }
+    } else if(thirdDropDown.includes(filterValue) === true) {
+
+        let tagsFifths = document.querySelectorAll('.box__tag__content:not(.tag--tiers):not(.tag--quarts)');
+
+        for(let i = 0; i < tagsFifths.length; i++) {
+                tagsFifths[i].classList.add('tag--fifth');
+        }
+    }
+};

@@ -30,9 +30,12 @@
 .box__tag__content {
     padding: 8px 16px;
     border-radius: 4px;
-    width: 104px;
     color: $white;
     font-weight: 700;
+
+    span {
+        margin-top: 4px;
+    }
 
     span:hover {
         cursor: pointer;
@@ -159,6 +162,11 @@
 #searchInstrumentDropDown {
     display: none;
     width: 94%;
+}
+
+.list__item {
+    max-width: 128px;
+    display: inline-block;
 }
 
 /*** Card recipes ***/
