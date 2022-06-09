@@ -1,18 +1,12 @@
 import { fetchRecipesJSON } from "../api/getData.js";
+import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../dropdowns/dropdown-ingredients.js";
+import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../dropdowns/dropdown-devices.js";
+import { searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../dropdowns/dropdown-instruments.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
 
 export let recipes= [];
 export let recipesIngredients = [];
-export let firstDropDown = [];
-export let secondDropDown = [];
-export let thirdDropDown = [];
-let searchBox = document.querySelector('#closeDropDown');
-let searchBoxDevice = document.querySelector('#searchDeviceDropDown');
-let searchBoxInstrument = document.querySelector('#searchInstrumentDropDown');
-let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
-let deviceDropDown = document.querySelector('#deviceDropDown');
-let instrumentDropDown = document.querySelector('#instrumentDropDown');
 
 fetchRecipesJSON()
     .then(data =>{
@@ -74,132 +68,6 @@ const addInDropdown = (recipeData) => {
     addIngredientInDropDown(recipeData);
     addDeviceInDropDown(recipeData);
     addInstrumentInDropDown(recipeData);
-}
-
-const addIngredientInDropDown = (recipeData) => {
-    let dropDownList = document.querySelector('.dropdown--tiers ul');
-    for(let i = 0; i < recipeData.length; i++) {
-        let arrayIngredient = recipeData[i].ingredients;
-        for(let j = 0; j < arrayIngredient.length; j++ ) {
-            if(firstDropDown.indexOf(arrayIngredient[j].ingredient) < 0) {
-                firstDropDown.push(arrayIngredient[j].ingredient);
-            }
-        }
-    }
-    for(let i = 0; i < firstDropDown.length; i++) {
-        let liItemIngredient = document.createElement('li');
-        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
-        liItemIngredient.innerHTML = `
-            <a href="javascript:void(0);"> ${firstDropDown[i]}</a>
-        `
-            dropDownList.appendChild(liItemIngredient);
-    }
-}
-
-const displayDropDownIngredient = () => {
-    let dropDownIngredients = document.querySelector('.btn.btn--tiers.dropdown-toggle');
-    let dropDown = document.querySelector('.dropdown-menu');
-    
-    dropDownIngredients.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchBox.style.display="block";
-        dropDown.style.display= "block";
-        ingredientsDropDown.style.display = "none";
-        dropDownIngredients.classList.add('btn--dropdown');
-    })
-}
-
-const closeDropDownIngredient = () => {
-    let dropDownIngredients = document.querySelector('.btn.btn--tiers');
-    let dropDown = document.querySelector('.dropdown-menu');
-    searchBox.style.display ="none";
-    ingredientsDropDown.style.display = "inline-flex";
-    dropDownIngredients.classList.remove('btn--dropdown');
-    dropDown.style.display="none";
-}
-
-const addDeviceInDropDown = (recipeData) => {
-    let dropDownList = document.querySelector('.dropdown--quarts ul');
-    let applianceArray = [];
-    for(let i = 0; i < recipeData.length; i++) {
-        let applianceItem = recipeData[i].appliance;
-        applianceArray.push(applianceItem);
-        for(let j = 0; j < applianceArray.length; j++ ) {
-            if(secondDropDown.indexOf(applianceArray[j]) < 0) {
-                secondDropDown.push(applianceArray[j]);
-            }
-        }
-    }
-
-    for(let i = 0; i < secondDropDown.length; i++) {
-        let liItemIngredient = document.createElement('li');
-        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
-        liItemIngredient.innerHTML = `
-            <a href="javascript:void(0);"> ${secondDropDown[i]}</a>
-        `
-            dropDownList.appendChild(liItemIngredient);
-    }
-}
-
-const displayDropDownDevice = () => {
-    let dropDownDevice = document.querySelector('.btn.btn--quarts.dropdown-toggle');
-    let listDevice = document.querySelector('.dropdown--quarts');
-    dropDownDevice.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchBoxDevice.style.display="block";
-        deviceDropDown.style.display="none";
-        listDevice.style.display = "block";
-        dropDownDevice.classList.add('btn--dropdown');
-    })
-}
-const closeDropDownDevice = () => {
-    let dropDownDevice = document.querySelector('.btn.btn--quarts');
-    let listDevice = document.querySelector('.dropdown--quarts');
-    dropDownDevice.classList.remove('btn--dropdown');
-        listDevice.style.display="none";
-        searchBoxDevice.style.display ="none";
-        deviceDropDown.style.display = "inline-flex";
-}
-
-const addInstrumentInDropDown = (recipeData) => {
-    let dropDownList = document.querySelector('.dropdown--fifth ul');
-    for(let i = 0; i < recipeData.length; i++) {
-        let arrayInstrument = recipeData[i].ustensils;
-        for(let j = 0; j < arrayInstrument.length; j++ ) {
-            if(thirdDropDown.indexOf(arrayInstrument[j]) < 0) {
-                thirdDropDown.push(arrayInstrument[j]);
-            }
-        }
-    }
-    for(let i = 0; i < thirdDropDown.length; i++) {
-        let liItemIngredient = document.createElement('li');
-        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
-        liItemIngredient.innerHTML = `
-            <a href="javascript:void(0);"> ${thirdDropDown[i]}</a>
-        `
-            dropDownList.appendChild(liItemIngredient);
-    }
-}
-
-const displayDropDownInstrument = () => {
-    let dropDownInstrument = document.querySelector('.btn.btn--fifth.dropdown-toggle');
-    let listInstrument = document.querySelector('.dropdown--fifth');
-    dropDownInstrument.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchBoxInstrument.style.display="block";
-        instrumentDropDown.style.display="none";
-        listInstrument.style.display = "block";
-        dropDownInstrument.classList.add('btn--dropdown');
-    })
-}
-
-const closeDropDownInstrument = () => {
-    let dropDownInstrument = document.querySelector('.btn.btn--fifth');
-    let listInstrument = document.querySelector('.dropdown--fifth');
-    dropDownInstrument.classList.remove('btn--dropdown');
-    listInstrument.style.display="none";
-    searchBoxInstrument.style.display ="none";
-    instrumentDropDown.style.display = "inline-flex";
 }
 
 window.onclick = function(event) {

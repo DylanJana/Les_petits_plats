@@ -229,7 +229,7 @@ ul {
 }
 
 .btn--plain.btn--dropdown {
-  width: 433px;
+  width: 570px;
   border-radius: 4px 4px 0 0;
 }
 
@@ -240,7 +240,7 @@ ul {
 .dropdown-menu {
   padding-left: 24px;
   padding-right: 24px;
-  max-width: 433px;
+  max-width: 570px;
   -webkit-transform: translate(5px, 68px) !important;
           transform: translate(5px, 68px) !important;
 }
