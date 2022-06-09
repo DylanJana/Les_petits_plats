@@ -68,37 +68,9 @@ const addRecipeIngredientsInDOM = (recipesIngredients) => {
 }
 
 const addInDropdown = (recipeData) => {
-    let dropDownIngredients = document.querySelector('.btn.btn--tiers.dropdown-toggle');
-    let dropDown = document.querySelector('.dropdown-menu');
-    
-    dropDownIngredients.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchBox.style.display="block";
-        dropDown.style.display= "block";
-        ingredientsDropDown.style.display = "none";
-        dropDownIngredients.classList.add('btn--dropdown');
-    })
-
-    let dropDownDevice = document.querySelector('.btn.btn--quarts.dropdown-toggle');
-    let listDevice = document.querySelector('.dropdown--quarts');
-    dropDownDevice.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchBoxDevice.style.display="block";
-        deviceDropDown.style.display="none";
-        listDevice.style.display = "block";
-        dropDownDevice.classList.add('btn--dropdown');
-    })
-
-    let dropDownInstrument = document.querySelector('.btn.btn--fifth.dropdown-toggle');
-    let listInstrument = document.querySelector('.dropdown--fifth');
-    dropDownInstrument.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchBoxInstrument.style.display="block";
-        instrumentDropDown.style.display="none";
-        listInstrument.style.display = "block";
-        dropDownInstrument.classList.add('btn--dropdown');
-    })
-
+    displayDropDownIngredient();
+    displayDropDownDevice();
+    displayDropDownInstrument();
     addIngredientInDropDown(recipeData);
     addDeviceInDropDown(recipeData);
     addInstrumentInDropDown(recipeData);
@@ -124,6 +96,28 @@ const addIngredientInDropDown = (recipeData) => {
     }
 }
 
+const displayDropDownIngredient = () => {
+    let dropDownIngredients = document.querySelector('.btn.btn--tiers.dropdown-toggle');
+    let dropDown = document.querySelector('.dropdown-menu');
+    
+    dropDownIngredients.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchBox.style.display="block";
+        dropDown.style.display= "block";
+        ingredientsDropDown.style.display = "none";
+        dropDownIngredients.classList.add('btn--dropdown');
+    })
+}
+
+const closeDropDownIngredient = () => {
+    let dropDownIngredients = document.querySelector('.btn.btn--tiers');
+    let dropDown = document.querySelector('.dropdown-menu');
+    searchBox.style.display ="none";
+    ingredientsDropDown.style.display = "inline-flex";
+    dropDownIngredients.classList.remove('btn--dropdown');
+    dropDown.style.display="none";
+}
+
 const addDeviceInDropDown = (recipeData) => {
     let dropDownList = document.querySelector('.dropdown--quarts ul');
     let applianceArray = [];
@@ -147,6 +141,26 @@ const addDeviceInDropDown = (recipeData) => {
     }
 }
 
+const displayDropDownDevice = () => {
+    let dropDownDevice = document.querySelector('.btn.btn--quarts.dropdown-toggle');
+    let listDevice = document.querySelector('.dropdown--quarts');
+    dropDownDevice.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchBoxDevice.style.display="block";
+        deviceDropDown.style.display="none";
+        listDevice.style.display = "block";
+        dropDownDevice.classList.add('btn--dropdown');
+    })
+}
+const closeDropDownDevice = () => {
+    let dropDownDevice = document.querySelector('.btn.btn--quarts');
+    let listDevice = document.querySelector('.dropdown--quarts');
+    dropDownDevice.classList.remove('btn--dropdown');
+        listDevice.style.display="none";
+        searchBoxDevice.style.display ="none";
+        deviceDropDown.style.display = "inline-flex";
+}
+
 const addInstrumentInDropDown = (recipeData) => {
     let dropDownList = document.querySelector('.dropdown--fifth ul');
     for(let i = 0; i < recipeData.length; i++) {
@@ -167,64 +181,40 @@ const addInstrumentInDropDown = (recipeData) => {
     }
 }
 
+const displayDropDownInstrument = () => {
+    let dropDownInstrument = document.querySelector('.btn.btn--fifth.dropdown-toggle');
+    let listInstrument = document.querySelector('.dropdown--fifth');
+    dropDownInstrument.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchBoxInstrument.style.display="block";
+        instrumentDropDown.style.display="none";
+        listInstrument.style.display = "block";
+        dropDownInstrument.classList.add('btn--dropdown');
+    })
+}
+
+const closeDropDownInstrument = () => {
+    let dropDownInstrument = document.querySelector('.btn.btn--fifth');
+    let listInstrument = document.querySelector('.dropdown--fifth');
+    dropDownInstrument.classList.remove('btn--dropdown');
+    listInstrument.style.display="none";
+    searchBoxInstrument.style.display ="none";
+    instrumentDropDown.style.display = "inline-flex";
+}
+
 window.onclick = function(event) {
     if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {
-        let dropDownIngredients = document.querySelector('.btn.btn--tiers');
-        let dropDown = document.querySelector('.dropdown-menu');
-        let dropDownDevice = document.querySelector('.btn.btn--quarts');
-        let listDevice = document.querySelector('.dropdown--quarts');
-        let dropDownInstrument = document.querySelector('.btn.btn--fifth');
-        let listInstrument = document.querySelector('.dropdown--fifth');
-        searchBox.style.display ="none";
-        ingredientsDropDown.style.display = "inline-flex";
-        dropDownIngredients.classList.remove('btn--dropdown');
-        dropDown.style.display="none";
-        dropDownDevice.classList.remove('btn--dropdown');
-        listDevice.style.display="none";
-        searchBoxDevice.style.display ="none";
-        deviceDropDown.style.display = "inline-flex";
-        dropDownInstrument.classList.remove('btn--dropdown');
-        listInstrument.style.display="none";
-        searchBoxInstrument.style.display ="none";
-        instrumentDropDown.style.display = "inline-flex";
+        closeDropDownIngredient();
+        closeDropDownDevice();
+        closeDropDownInstrument();
     } else if(event.target.matches('.btn--tiers')) {
-        let dropDownDevice = document.querySelector('.btn.btn--quarts');
-        let listDevice = document.querySelector('.dropdown--quarts');
-        let dropDownInstrument = document.querySelector('.btn.btn--fifth');
-        let listInstrument = document.querySelector('.dropdown--fifth');
-        dropDownDevice.classList.remove('btn--dropdown');
-        listDevice.style.display="none";
-        searchBoxDevice.style.display ="none";
-        deviceDropDown.style.display = "inline-flex";
-        dropDownInstrument.classList.remove('btn--dropdown');
-        listInstrument.style.display="none";
-        searchBoxInstrument.style.display ="none";
-        instrumentDropDown.style.display = "inline-flex";
+        closeDropDownDevice();
+        closeDropDownInstrument();
     } else if(event.target.matches('.btn--quarts')) {
-        let dropDownIngredients = document.querySelector('.btn.btn--tiers');
-        let dropDown = document.querySelector('.dropdown-menu');
-        let dropDownInstrument = document.querySelector('.btn.btn--fifth');
-        let listInstrument = document.querySelector('.dropdown--fifth');
-        dropDownInstrument.classList.remove('btn--dropdown');
-        searchBox.style.display ="none";
-        ingredientsDropDown.style.display = "inline-flex";
-        dropDownIngredients.classList.remove('btn--dropdown');
-        dropDown.style.display="none";
-        listInstrument.style.display="none";
-        searchBoxInstrument.style.display ="none";
-        instrumentDropDown.style.display = "inline-flex";
+        closeDropDownIngredient();
+        closeDropDownInstrument();
     } else if(event.target.matches('.btn--fifth')) {
-        let dropDownIngredients = document.querySelector('.btn.btn--tiers');
-        let dropDown = document.querySelector('.dropdown-menu');
-        let dropDownDevice = document.querySelector('.btn.btn--quarts');
-        let listDevice = document.querySelector('.dropdown--quarts');
-        searchBox.style.display ="none";
-        ingredientsDropDown.style.display = "inline-flex";
-        dropDownIngredients.classList.remove('btn--dropdown');
-        dropDown.style.display="none";
-        dropDownDevice.classList.remove('btn--dropdown');
-        listDevice.style.display="none";
-        searchBoxDevice.style.display ="none";
-        deviceDropDown.style.display = "inline-flex";
+        closeDropDownIngredient();
+        closeDropDownDevice();
     }
 }
