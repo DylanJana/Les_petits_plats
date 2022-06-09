@@ -39,7 +39,7 @@
         <section class="ly--lg-container">
             <div class="row--has-columns-sm">
                 <div class="btn-group column" id="firstGroup">
-                    <div href="javascript:void(0);" class="btn btn-lg dropdown-toggle btn--plain btn--tiers" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button" >
+                    <div class="btn btn-lg dropdown-toggle btn--plain btn--tiers" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button" >
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="closeDropDown">
                             <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un ingrédient">
                             <span class="fas fa-chevron-up"></span>
@@ -55,9 +55,15 @@
                     </div>
                 </div>
                 <div class="btn-group column">
-                    <div href="javascript:void(0);" class="btn btn-lg dropdown-toggle btn--plain btn--quarts" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button" >
-                        Appareils
-                        <span class="fas fa-chevron-down"></span>
+                    <div class="btn btn-lg dropdown-toggle btn--plain btn--quarts" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="searchDeviceDropDown">
+                            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un appareil">
+                            <span class="fas fa-chevron-up"></span>
+                        </div>
+                        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="deviceDropDown">
+                            <p class="paragraph">Appareils</p>
+                            <span class="fas fa-chevron-down"></span>
+                        </div>
                     </div>
                     <div class="dropdown-menu dropdown--quarts row--has-columns-md dropdown-content">
                         <ul class="flex flex-wrap">
@@ -65,13 +71,20 @@
                     </div>
                 </div>  
                 <div class="btn-group column">
-                    <button class="btn btn-lg btn--fifth dropdown-toggle btn--plain" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ustensiles
-                        <span class="fas fa-chevron-down"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown--fifth">
-                      ...
-                    </ul>
+                    <div class="btn btn-lg dropdown-toggle btn--plain btn--fifth" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="searchInstrumentDropDown">
+                            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un appareil">
+                            <span class="fas fa-chevron-up"></span>
+                        </div>
+                        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="instrumentDropDown">
+                            <p class="paragraph">Ustensiles</p>
+                            <span class="fas fa-chevron-down"></span>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu dropdown--fifth row--has-columns-md dropdown-content">
+                        <ul class="flex flex-wrap">
+                        </ul>
+                    </div>
                 </div>  
             </div>                                  
         </section>

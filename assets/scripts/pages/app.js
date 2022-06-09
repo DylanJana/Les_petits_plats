@@ -6,8 +6,13 @@ export let recipes= [];
 export let recipesIngredients = [];
 export let firstDropDown = [];
 export let secondDropDown = [];
+export let thirdDropDown = [];
 let searchBox = document.querySelector('#closeDropDown');
+let searchBoxDevice = document.querySelector('#searchDeviceDropDown');
+let searchBoxInstrument = document.querySelector('#searchInstrumentDropDown');
 let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
+let deviceDropDown = document.querySelector('#deviceDropDown');
+let instrumentDropDown = document.querySelector('#instrumentDropDown');
 
 fetchRecipesJSON()
     .then(data =>{
@@ -78,18 +83,25 @@ const addInDropdown = (recipeData) => {
     let listDevice = document.querySelector('.dropdown--quarts');
     dropDownDevice.addEventListener('click', (e) => {
         e.preventDefault();
-        dropDownDevice.innerHTML = `
-        <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="closeDropwDown">
-            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un appareil">
-            <span class="fas fa-chevron-up"></span>
-        </div>
-        `;
+        searchBoxDevice.style.display="block";
+        deviceDropDown.style.display="none";
+        listDevice.style.display = "block";
         dropDownDevice.classList.add('btn--dropdown');
-        listDevice.classList.add("d--block");
+    })
+
+    let dropDownInstrument = document.querySelector('.btn.btn--fifth.dropdown-toggle');
+    let listInstrument = document.querySelector('.dropdown--fifth');
+    dropDownInstrument.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchBoxInstrument.style.display="block";
+        instrumentDropDown.style.display="none";
+        listInstrument.style.display = "block";
+        dropDownInstrument.classList.add('btn--dropdown');
     })
 
     addIngredientInDropDown(recipeData);
     addDeviceInDropDown(recipeData);
+    addInstrumentInDropDown(recipeData);
 }
 
 const addIngredientInDropDown = (recipeData) => {
@@ -135,30 +147,84 @@ const addDeviceInDropDown = (recipeData) => {
     }
 }
 
-window.onclick = function() {
-            if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {
-              let dropDownIngredients = document.querySelector('.btn.btn--tiers');
-              let dropDown = document.querySelector('.dropdown-menu');
-              searchBox.style.display ="none";
-              ingredientsDropDown.style.display = "inline-flex";
-              dropDownIngredients.classList.remove('btn--dropdown');
-              dropDown.style.display="none";
-              /*dropDownIngredients.innerHTML = `
-              Ingredients
-              <span class="fas fa-chevron-down"></span>
-              `
-            dropDownDevice.innerHTML = `
-            Appareils
-            <span class="fas fa-chevron-down"></span>
-            `*/
-              /*for (let i = 0; i < dropdowns.length; i++) {
-                let openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('d--block')) {
-                  openDropdown.classList.remove('d--block');
-                  dropDownIngredients.classList.remove('btn--dropdown');
-                  dropDownDevice.classList.remove('btn--dropdown');
-                }
-              }
-            }*/
-          }
+const addInstrumentInDropDown = (recipeData) => {
+    let dropDownList = document.querySelector('.dropdown--fifth ul');
+    for(let i = 0; i < recipeData.length; i++) {
+        let arrayInstrument = recipeData[i].ustensils;
+        for(let j = 0; j < arrayInstrument.length; j++ ) {
+            if(thirdDropDown.indexOf(arrayInstrument[j]) < 0) {
+                thirdDropDown.push(arrayInstrument[j]);
+            }
+        }
+    }
+    for(let i = 0; i < thirdDropDown.length; i++) {
+        let liItemIngredient = document.createElement('li');
+        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+        liItemIngredient.innerHTML = `
+            <a href="javascript:void(0);"> ${thirdDropDown[i]}</a>
+        `
+            dropDownList.appendChild(liItemIngredient);
+    }
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {
+        let dropDownIngredients = document.querySelector('.btn.btn--tiers');
+        let dropDown = document.querySelector('.dropdown-menu');
+        let dropDownDevice = document.querySelector('.btn.btn--quarts');
+        let listDevice = document.querySelector('.dropdown--quarts');
+        let dropDownInstrument = document.querySelector('.btn.btn--fifth');
+        let listInstrument = document.querySelector('.dropdown--fifth');
+        searchBox.style.display ="none";
+        ingredientsDropDown.style.display = "inline-flex";
+        dropDownIngredients.classList.remove('btn--dropdown');
+        dropDown.style.display="none";
+        dropDownDevice.classList.remove('btn--dropdown');
+        listDevice.style.display="none";
+        searchBoxDevice.style.display ="none";
+        deviceDropDown.style.display = "inline-flex";
+        dropDownInstrument.classList.remove('btn--dropdown');
+        listInstrument.style.display="none";
+        searchBoxInstrument.style.display ="none";
+        instrumentDropDown.style.display = "inline-flex";
+    } else if(event.target.matches('.btn--tiers')) {
+        let dropDownDevice = document.querySelector('.btn.btn--quarts');
+        let listDevice = document.querySelector('.dropdown--quarts');
+        let dropDownInstrument = document.querySelector('.btn.btn--fifth');
+        let listInstrument = document.querySelector('.dropdown--fifth');
+        dropDownDevice.classList.remove('btn--dropdown');
+        listDevice.style.display="none";
+        searchBoxDevice.style.display ="none";
+        deviceDropDown.style.display = "inline-flex";
+        dropDownInstrument.classList.remove('btn--dropdown');
+        listInstrument.style.display="none";
+        searchBoxInstrument.style.display ="none";
+        instrumentDropDown.style.display = "inline-flex";
+    } else if(event.target.matches('.btn--quarts')) {
+        let dropDownIngredients = document.querySelector('.btn.btn--tiers');
+        let dropDown = document.querySelector('.dropdown-menu');
+        let dropDownInstrument = document.querySelector('.btn.btn--fifth');
+        let listInstrument = document.querySelector('.dropdown--fifth');
+        dropDownInstrument.classList.remove('btn--dropdown');
+        searchBox.style.display ="none";
+        ingredientsDropDown.style.display = "inline-flex";
+        dropDownIngredients.classList.remove('btn--dropdown');
+        dropDown.style.display="none";
+        listInstrument.style.display="none";
+        searchBoxInstrument.style.display ="none";
+        instrumentDropDown.style.display = "inline-flex";
+    } else if(event.target.matches('.btn--fifth')) {
+        let dropDownIngredients = document.querySelector('.btn.btn--tiers');
+        let dropDown = document.querySelector('.dropdown-menu');
+        let dropDownDevice = document.querySelector('.btn.btn--quarts');
+        let listDevice = document.querySelector('.dropdown--quarts');
+        searchBox.style.display ="none";
+        ingredientsDropDown.style.display = "inline-flex";
+        dropDownIngredients.classList.remove('btn--dropdown');
+        dropDown.style.display="none";
+        dropDownDevice.classList.remove('btn--dropdown');
+        listDevice.style.display="none";
+        searchBoxDevice.style.display ="none";
+        deviceDropDown.style.display = "inline-flex";
+    }
 }

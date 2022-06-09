@@ -80,7 +80,7 @@
     }
 
     &.btn--dropdown {
-        width: 488px;
+        width: 433px;
         border-radius: 4px 4px 0 0;
     }
 }
@@ -92,7 +92,8 @@
 .dropdown-menu {
     padding-left: 24px;
     padding-right: 24px;
-    width: 488px;
+    max-width: 433px;
+    transform: translate(5px, 68px)!important;
 
     &.dropdown--tiers {
         background-color: $color-tiers;
@@ -150,6 +151,16 @@
     width: 94%;
 }
 
+#searchDeviceDropDown {
+    display: none;
+    width: 94%;
+}
+
+#searchInstrumentDropDown {
+    display: none;
+    width: 94%;
+}
+
 /*** Card recipes ***/
 .card__recipe {
     border-radius: 8px;
@@ -201,8 +212,16 @@
 }
 
 @media (max-width: 575px) {
+    .dropdown-menu {
+        width: 300px;
+    }
+    
 	.btn--plain {
         margin-bottom: 16px;
+
+        &.btn--dropdown {
+            width: 300px;
+        }
     }
 
     .card__recipe__title {
