@@ -15,6 +15,26 @@ export const createTagTemplate = (tagValue) => {
         </div>
     `
     tagBoxDiv.innerHTML = tagBox;
+    deleteTag(tagBoxDiv);
+}
+
+export const deleteTag = (tagBoxDiv) => {
+        let closeTag = tagBoxDiv.querySelector('span');
+        closeTag.addEventListener('click', (e) => {
+            e.preventDefault();
+            let tagTextValue = tagBoxDiv.querySelector('p').innerText;
+            tagBoxDiv.style.display = "none";
+            reactivateItemDropDown(tagTextValue);
+    })
+}
+
+export const reactivateItemDropDown = (tagTextValue) => {
+    let allItems = document.querySelectorAll('.list__item__disabled');
+    for(let i = 0; i < allItems.length; i++) {
+        if(allItems[i].textContent == (" " + tagTextValue)) {
+            allItems[i].classList.remove('list__item__disabled')
+        }
+    }
 }
 
 export const createTagTiers = ()  => {
