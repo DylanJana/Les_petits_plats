@@ -1,7 +1,8 @@
 import { fetchRecipesJSON } from "../api/getData.js";
-import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../dropdowns/dropdown-ingredients.js";
-import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../dropdowns/dropdown-devices.js";
-import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../dropdowns/dropdown-instruments.js";
+import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../features/dropdowns/dropdown-ingredients.js";
+import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
+import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
+import{ itemListDisabledOnClick, findTagValueClick } from "../features/tags/tags.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
 
@@ -69,6 +70,7 @@ const addInDropdown = (recipeData) => {
     addIngredientInDropDown(recipeData);
     addDeviceInDropDown(recipeData);
     addInstrumentInDropDown(recipeData);
+    itemListDisabledOnClick();
 }
 
 // Close dropdown on click on window
@@ -89,38 +91,4 @@ window.onclick = function(event) {
     }
 }
 
-window.findValueClick = findValueClick;
-
-export function findValueClick(filterValue) {
-    let tagBoxContainer = document.querySelector('.box__tag__container');
-    let tagBoxDiv = document.createElement('div');
-    tagBoxDiv.classList.add('column', 'col-sm-2');
-    tagBoxContainer.appendChild(tagBoxDiv);
-    let tagBox = `
-        <div class="box__tag__content flex align-items--start justify-content--space-between">
-            <p class="paragraph">${filterValue}</p>
-            <span class="far fa-times-circle"></span>
-        </div>
-    `
-    tagBoxDiv.innerHTML = tagBox;
-    if(firstDropDown.includes(filterValue) === true) {
-        let tagsTiers = document.querySelectorAll('.box__tag__content:not(.tag--quarts):not(.tag--fifth)');
-
-        for(let i = 0; i < tagsTiers.length; i++) {
-            tagsTiers[i].classList.add('tag--tiers');
-        }
-    } else if(secondDropDown.includes(filterValue) === true) {
-        let tagsQuarts = document.querySelectorAll('.box__tag__content:not(.tag--tiers):not(.tag--fifth)');
-
-        for(let i = 0; i < tagsQuarts.length; i++) {
-            tagsQuarts[i].classList.add('tag--quarts');
-        }
-    } else if(thirdDropDown.includes(filterValue) === true) {
-
-        let tagsFifths = document.querySelectorAll('.box__tag__content:not(.tag--tiers):not(.tag--quarts)');
-
-        for(let i = 0; i < tagsFifths.length; i++) {
-                tagsFifths[i].classList.add('tag--fifth');
-        }
-    }
-};
+window.findTagValueClick = findTagValueClick;

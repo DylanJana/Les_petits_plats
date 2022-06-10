@@ -183,6 +183,7 @@ ul {
 /*** Tags ***/
 .box__tag__content {
   padding: 8px 16px;
+  margin-top: 10px;
   border-radius: 4px;
   color: #fff;
   font-weight: 700;
@@ -277,7 +278,6 @@ ul {
 }
 
 .dropdown-menu a {
-  color: #fff;
   text-decoration: none;
 }
 
@@ -329,8 +329,19 @@ ul {
 }
 
 .list__item {
+  color: #fff;
   max-width: 128px;
   display: inline-block;
+}
+
+.list__item__disabled {
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.list__item:hover {
+  color: #fff;
+  text-decoration: underline;
 }
 
 /*** Card recipes ***/
