@@ -78,7 +78,7 @@ export const deleteTag = (tagBoxDiv) => {
 export const reactivateItemDropDown = (tagTextValue) => {
 let allItems = document.querySelectorAll('.list__item__disabled');
 for(let i = 0; i < allItems.length; i++) {
-    if(allItems[i].textContent == (" " + tagTextValue)) {
+    if(allItems[i].textContent.trim() === tagTextValue.trim()) {
         allItems[i].classList.remove('list__item__disabled')
     }
 }
