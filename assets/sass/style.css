@@ -34,6 +34,10 @@ ul {
   box-sizing: border-box;
 }
 
+.w--100 {
+  width: 100%;
+}
+
 /*** Gestion des blocks ***/
 .d--block {
   display: block !important;
@@ -384,6 +388,13 @@ ul {
 
 .card__recipe__title span {
   text-align: right;
+}
+
+/*** Boxes ***/
+.t--box-a {
+  background-color: #E7E7E7;
+  padding: 48px 56px;
+  border-radius: 8px;
 }
 
 /*** Queries ***/

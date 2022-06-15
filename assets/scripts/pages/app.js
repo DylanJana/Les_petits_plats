@@ -3,6 +3,7 @@ import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, clos
 import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
 import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
 import{ itemListDisabledOnClick, findTagValueClick } from "../features/tags/tags.js";
+import { onSearch } from "../features/search/search-bar.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
 
@@ -19,7 +20,7 @@ fetchRecipesJSON()
         addInDropdown(data.recipes);
     })
 
-const addRecipeInDOM = (recipe) =>{
+export const addRecipeInDOM = (recipe) =>{
     const articleRecipe = document.createElement("article");
     articleRecipe.classList.add('column', 'card__recipe', 'col-lg-4', 'col-12', 'mb--sm',  'flex', 'flex--column');
     wrapperRecipes.appendChild(articleRecipe);
@@ -37,9 +38,11 @@ const addRecipeInDOM = (recipe) =>{
         </div>
     </div>`;
     recipesIngredients = recipe["ingredients"];
+    itemsArray.push(articleRecipe)
     addRecipeIngredientsInCard(recipesIngredients);
 }
 
+onSearch(itemsArray);
 
 
 const addRecipeIngredientsInCard = (recipesIngredients) => {
@@ -63,7 +66,7 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
     }
 }
 
-const addInDropdown = (recipeData) => {
+export const addInDropdown = (recipeData) => {
     displayDropDownIngredient();
     displayDropDownDevice();
     displayDropDownInstrument();

@@ -223,6 +223,12 @@
     }
 }
 
+/*** Boxes ***/
+.t--box-a {
+    background-color: $color-primary;
+    padding: 48px 56px;
+    border-radius: 8px;
+}
 /*** Queries ***/
 @media (max-width: 992px) {
     .card__recipe {
