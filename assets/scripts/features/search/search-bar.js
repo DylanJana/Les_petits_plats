@@ -1,5 +1,9 @@
 import { fetchRecipesJSON } from "../../api/getData.js";
-import { itemsArray, recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
+import { recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
+let wrapper = document.querySelector('.wrapper');
+let wrapperContainer = document.createElement('div');
+wrapperContainer.classList.add('flex', 'justify-content--center', 'align-items--center', 'w--100', 'empty-message');
+let refreshWrapperReady;
 
 export const onSearch = (recipesArticles) => {
     let searchBar = document.querySelector("#search");
@@ -9,26 +13,30 @@ export const onSearch = (recipesArticles) => {
             
             if(query.length >= 3) {
                 findRecipeTitle(query, recipesArticles);
-            } else if(query.length < 3) {
-                cleanWrapper();
+                refreshWrapperReady= false;
             }
+            refreshWrapper(query, refreshWrapperReady);
         })
 }
 
 export const findRecipeTitle = (query, recipesArticles) => {
+    let counter = 0;
     for(let i = 0; i < recipesArticles.length; i++) {
         let titleRecipe = recipesArticles[i].querySelector('.card__recipe__body div p');
         if(!(titleRecipe.textContent.toLowerCase().includes(query.toLowerCase()))) {
-            recipesArticles[i].remove();
+            recipesArticles[i].style.display ="none";
+            counter++
+        } else {
+            recipesArticles[i].removeAttribute("style");
+            wrapperContainer.removeAttribute("style");
         }
     }
-    checkWrapper();
+    checkWrapper(counter, recipesArticles);
 }
 
-export const checkWrapper = () => {
-    let checkWrapper = document.querySelectorAll('.card__recipe').length;
-    let wrapper = document.querySelector('.wrapper');
-    if( checkWrapper === 0) {
+export const checkWrapper = (counter, recipesArticles) => {
+    if(counter === recipesArticles.length) {
+        wrapperContainer.style.display = "block";
         let messageNoRecipes = `
         <div class="flex justify-content--center align-items--center w--100">
             <div class="t--box-a">
@@ -36,14 +44,15 @@ export const checkWrapper = () => {
             </div>
         </div>
         `;
-        wrapper.innerHTML = messageNoRecipes;
+        wrapperContainer.innerHTML = messageNoRecipes;
+        wrapper.appendChild(wrapperContainer);
     }
 }
 
-export const cleanWrapper = () => {
-    let wrapper = document.querySelector('.wrapper');
-    wrapper.innerHTML = '';
-    fetchRecipesJSON()
+export const refreshWrapper = (query) => {
+    if(query.length < 3 && refreshWrapperReady === false) {
+        wrapper.innerHTML = '';
+        fetchRecipesJSON()
         .then(data =>{
             for(let i = 0; i < data.recipes.length; i++){
                 recipes[i] = data.recipes[i];
@@ -51,4 +60,6 @@ export const cleanWrapper = () => {
             }
             addInDropdown(data.recipes);
         })
+        refreshWrapperReady = true;
+    }
 }

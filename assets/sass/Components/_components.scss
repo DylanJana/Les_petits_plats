@@ -229,6 +229,10 @@
     padding: 48px 56px;
     border-radius: 8px;
 }
+
+.empty-message {
+    display: none;
+}
 /*** Queries ***/
 @media (max-width: 992px) {
     .card__recipe {
