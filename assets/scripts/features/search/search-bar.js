@@ -12,21 +12,22 @@ export const onSearch = (recipesArticles) => {
             const query = e.target.value;
             
             if(query.length >= 3) {
-                findRecipeTitle(query, recipesArticles);
+                searchInRecipes(query, recipesArticles);
                 refreshWrapperReady= false;
             }
             refreshWrapper(query, refreshWrapperReady);
         })
 }
 
-export const findRecipeTitle = (query, recipesArticles) => {
+export const searchInRecipes = (query, recipesArticles) => {
     let counter = 0;
     for(let i = 0; i < recipesArticles.length; i++) {
-        let titleRecipe = recipesArticles[i].querySelector('.card__recipe__body div p');
-        if(!(titleRecipe.textContent.toLowerCase().includes(query.toLowerCase()))) {
+        let currentRecipeBody = recipesArticles[i].querySelector('.card__recipe__body');
+        if(!(currentRecipeBody.textContent.toLowerCase().includes(query.toLowerCase()))) {
             recipesArticles[i].style.display ="none";
             counter++
-        } else {
+        } 
+        else {
             recipesArticles[i].removeAttribute("style");
             wrapperContainer.removeAttribute("style");
         }
