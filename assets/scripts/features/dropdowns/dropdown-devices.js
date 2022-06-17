@@ -16,7 +16,7 @@ export const addDeviceInDropDown = (recipeData) => {
                 appliance = "casserole";
             }
             
-            if((secondDropDown.indexOf(appliance) < 0)) {
+            if((secondDropDown.indexOf(appliance) < 0) && appliance !== "saladier") {
                 secondDropDown.push(appliance);
             }
         }

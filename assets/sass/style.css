@@ -255,6 +255,7 @@ ul {
   padding-left: 24px;
   padding-right: 24px;
   max-width: 570px;
+  width: 100%;
   -webkit-transform: translate(5px, 68px) !important;
           transform: translate(5px, 68px) !important;
 }
