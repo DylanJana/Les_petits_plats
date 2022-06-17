@@ -74,6 +74,15 @@ export const addInDropdown = (recipeData) => {
 }
 
 onSearch(itemsArray);
+
+export const addLineInDropDown = (dropDownList, lineItem) => {
+    let liItemIngredient = document.createElement('li');
+    liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+    liItemIngredient.innerHTML = `
+        <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${lineItem[0].toUpperCase() + lineItem.slice(1)}</a>
+    `
+        dropDownList.appendChild(liItemIngredient);
+}
 // Close dropdown on click on window
 window.onclick = function(event) {
     if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {

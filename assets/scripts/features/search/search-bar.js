@@ -1,9 +1,6 @@
 import { fetchRecipesJSON } from "../../api/getData.js";
 import { recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
-import { firstDropDown, dropDownList } from "../dropdowns/dropdown-ingredients.js";
-import { secondDropDown } from "../dropdowns/dropdown-devices.js";
-import { thirdDropDown } from "../dropdowns/dropdown-instruments.js";
-import{ itemListDisabledOnClick } from "../tags/tags.js";
+import { itemsInDropDown } from "./tag-search.js";
 
 let wrapper = document.querySelector('.wrapper');
 let wrapperContainer = document.createElement('div');
@@ -43,40 +40,6 @@ export const searchInRecipes = (query, recipesArticles) => {
     itemsInDropDown();
 }
 
-export const itemsInDropDown = () => {
-    let avaiblesRecipes = document.querySelectorAll('.avaible__recipe');
-    let avaiblesIngredients = [];
-    dropDownList.innerHTML = '';
-    for(let i = 0; i < avaiblesRecipes.length; i++) {
-        let currentRecipeIngredients = avaiblesRecipes[i].querySelectorAll('.recipe__list li span');
-        for(let j = 0; j < currentRecipeIngredients.length; j++ ) {
-            let currentIngredient = currentRecipeIngredients[j].textContent;
-            avaiblesIngredients.push(currentIngredient);
-        }
-    }
-
-    for(let i = 0 ; i < avaiblesIngredients.length; i++) {
-        console.log(avaiblesIngredients[i])
-        for(let j = 0; j < firstDropDown.length; j++) {
-            if(avaiblesIngredients[i].toLowerCase().trim() === firstDropDown[j].toLowerCase()) {
-                let liItemIngredient = document.createElement('li');
-                liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
-                liItemIngredient.innerHTML = `
-                    <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${firstDropDown[j][0].toUpperCase() + firstDropDown[j].slice(1)}</a>
-                `
-                    dropDownList.appendChild(liItemIngredient);
-            }
-        }
-    }
-
-    itemListDisabledOnClick();
-    console.log("Array ingredients ", avaiblesIngredients);
-    console.log("First Drop Down ", firstDropDown);
-    console.log("Second Drop Down ", secondDropDown);
-    console.log("Third Drop Down ", thirdDropDown);
-}
-
-itemsInDropDown
 export const checkWrapper = (counter, recipesArticles) => {
     if(counter === recipesArticles.length) {
         wrapperContainer.style.display = "block";

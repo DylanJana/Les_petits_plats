@@ -47,9 +47,9 @@ export function findTagValueClick(tagValue) {
 
     if(firstDropDown.includes(tagValue.toLowerCase()) === true) {
         createTagTiers();
-    } else if(secondDropDown.includes(tagValue) === true) {
+    } else if(secondDropDown.includes(tagValue.toLowerCase()) === true) {
         createTagQuarts();
-    } else if(thirdDropDown.includes(tagValue) === true) {
+    } else if(thirdDropDown.includes(tagValue.toLowerCase()) === true) {
         createTagFifth();
     }
 };

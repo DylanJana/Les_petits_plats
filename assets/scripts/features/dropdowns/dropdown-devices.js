@@ -1,3 +1,5 @@
+import { addLineInDropDown } from "../../pages/app.js";
+
 export let searchBoxDevice = document.querySelector('#searchDeviceDropDown');
 export let deviceDropDown = document.querySelector('#deviceDropDown');
 export let secondDropDown = [];
@@ -9,19 +11,19 @@ export const addDeviceInDropDown = (recipeData) => {
         let applianceItem = recipeData[i].appliance;
         applianceArray.push(applianceItem);
         for(let j = 0; j < applianceArray.length; j++ ) {
-            if(secondDropDown.indexOf(applianceArray[j]) < 0) {
-                secondDropDown.push(applianceArray[j]);
+            let appliance = applianceArray[j].toLowerCase().replace('.', '');
+            if(appliance === "casserolle") {
+                appliance = "casserole";
+            }
+            
+            if((secondDropDown.indexOf(appliance) < 0)) {
+                secondDropDown.push(appliance);
             }
         }
     }
 
     for(let i = 0; i < secondDropDown.length; i++) {
-        let liItemIngredient = document.createElement('li');
-        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
-        liItemIngredient.innerHTML = `
-            <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${secondDropDown[i]}</a>
-        `
-            dropDownList.appendChild(liItemIngredient);
+        addLineInDropDown(dropDownList ,secondDropDown[i]);
     }
 }
 
