@@ -6,7 +6,7 @@ import {thirdDropDown} from "../dropdowns/dropdown-instruments.js";
 export const createTagTemplate = (tagValue) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
     let tagBoxDiv = document.createElement('div');
-    tagBoxDiv.classList.add('column', 'col-sm-3');
+    tagBoxDiv.classList.add('column', 'col-sm-3', 'column__tag');
     tagBoxContainer.appendChild(tagBoxDiv);
     let tagBox = `
         <div class="box__tag__content flex align-items--start justify-content--space-between">
@@ -70,6 +70,7 @@ export const deleteTag = (tagBoxDiv) => {
     closeTag.addEventListener('click', (e) => {
         e.preventDefault();
         let tagTextValue = tagBoxDiv.querySelector('p').innerText;
+        tagBoxDiv.classList.remove('column__tag');
         tagBoxDiv.style.display = "none";
         reactivateItemDropDown(tagTextValue);
 })
