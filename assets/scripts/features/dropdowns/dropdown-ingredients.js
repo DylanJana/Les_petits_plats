@@ -12,6 +12,10 @@ export const addIngredientInDropDown = (recipeData) => {
         let arrayIngredient = recipeData[i].ingredients;
         for(let j = 0; j < arrayIngredient.length; j++ ) {
             let ingredient = arrayIngredient[j].ingredient.toLowerCase();
+            if((ingredient === 'crème fraiche') || (ingredient === 'crême fraîche')) {
+                ingredient = "crème fraîche";
+            }
+            
             if(firstDropDown.indexOf(ingredient) < 0) {
                 firstDropDown.push(ingredient);
             }
