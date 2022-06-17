@@ -1,14 +1,17 @@
 export let searchBox = document.querySelector('#closeDropDown');
 export let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
 export let firstDropDown = [];
+export let dropDownList = document.querySelector('.dropdown--tiers ul');
+console.log(dropDownList)
 
 export const addIngredientInDropDown = (recipeData) => {
-    let dropDownList = document.querySelector('.dropdown--tiers ul');
+    dropDownList.innerHTML = '';
     for(let i = 0; i < recipeData.length; i++) {
         let arrayIngredient = recipeData[i].ingredients;
         for(let j = 0; j < arrayIngredient.length; j++ ) {
-            if(firstDropDown.indexOf(arrayIngredient[j].ingredient) < 0) {
-                firstDropDown.push(arrayIngredient[j].ingredient);
+            let ingredient = arrayIngredient[j].ingredient.toLowerCase();
+            if(firstDropDown.indexOf(ingredient) < 0) {
+                firstDropDown.push(ingredient);
             }
         }
     }
@@ -16,7 +19,7 @@ export const addIngredientInDropDown = (recipeData) => {
         let liItemIngredient = document.createElement('li');
         liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
         liItemIngredient.innerHTML = `
-            <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${firstDropDown[i]}</a>
+            <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${firstDropDown[i][0].toUpperCase() + firstDropDown[i].slice(1)}</a>
         `
             dropDownList.appendChild(liItemIngredient);
     }

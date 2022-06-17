@@ -42,9 +42,6 @@ export const addRecipeInDOM = (recipe) =>{
     addRecipeIngredientsInCard(recipesIngredients);
 }
 
-onSearch(itemsArray);
-
-
 const addRecipeIngredientsInCard = (recipesIngredients) => {
     let list = document.querySelectorAll('.recipe__list');
 
@@ -52,11 +49,11 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
         let createLi = document.createElement('li');
         if((recipesIngredients[i].unit !== undefined) && (recipesIngredients[i].quantity !== undefined)) {
             createLi.innerHTML = `
-                <li><span>${recipesIngredients[i].ingredient} : </span>${recipesIngredients[i].quantity} ${recipesIngredients[i].unit}</li>
+                <span>${recipesIngredients[i].ingredient} </span>: ${recipesIngredients[i].quantity} ${recipesIngredients[i].unit}
             `
         } else if(recipesIngredients[i].quantity !== undefined) {
             createLi.innerHTML = `
-                <li><span>${recipesIngredients[i].ingredient} : </span>${recipesIngredients[i].quantity}</li>
+                <span>${recipesIngredients[i].ingredient} </span>: ${recipesIngredients[i].quantity}
             `
         }
 
@@ -76,6 +73,7 @@ export const addInDropdown = (recipeData) => {
     itemListDisabledOnClick();
 }
 
+onSearch(itemsArray);
 // Close dropdown on click on window
 window.onclick = function(event) {
     if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {

@@ -45,7 +45,7 @@ export const createTagFifth = ()  => {
 export function findTagValueClick(tagValue) {
     createTagTemplate(tagValue)
 
-    if(firstDropDown.includes(tagValue) === true) {
+    if(firstDropDown.includes(tagValue.toLowerCase()) === true) {
         createTagTiers();
     } else if(secondDropDown.includes(tagValue) === true) {
         createTagQuarts();
@@ -77,9 +77,9 @@ export const deleteTag = (tagBoxDiv) => {
 
 export const reactivateItemDropDown = (tagTextValue) => {
 let allItems = document.querySelectorAll('.list__item__disabled');
-for(let i = 0; i < allItems.length; i++) {
-    if(allItems[i].textContent.trim() === tagTextValue.trim()) {
-        allItems[i].classList.remove('list__item__disabled')
+    for(let i = 0; i < allItems.length; i++) {
+        if(allItems[i].textContent.trim() === tagTextValue.trim()) {
+            allItems[i].classList.remove('list__item__disabled')
+        }
     }
-}
 }
