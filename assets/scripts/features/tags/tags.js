@@ -2,6 +2,7 @@
 import {firstDropDown} from "../dropdowns/dropdown-ingredients.js";
 import {secondDropDown} from "../dropdowns/dropdown-devices.js";
 import {thirdDropDown} from "../dropdowns/dropdown-instruments.js";
+import { searchByTags, ingredientsAvailablesArray } from "../search/tag-search.js";
 
 export const createTagTemplate = (tagValue) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
@@ -16,6 +17,7 @@ export const createTagTemplate = (tagValue) => {
     `
     tagBoxDiv.innerHTML = tagBox;
     deleteTag(tagBoxDiv);
+    searchByTags(tagValue);
 }
 
 export const createTagTiers = ()  => {
@@ -43,7 +45,7 @@ export const createTagFifth = ()  => {
 }
 
 export function findTagValueClick(tagValue) {
-    createTagTemplate(tagValue)
+    createTagTemplate(tagValue);
 
     if(firstDropDown.includes(tagValue.toLowerCase()) === true) {
         createTagTiers();

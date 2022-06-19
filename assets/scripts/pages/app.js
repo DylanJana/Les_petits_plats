@@ -22,7 +22,7 @@ fetchRecipesJSON()
 
 export const addRecipeInDOM = (recipe) =>{
     const articleRecipe = document.createElement("article");
-    articleRecipe.classList.add('column', 'card__recipe', 'col-lg-4', 'col-12', 'mb--sm',  'flex', 'flex--column');
+    articleRecipe.classList.add('column', 'card__recipe', 'col-lg-4', 'col-12', 'mb--sm',  'flex', 'flex--column', 'avaible__recipe');
     wrapperRecipes.appendChild(articleRecipe);
     articleRecipe.innerHTML=  `
     <img src="assets/img/cook.jpg">

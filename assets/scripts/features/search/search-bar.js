@@ -23,6 +23,8 @@ export const onSearch = (recipesArticles) => {
 
 export const searchInRecipes = (query, recipesArticles) => {
     let counter = 0;
+    let containerBoxes = document.querySelector('.box__tag__container');
+    containerBoxes.innerHTML = '';
     for(let i = 0; i < recipesArticles.length; i++) {
         let currentRecipeBody = recipesArticles[i].querySelector('.card__recipe__body');
         if(!(currentRecipeBody.textContent.toLowerCase().includes(query.toLowerCase()))) {
@@ -32,7 +34,9 @@ export const searchInRecipes = (query, recipesArticles) => {
         } 
         else {
             recipesArticles[i].removeAttribute("style");
-            recipesArticles[i].classList.add("avaible__recipe");
+            if(!recipesArticles[i].classList.contains("avaible__recipe")) {
+                recipesArticles[i].classList.add("avaible__recipe");
+            }
             wrapperContainer.removeAttribute("style");
         }
     }
