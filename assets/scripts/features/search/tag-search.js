@@ -113,6 +113,8 @@ const createCurrentInstruments = (avaiblesInstruments) => {
 
 export const searchByTags = (tagValue) => {
     dropDownList.innerHTML = '';
+    dropDownListDevices.innerHTML = '';
+    dropDownListInstruments.innerHTML = '';
     let allRecipes = document.querySelectorAll('.avaible__recipe');
     let avaiblesRecipes = [];
     let containerBoxes = document.querySelector('.box__tag__container');
@@ -122,9 +124,13 @@ export const searchByTags = (tagValue) => {
     for(let i = 0; i < avaiblesRecipes.length; i++) {
         let currentRecipe = avaiblesRecipes[i];
         currentRecipeIngredients(currentRecipe, containerBoxes);
+        currentRecipeDevices(currentRecipe, containerBoxes);
+        currentInstrumentsDevices(currentRecipe, containerBoxes);
     }
 
     refreshIngredientsDropDown(containerBoxes);
+    refreshDevicesDropDown(containerBoxes);
+    refreshInstrumentsDropDown(containerBoxes);
 }
 
 const displayRecipes = (allRecipes, avaiblesRecipes, tagValue) => {
@@ -151,11 +157,61 @@ const currentRecipeIngredients = (currentRecipe, containerBoxes) => {
 
 const refreshIngredientsDropDown = (containerBoxes) => {
     let liIngredients = document.querySelectorAll('.dropdown--tiers ul li');
-    console.log(liIngredients)
     for(let i = 0; i < liIngredients.length; i++) {
         let liIngredient = liIngredients[i];
         if((containerBoxes.innerText.includes(liIngredient.innerText))) {
             liIngredient.style.display = 'none';
+        }
+    }
+}
+
+const currentRecipeDevices = (currentRecipe, containerBoxes) => {
+    let currentRecipeDevices = currentRecipe.querySelectorAll('.recipe__desc');
+        for(let i = 0; i < currentRecipeDevices.length; i++) {
+            let currentDevices = currentRecipeDevices[i].innerText;
+            for(let j = 0; j < secondDropDown.length; j++) {
+                let currentDevicesInDropDown = secondDropDown[j].toLowerCase()
+                if(currentDevices.toLowerCase().trim().includes(currentDevicesInDropDown)) {
+                    if((containerBoxes.innerText.search(currentDevicesInDropDown[0].toUpperCase() + currentDevicesInDropDown.slice(1)))) {
+                        addLineInDropDown(dropDownListDevices, currentDevicesInDropDown);
+                    }
+                }
+            }
+        }
+}
+
+const refreshDevicesDropDown = (containerBoxes) => {
+    let liDevices = document.querySelectorAll('.dropdown--quarts ul li');
+    for(let i = 0; i < liDevices.length; i++) {
+        let liDevice = liDevices[i];
+        if((containerBoxes.innerText.includes(liDevice.innerText))) {
+            liDevice.style.display = 'none';
+        }
+    }
+}
+
+const currentInstrumentsDevices = (currentRecipe, containerBoxes) => {
+    let currentInstrumentsDevices = currentRecipe.querySelectorAll('.card__recipe__body');
+    console.log(thirdDropDown)
+        for(let i = 0; i < currentInstrumentsDevices.length; i++) {
+            let currentInstruments = currentInstrumentsDevices[i].innerText;
+            for(let j = 0; j < thirdDropDown.length; j++) {
+                let currentInstrumentsInDropDown = thirdDropDown[j].toLowerCase();
+                if(currentInstruments.toLowerCase().trim().includes(currentInstrumentsInDropDown)) {
+                    if((containerBoxes.innerText.search(currentInstrumentsInDropDown[0].toUpperCase() + currentInstrumentsInDropDown.slice(1)))) {
+                        addLineInDropDown(dropDownListInstruments, currentInstrumentsInDropDown);
+                    }
+                }
+            }
+        }
+}
+
+const refreshInstrumentsDropDown = (containerBoxes) => {
+    let liInstruments = document.querySelectorAll('.dropdown--fifth ul li');
+    for(let i = 0; i < liInstruments.length; i++) {
+        let liInstrument = liInstruments[i];
+        if((containerBoxes.innerText.includes(liInstrument.innerText))) {
+            liInstrument.style.display = 'none';
         }
     }
 }
