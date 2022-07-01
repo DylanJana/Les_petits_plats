@@ -2,7 +2,7 @@ import { fetchRecipesJSON } from "../api/getData.js";
 import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../features/dropdowns/dropdown-ingredients.js";
 import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
 import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
-import{ itemListDisabledOnClick, findTagValueClick } from "../features/tags/tags.js";
+import{ findTagValueClick } from "../features/tags/tags.js";
 import { onSearch } from "../features/search/search-bar.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
@@ -70,7 +70,6 @@ export const addInDropdown = (recipeData) => {
     addIngredientInDropDown(recipeData);
     addDeviceInDropDown(recipeData);
     addInstrumentInDropDown(recipeData);
-    itemListDisabledOnClick();
 }
 
 onSearch(itemsArray);

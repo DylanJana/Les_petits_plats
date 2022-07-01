@@ -2,11 +2,13 @@ import { addLineInDropDown } from "../../pages/app.js";
 import { firstDropDown, dropDownList } from "../dropdowns/dropdown-ingredients.js";
 import { secondDropDown } from "../dropdowns/dropdown-devices.js";
 import { thirdDropDown } from "../dropdowns/dropdown-instruments.js";
-import{ itemListDisabledOnClick } from "../tags/tags.js";
+import{  deleteTag } from "../tags/tags.js";
 
 let dropDownListDevices = document.querySelector('.dropdown--quarts ul');
 let dropDownListInstruments = document.querySelector('.dropdown--fifth ul');
 let ingredientsArray = [];
+let devicesArray = [];
+let instrumentsArray = [];
 export let ingredientsAvailablesArray = [];
 
 export const itemsInDropDown = () => {
@@ -14,7 +16,6 @@ export const itemsInDropDown = () => {
     ingredientsCurrentRecipe(availablesRecipes);
     devicesCurrentRecipe(availablesRecipes);
     instrumentsCurrentRecipe(availablesRecipes);
-    itemListDisabledOnClick();
 }
 
 
@@ -24,7 +25,7 @@ const ingredientsCurrentRecipe = (availablesRecipes) => {
     for(let i = 0; i < availablesRecipes.length; i++) {
         let currentRecipeIngredients = availablesRecipes[i].querySelectorAll('.recipe__list li span');
         for(let j = 0; j < currentRecipeIngredients.length; j++ ) {
-            let currentIngredient = currentRecipeIngredients[j].textContent;
+            let currentIngredient = currentRecipeIngredients[j].innerText;
             availablesIngredients.push(currentIngredient);
         }
     }
@@ -46,6 +47,8 @@ const createCurrentIngredients = (availablesIngredients) => {
     for(let i = 0; i < ingredientsArray.length; i++) {
         addLineInDropDown(dropDownList, ingredientsArray[i]);
     }
+
+    console.log("ingredients array ", ingredientsArray)
 }
 
 
@@ -64,12 +67,16 @@ const devicesCurrentRecipe = (availablesRecipes) => {
 
 const createCurrentDevices = (avaiblesDevices) => {
     dropDownListDevices.innerHTML = '';
-    let devicesArray = [];
+    console.log(avaiblesDevices);
+    console.log("second drop down lenght ", secondDropDown.length)
     for(let i = 0 ; i < avaiblesDevices.length; i++) {
         for(let j = 0; j < secondDropDown.length; j++) {
-            if(avaiblesDevices[i].toLowerCase().trim().includes(secondDropDown[j].toLowerCase())) {
-                if(devicesArray.indexOf(secondDropDown[j]) < 0) {
+            if(avaiblesDevices[i].toLowerCase().includes(secondDropDown[j].toLowerCase())) {
+                console.log("second drop down lenght 4 ", secondDropDown[j])
+                if(devicesArray.indexOf(secondDropDown[j].toLowerCase()) < 0) {
+                    console.log("AVAIBLE DEVICE I : ", avaiblesDevices[i])
                     devicesArray.push(secondDropDown[j]);
+                    console.log("devices array ", devicesArray)
                 }
             }
         }
@@ -95,7 +102,7 @@ const instrumentsCurrentRecipe = (availablesRecipes) => {
 
 const createCurrentInstruments = (avaiblesInstruments) => {
     dropDownListInstruments.innerHTML = '';
-    let instrumentsArray = [];
+    console.log(avaiblesInstruments)
     for(let i = 0 ; i < avaiblesInstruments.length; i++) {
         for(let j = 0; j < thirdDropDown.length; j++) {
             if(avaiblesInstruments[i].toLowerCase().trim().includes(thirdDropDown[j].toLowerCase())) {
@@ -105,54 +112,74 @@ const createCurrentInstruments = (avaiblesInstruments) => {
             }
         }
     }
+    console.log("instrument array ", instrumentsArray)
 
     for(let i = 0; i < instrumentsArray.length; i++) {
         addLineInDropDown(dropDownListInstruments, instrumentsArray[i]);
     }
 }
 
-export const searchByTags = (tagValue) => {
+export const searchByTags = (tagValue, tagBoxDiv) => {
     dropDownList.innerHTML = '';
     dropDownListDevices.innerHTML = '';
     dropDownListInstruments.innerHTML = '';
     let allRecipes = document.querySelectorAll('.avaible__recipe');
+
+    seperateRecipes(allRecipes, tagValue, tagBoxDiv);
+}
+
+const seperateRecipes = (allRecipes, tagValue, tagBoxDiv) => {
     let avaiblesRecipes = [];
+    let unavaibleRecipes = [];
     let containerBoxes = document.querySelector('.box__tag__container');
+    for(let i = 0; i < allRecipes.length; i++) {
+        let avaibleRecipe = allRecipes[i];
+        if((!(avaibleRecipe.innerText.toLowerCase().includes(tagValue.toLowerCase() || tagValue)))) {
+                avaibleRecipe.style.display = "none";
+                avaibleRecipe.classList.remove('avaible__recipe');
+                unavaibleRecipes.push(avaibleRecipe);
+        } else {
+            avaiblesRecipes.push(avaibleRecipe);
+        }
+    }
+    displayAvaiblesRecipes(avaiblesRecipes, containerBoxes);
+    deleteTag(tagBoxDiv, unavaibleRecipes, containerBoxes);
+    refreshIngredientsDropDown(containerBoxes);
+    refreshDevicesDropDown(containerBoxes);
+    refreshInstrumentsDropDown(containerBoxes);
+}
 
-    displayRecipes(allRecipes, avaiblesRecipes, tagValue);
-
+const displayAvaiblesRecipes = (avaiblesRecipes, containerBoxes) => {
     for(let i = 0; i < avaiblesRecipes.length; i++) {
         let currentRecipe = avaiblesRecipes[i];
         currentRecipeIngredients(currentRecipe, containerBoxes);
         currentRecipeDevices(currentRecipe, containerBoxes);
         currentInstrumentsDevices(currentRecipe, containerBoxes);
     }
-
-    refreshIngredientsDropDown(containerBoxes);
-    refreshDevicesDropDown(containerBoxes);
-    refreshInstrumentsDropDown(containerBoxes);
+    
+    console.log("second drop down Avaibles ", secondDropDown);
+    console.log("third drop down Avaibles ", thirdDropDown)
 }
 
-const displayRecipes = (allRecipes, avaiblesRecipes, tagValue) => {
-    for(let i = 0; i < allRecipes.length; i++) {
-        let avaibleRecipe = allRecipes[i];
-        if((!(avaibleRecipe.innerText.toLowerCase().includes(tagValue.toLowerCase() || tagValue)))) {
-                avaibleRecipe.style.display = "none";
-                avaibleRecipe.classList.remove('avaible__recipe');
-        } else {
-            avaiblesRecipes.push(avaibleRecipe);
-        }
+export const displayUnavaiblesRecipes = (unavaibleRecipes) => {
+    for(let i = 0; i < unavaibleRecipes.length; i++ ) {
+        let unavaibleRecipe = unavaibleRecipes[i];
+        unavaibleRecipe.style.display ="flex";
+        unavaibleRecipe.classList.add('avaible__recipe');
     }
+    itemsInDropDown();
 }
+
 
 const currentRecipeIngredients = (currentRecipe, containerBoxes) => {
     let currentRecipeIngredients = currentRecipe.querySelectorAll('.recipe__list li span');
-        for(let j = 0; j < currentRecipeIngredients.length; j++) {
-            let currentIngredient = currentRecipeIngredients[j].innerText;
+        for(let i = 0; i < currentRecipeIngredients.length; i++) {
+            let currentIngredient = currentRecipeIngredients[i].innerText;
             if((containerBoxes.innerText.search(currentIngredient[0].toUpperCase() + currentIngredient[0].slice(1)))) {
                 addLineInDropDown(dropDownList, currentIngredient);
             }
         }
+        console.log("first drop down Avaibles ", dropDownList)
 }
 
 const refreshIngredientsDropDown = (containerBoxes) => {
@@ -192,7 +219,6 @@ const refreshDevicesDropDown = (containerBoxes) => {
 
 const currentInstrumentsDevices = (currentRecipe, containerBoxes) => {
     let currentInstrumentsDevices = currentRecipe.querySelectorAll('.card__recipe__body');
-    console.log(thirdDropDown)
         for(let i = 0; i < currentInstrumentsDevices.length; i++) {
             let currentInstruments = currentInstrumentsDevices[i].innerText;
             for(let j = 0; j < thirdDropDown.length; j++) {

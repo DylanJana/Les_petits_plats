@@ -2,7 +2,7 @@ import { fetchRecipesJSON } from "../../api/getData.js";
 import { recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
 import { itemsInDropDown } from "./tag-search.js";
 
-let wrapper = document.querySelector('.wrapper');
+export let wrapper = document.querySelector('.wrapper');
 let wrapperContainer = document.createElement('div');
 wrapperContainer.classList.add('flex', 'justify-content--center', 'align-items--center', 'w--100', 'empty-message');
 let refreshWrapperReady;

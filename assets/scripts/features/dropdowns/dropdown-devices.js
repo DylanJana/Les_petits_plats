@@ -5,6 +5,7 @@ export let deviceDropDown = document.querySelector('#deviceDropDown');
 export let secondDropDown = [];
 
 export const addDeviceInDropDown = (recipeData) => {
+    console.log("addDeviceInDropDown ", recipeData)
     let dropDownList = document.querySelector('.dropdown--quarts ul');
     let applianceArray = [];
     for(let i = 0; i < recipeData.length; i++) {

@@ -2,7 +2,8 @@
 import {firstDropDown} from "../dropdowns/dropdown-ingredients.js";
 import {secondDropDown} from "../dropdowns/dropdown-devices.js";
 import {thirdDropDown} from "../dropdowns/dropdown-instruments.js";
-import { searchByTags, ingredientsAvailablesArray } from "../search/tag-search.js";
+import { searchByTags, ingredientsAvailablesArray, displayUnavaiblesRecipes } from "../search/tag-search.js";
+import { refreshAfterTagDelete} from "../tags/tag-delete.js";
 
 export const createTagTemplate = (tagValue) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
@@ -16,8 +17,7 @@ export const createTagTemplate = (tagValue) => {
         </div>
     `
     tagBoxDiv.innerHTML = tagBox;
-    deleteTag(tagBoxDiv);
-    searchByTags(tagValue);
+    searchByTags(tagValue, tagBoxDiv);
 }
 
 export const createTagTiers = ()  => {
@@ -56,33 +56,12 @@ export function findTagValueClick(tagValue) {
     }
 };
 
-export const itemListDisabledOnClick = () => {
-    let itemList = document.querySelectorAll('.list__item');
-
-    for(let i = 0; i < itemList.length; i++) {
-        itemList[i].addEventListener('click', (e) => {
-            let itemSelected = e.target;
-            itemSelected.classList.add('list__item__disabled');
-        })
-    }
-}
-
-export const deleteTag = (tagBoxDiv) => {
+export const deleteTag = (tagBoxDiv, unavaibleRecipes, containerBoxes) => {
     let closeTag = tagBoxDiv.querySelector('span');
     closeTag.addEventListener('click', (e) => {
         e.preventDefault();
-        let tagTextValue = tagBoxDiv.querySelector('p').innerText;
         tagBoxDiv.classList.remove('column__tag');
         tagBoxDiv.style.display = "none";
-        reactivateItemDropDown(tagTextValue);
-})
-}
-
-export const reactivateItemDropDown = (tagTextValue) => {
-let allItems = document.querySelectorAll('.list__item__disabled');
-    for(let i = 0; i < allItems.length; i++) {
-        if(allItems[i].textContent.trim() === tagTextValue.trim()) {
-            allItems[i].classList.remove('list__item__disabled')
-        }
-    }
+        displayUnavaiblesRecipes(unavaibleRecipes, containerBoxes);
+    })
 }

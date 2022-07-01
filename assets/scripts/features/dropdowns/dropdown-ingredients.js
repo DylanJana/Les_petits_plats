@@ -4,14 +4,13 @@ export let searchBox = document.querySelector('#closeDropDown');
 export let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
 export let firstDropDown = [];
 export let dropDownList = document.querySelector('.dropdown--tiers ul');
-console.log(dropDownList)
 
 export const addIngredientInDropDown = (recipeData) => {
     dropDownList.innerHTML = '';
     for(let i = 0; i < recipeData.length; i++) {
-        let arrayIngredient = recipeData[i].ingredients;
-        for(let j = 0; j < arrayIngredient.length; j++ ) {
-            let ingredient = arrayIngredient[j].ingredient.toLowerCase();
+        let listIngredient = recipeData[i].ingredients;
+        for(let j = 0; j < listIngredient.length; j++ ) {
+            let ingredient = listIngredient[j].ingredient.toLowerCase();
             if((ingredient === 'crème fraiche') || (ingredient === 'crême fraîche')) {
                 ingredient = "crème fraîche";
             }
