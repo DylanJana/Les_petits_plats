@@ -66,6 +66,7 @@ export const refreshWrapperIsReady = (query) => {
 }
 
 export const reloadWrapper = () => {
+        let wrapper = document.querySelector('.wrapper');
         wrapper.innerHTML = '';
         fetchRecipesJSON()
         .then(data =>{

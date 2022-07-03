@@ -171,7 +171,6 @@ const currentRecipeIngredients = (currentRecipe, containerBoxes) => {
                 addLineInDropDown(dropDownList, currentIngredient);
             }
         }
-        console.log("first drop down Avaibles ", dropDownList)
 }
 
 const refreshIngredientsDropDown = (containerBoxes) => {

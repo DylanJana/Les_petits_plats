@@ -2,10 +2,7 @@
 import {firstDropDown} from "../dropdowns/dropdown-ingredients.js";
 import {secondDropDown} from "../dropdowns/dropdown-devices.js";
 import {thirdDropDown} from "../dropdowns/dropdown-instruments.js";
-import { searchByTags, ingredientsAvailablesArray, displayUnavaiblesRecipes } from "../search/tag-search.js";
-import { refreshAfterTagDelete} from "../tags/tag-delete.js";
-import { fetchRecipesJSON } from "../../api/getData.js";
-import { recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
+import { searchByTags, displayUnavaiblesRecipes } from "../search/tag-search.js";
 import { reloadWrapper  } from "../search/search-bar.js";
 
 export const createTagTemplate = (tagValue) => {

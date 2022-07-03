@@ -1,7 +1,7 @@
 import { fetchRecipesJSON } from "../api/getData.js";
-import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../features/dropdowns/dropdown-ingredients.js";
-import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
-import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
+import { addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient } from "../features/dropdowns/dropdown-ingredients.js";
+import { addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
+import { addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
 import{ findTagValueClick } from "../features/tags/tags.js";
 import { onSearch } from "../features/search/search-bar.js";
 
