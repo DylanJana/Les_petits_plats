@@ -17,7 +17,7 @@ export const onSearch = (recipesArticles) => {
                 searchInRecipes(query, recipesArticles);
                 refreshWrapperReady= false;
             }
-            refreshWrapper(query, refreshWrapperReady);
+            refreshWrapperIsReady(query, refreshWrapperReady);
         })
 }
 
@@ -59,8 +59,13 @@ export const checkWrapper = (counter, recipesArticles) => {
     }
 }
 
-export const refreshWrapper = (query) => {
-    if(query.length < 3 && refreshWrapperReady === false) {
+export const refreshWrapperIsReady = (query) => {
+    if((query.length < 3 && refreshWrapperReady === false)) {
+        reloadWrapper()
+    }
+}
+
+export const reloadWrapper = () => {
         wrapper.innerHTML = '';
         fetchRecipesJSON()
         .then(data =>{
@@ -71,5 +76,4 @@ export const refreshWrapper = (query) => {
             addInDropdown(data.recipes);
         })
         refreshWrapperReady = true;
-    }
 }

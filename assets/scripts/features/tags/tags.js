@@ -4,6 +4,9 @@ import {secondDropDown} from "../dropdowns/dropdown-devices.js";
 import {thirdDropDown} from "../dropdowns/dropdown-instruments.js";
 import { searchByTags, ingredientsAvailablesArray, displayUnavaiblesRecipes } from "../search/tag-search.js";
 import { refreshAfterTagDelete} from "../tags/tag-delete.js";
+import { fetchRecipesJSON } from "../../api/getData.js";
+import { recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
+import { reloadWrapper  } from "../search/search-bar.js";
 
 export const createTagTemplate = (tagValue) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
@@ -61,7 +64,12 @@ export const deleteTag = (tagBoxDiv, unavaibleRecipes, containerBoxes) => {
     closeTag.addEventListener('click', (e) => {
         e.preventDefault();
         tagBoxDiv.classList.remove('column__tag');
-        tagBoxDiv.style.display = "none";
+        tagBoxDiv.remove();
         displayUnavaiblesRecipes(unavaibleRecipes, containerBoxes);
+        let tagAvaible = document.querySelector('.box__tag__content');
+        let search = document.querySelector('#search').value;
+        if ((!(tagAvaible) && (search.length < 3))) {
+            reloadWrapper()
+        }
     })
 }

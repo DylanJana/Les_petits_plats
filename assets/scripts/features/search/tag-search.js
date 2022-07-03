@@ -67,16 +67,12 @@ const devicesCurrentRecipe = (availablesRecipes) => {
 
 const createCurrentDevices = (avaiblesDevices) => {
     dropDownListDevices.innerHTML = '';
-    console.log(avaiblesDevices);
-    console.log("second drop down lenght ", secondDropDown.length)
     for(let i = 0 ; i < avaiblesDevices.length; i++) {
         for(let j = 0; j < secondDropDown.length; j++) {
             if(avaiblesDevices[i].toLowerCase().includes(secondDropDown[j].toLowerCase())) {
-                console.log("second drop down lenght 4 ", secondDropDown[j])
                 if(devicesArray.indexOf(secondDropDown[j].toLowerCase()) < 0) {
                     console.log("AVAIBLE DEVICE I : ", avaiblesDevices[i])
                     devicesArray.push(secondDropDown[j]);
-                    console.log("devices array ", devicesArray)
                 }
             }
         }
@@ -112,7 +108,6 @@ const createCurrentInstruments = (avaiblesInstruments) => {
             }
         }
     }
-    console.log("instrument array ", instrumentsArray)
 
     for(let i = 0; i < instrumentsArray.length; i++) {
         addLineInDropDown(dropDownListInstruments, instrumentsArray[i]);
@@ -156,9 +151,6 @@ const displayAvaiblesRecipes = (avaiblesRecipes, containerBoxes) => {
         currentRecipeDevices(currentRecipe, containerBoxes);
         currentInstrumentsDevices(currentRecipe, containerBoxes);
     }
-    
-    console.log("second drop down Avaibles ", secondDropDown);
-    console.log("third drop down Avaibles ", thirdDropDown)
 }
 
 export const displayUnavaiblesRecipes = (unavaibleRecipes) => {
