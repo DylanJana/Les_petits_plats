@@ -11,6 +11,10 @@ export const addDeviceInDropDown = (recipeData) => {
         for(let j = 0; j < applianceArray.length; j++ ) {
             if(secondDropDown.indexOf(applianceArray[j]) < 0) {
                 secondDropDown.push(applianceArray[j]);
+            let appliance = applianceArray[j].toLowerCase();
+            
+            if((secondDropDown.indexOf(appliance) < 0) && appliance !== "saladier") {
+                secondDropDown.push(appliance);
             }
         }
     }

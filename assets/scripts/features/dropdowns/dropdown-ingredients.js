@@ -5,10 +5,12 @@ export let firstDropDown = [];
 export const addIngredientInDropDown = (recipeData) => {
     let dropDownList = document.querySelector('.dropdown--tiers ul');
     for(let i = 0; i < recipeData.length; i++) {
-        let arrayIngredient = recipeData[i].ingredients;
-        for(let j = 0; j < arrayIngredient.length; j++ ) {
-            if(firstDropDown.indexOf(arrayIngredient[j].ingredient) < 0) {
-                firstDropDown.push(arrayIngredient[j].ingredient);
+        let listIngredient = recipeData[i].ingredients;
+        for(let j = 0; j < listIngredient.length; j++ ) {
+            let ingredient = listIngredient[j].ingredient.toLowerCase();
+            
+            if(firstDropDown.indexOf(ingredient) < 0) {
+                firstDropDown.push(ingredient);
             }
         }
     }

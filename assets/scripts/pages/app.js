@@ -1,8 +1,10 @@
 import { fetchRecipesJSON } from "../api/getData.js";
-import { firstDropDown, addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient, searchBox, ingredientsDropDown } from "../features/dropdowns/dropdown-ingredients.js";
-import { secondDropDown, searchBoxDevice, deviceDropDown, addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
-import { thirdDropDown, searchBoxInstrument, instrumentDropDown, addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
-import{ itemListDisabledOnClick, findTagValueClick } from "../features/tags/tags.js";
+import { addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient } from "../features/dropdowns/dropdown-ingredients.js";
+import { addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
+import { addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
+import{ findTagValueClick } from "../features/tags/tags.js";
+import { onSearch } from "../features/search/search-bar.js";
+import { dispacthRecipes } from "./dispatchRecipes.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
 
@@ -19,9 +21,9 @@ fetchRecipesJSON()
         addInDropdown(data.recipes);
     })
 
-const addRecipeInDOM = (recipe) =>{
+export const addRecipeInDOM = (recipe) =>{
     const articleRecipe = document.createElement("article");
-    articleRecipe.classList.add('column', 'card__recipe', 'col-lg-4', 'col-12', 'mb--sm',  'flex', 'flex--column');
+    articleRecipe.classList.add('column', 'card__recipe', 'col-lg-4', 'col-12', 'mb--sm',  'flex', 'flex--column', 'avaible__recipe');
     wrapperRecipes.appendChild(articleRecipe);
     articleRecipe.innerHTML=  `
     <img src="assets/img/cook.jpg">
@@ -37,10 +39,9 @@ const addRecipeInDOM = (recipe) =>{
         </div>
     </div>`;
     recipesIngredients = recipe["ingredients"];
+    itemsArray.push(articleRecipe)
     addRecipeIngredientsInCard(recipesIngredients);
 }
-
-
 
 const addRecipeIngredientsInCard = (recipesIngredients) => {
     let list = document.querySelectorAll('.recipe__list');
@@ -49,11 +50,11 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
         let createLi = document.createElement('li');
         if((recipesIngredients[i].unit !== undefined) && (recipesIngredients[i].quantity !== undefined)) {
             createLi.innerHTML = `
-                <li><span>${recipesIngredients[i].ingredient} : </span>${recipesIngredients[i].quantity} ${recipesIngredients[i].unit}</li>
+                <span>${recipesIngredients[i].ingredient} </span>: ${recipesIngredients[i].quantity} ${recipesIngredients[i].unit}
             `
         } else if(recipesIngredients[i].quantity !== undefined) {
             createLi.innerHTML = `
-                <li><span>${recipesIngredients[i].ingredient} : </span>${recipesIngredients[i].quantity}</li>
+                <span>${recipesIngredients[i].ingredient} </span>: ${recipesIngredients[i].quantity}
             `
         }
 
@@ -63,16 +64,25 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
     }
 }
 
-const addInDropdown = (recipeData) => {
+export const addInDropdown = (recipeData) => {
     displayDropDownIngredient();
     displayDropDownDevice();
     displayDropDownInstrument();
     addIngredientInDropDown(recipeData);
     addDeviceInDropDown(recipeData);
     addInstrumentInDropDown(recipeData);
-    itemListDisabledOnClick();
 }
 
+onSearch(itemsArray);
+
+export const addLineInDropDown = (dropDownList, lineItem) => {
+    let liItemIngredient = document.createElement('li');
+    liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+    liItemIngredient.innerHTML = `
+        <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${lineItem[0].toUpperCase() + lineItem.slice(1)}</a>
+    `
+        dropDownList.appendChild(liItemIngredient);
+}
 // Close dropdown on click on window
 window.onclick = function(event) {
     if (!event.target.matches('.btn--dropdown') && !event.target.matches('#searchDropdown')) {
