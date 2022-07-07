@@ -1,19 +1,13 @@
-import { addLineInDropDown } from "../../pages/app.js";
-
 export let searchBox = document.querySelector('#closeDropDown');
 export let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
 export let firstDropDown = [];
-export let dropDownList = document.querySelector('.dropdown--tiers ul');
 
 export const addIngredientInDropDown = (recipeData) => {
-    dropDownList.innerHTML = '';
+    let dropDownList = document.querySelector('.dropdown--tiers ul');
     for(let i = 0; i < recipeData.length; i++) {
         let listIngredient = recipeData[i].ingredients;
         for(let j = 0; j < listIngredient.length; j++ ) {
             let ingredient = listIngredient[j].ingredient.toLowerCase();
-            if((ingredient === 'crème fraiche') || (ingredient === 'crême fraîche')) {
-                ingredient = "crème fraîche";
-            }
             
             if(firstDropDown.indexOf(ingredient) < 0) {
                 firstDropDown.push(ingredient);
@@ -21,7 +15,12 @@ export const addIngredientInDropDown = (recipeData) => {
         }
     }
     for(let i = 0; i < firstDropDown.length; i++) {
-        addLineInDropDown(dropDownList ,firstDropDown[i]);
+        let liItemIngredient = document.createElement('li');
+        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+        liItemIngredient.innerHTML = `
+            <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${firstDropDown[i]}</a>
+        `
+            dropDownList.appendChild(liItemIngredient);
     }
 }
 

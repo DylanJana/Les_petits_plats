@@ -34,6 +34,7 @@ const ingredientsCurrentRecipe = (availablesRecipes) => {
 
 const createCurrentIngredients = (availablesIngredients) => {
     dropDownList.innerHTML = '';
+    firstDropDown.innerHTML = '';
     for(let i = 0 ; i < availablesIngredients.length; i++) {
         for(let j = 0; j < firstDropDown.length; j++) {
             if(availablesIngredients[i].toLowerCase().trim() === firstDropDown[j].toLowerCase()) {
@@ -67,6 +68,7 @@ const devicesCurrentRecipe = (availablesRecipes) => {
 
 const createCurrentDevices = (avaiblesDevices) => {
     dropDownListDevices.innerHTML = '';
+    secondDropDown.innerHTML = '';
     for(let i = 0 ; i < avaiblesDevices.length; i++) {
         for(let j = 0; j < secondDropDown.length; j++) {
             if(avaiblesDevices[i].toLowerCase().includes(secondDropDown[j].toLowerCase())) {
@@ -98,6 +100,7 @@ const instrumentsCurrentRecipe = (availablesRecipes) => {
 
 const createCurrentInstruments = (avaiblesInstruments) => {
     dropDownListInstruments.innerHTML = '';
+    thirdDropDown.innerHTML = '';
     console.log(avaiblesInstruments)
     for(let i = 0 ; i < avaiblesInstruments.length; i++) {
         for(let j = 0; j < thirdDropDown.length; j++) {

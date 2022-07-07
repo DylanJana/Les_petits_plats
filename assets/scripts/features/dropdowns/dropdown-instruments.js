@@ -1,22 +1,28 @@
-import { addLineInDropDown } from "../../pages/app.js";
-
 export let searchBoxInstrument = document.querySelector('#searchInstrumentDropDown');
 export let instrumentDropDown = document.querySelector('#instrumentDropDown');
 export let thirdDropDown = [];
 
 export const addInstrumentInDropDown = (recipeData) => {
     let dropDownList = document.querySelector('.dropdown--fifth ul');
+    thirdDropDown.innerHTML = '';
     for(let i = 0; i < recipeData.length; i++) {
         let arrayInstrument = recipeData[i].ustensils;
         for(let j = 0; j < arrayInstrument.length; j++ ) {
+            if(thirdDropDown.indexOf(arrayInstrument[j]) < 0) {
+                thirdDropDown.push(arrayInstrument[j]);
             let instrument = arrayInstrument[j].toLowerCase();
-            if(thirdDropDown.indexOf(instrument) < 0) {
+            if(thirdDropDown.indexOf(instrument) < 0 && instrument !=="casserolle") {
                 thirdDropDown.push(instrument);
             }
         }
     }
     for(let i = 0; i < thirdDropDown.length; i++) {
-        addLineInDropDown(dropDownList ,thirdDropDown[i]);
+        let liItemIngredient = document.createElement('li');
+        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+        liItemIngredient.innerHTML = `
+            <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${thirdDropDown[i]}</a>
+        `
+            dropDownList.appendChild(liItemIngredient);
     }
 }
 

@@ -1,21 +1,17 @@
-import { addLineInDropDown } from "../../pages/app.js";
-
 export let searchBoxDevice = document.querySelector('#searchDeviceDropDown');
 export let deviceDropDown = document.querySelector('#deviceDropDown');
 export let secondDropDown = [];
 
 export const addDeviceInDropDown = (recipeData) => {
-    console.log("addDeviceInDropDown ", recipeData)
     let dropDownList = document.querySelector('.dropdown--quarts ul');
     let applianceArray = [];
     for(let i = 0; i < recipeData.length; i++) {
         let applianceItem = recipeData[i].appliance;
         applianceArray.push(applianceItem);
         for(let j = 0; j < applianceArray.length; j++ ) {
-            let appliance = applianceArray[j].toLowerCase().replace('.', '');
-            if(appliance === "casserolle") {
-                appliance = "casserole";
-            }
+            if(secondDropDown.indexOf(applianceArray[j]) < 0) {
+                secondDropDown.push(applianceArray[j]);
+            let appliance = applianceArray[j].toLowerCase();
             
             if((secondDropDown.indexOf(appliance) < 0) && appliance !== "saladier") {
                 secondDropDown.push(appliance);
@@ -24,7 +20,12 @@ export const addDeviceInDropDown = (recipeData) => {
     }
 
     for(let i = 0; i < secondDropDown.length; i++) {
-        addLineInDropDown(dropDownList ,secondDropDown[i]);
+        let liItemIngredient = document.createElement('li');
+        liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
+        liItemIngredient.innerHTML = `
+            <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${secondDropDown[i]}</a>
+        `
+            dropDownList.appendChild(liItemIngredient);
     }
 }
 

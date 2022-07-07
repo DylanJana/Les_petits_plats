@@ -4,6 +4,7 @@ import { addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from 
 import { addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
 import{ findTagValueClick } from "../features/tags/tags.js";
 import { onSearch } from "../features/search/search-bar.js";
+import { dispacthRecipes } from "./dispatchRecipes.js";
 
 const wrapperRecipes = document.querySelector(".wrapper");
 
