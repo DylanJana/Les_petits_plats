@@ -95,7 +95,7 @@ const addLineInDropDown = (dropDownList, lineItem) => {
     let liItemIngredient = document.createElement('li');
     liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
     liItemIngredient.innerHTML = `
-        <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${lineItem[0].toUpperCase() + lineItem.slice(1)}</a>
+        <a href="javascript:void(0);" class="list__item" onclick="findTagValueClick(this.innerText)"> ${lineItem}</a>
     `
         dropDownList.appendChild(liItemIngredient);
 }
