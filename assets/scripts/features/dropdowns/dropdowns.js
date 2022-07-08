@@ -29,6 +29,7 @@ export const displayDropDownIngredient = () => {
 
 export const createLinesInDDIngredients = (arrayIngredients) => {
     let dropDownIngredients = document.querySelector('.dropdown--tiers ul');
+    dropDownIngredients.innerHTML = '';
     for(let i = 0; i < arrayIngredients.length; i++) {
         addLineInDropDown(dropDownIngredients, arrayIngredients[i])
     }
@@ -58,6 +59,7 @@ export const displayDropDownAppliances = () => {
 
 export const createLinesInDDAppliances = (arrayAppliances) => {
     let dropDownAppliances = document.querySelector('.dropdown--quarts ul');
+    dropDownAppliances.innerHTML = '';
     for(let i = 0; i < arrayAppliances.length; i++) {
         addLineInDropDown(dropDownAppliances, arrayAppliances[i])
     }
@@ -86,6 +88,7 @@ export const displayDropDownUstensils = () => {
 
 export const createLinesInDDUstensils = (arrayUstensils) => {
     let dropDownUstensils = document.querySelector('.dropdown--fifth ul');
+    dropDownUstensils.innerHTML = '';
     for(let i = 0; i < arrayUstensils.length; i++) {
         addLineInDropDown(dropDownUstensils, arrayUstensils[i])
     }

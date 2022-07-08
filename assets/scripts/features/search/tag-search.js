@@ -1,8 +1,8 @@
-import { addLineInDropDown } from "../../pages/app.js";
+/*import { addLineInDropDown } from "../../pages/app.js";
 import { firstDropDown, dropDownList } from "../dropdowns/dropdown-ingredients.js";
 import { secondDropDown } from "../dropdowns/dropdown-devices.js";
 import { thirdDropDown } from "../dropdowns/dropdown-instruments.js";
-import{  deleteTag } from "../tags/tags.js";
+import{  deleteTag } from "../tags/tags.js";*/
 
 let dropDownListDevices = document.querySelector('.dropdown--quarts ul');
 let dropDownListInstruments = document.querySelector('.dropdown--fifth ul');

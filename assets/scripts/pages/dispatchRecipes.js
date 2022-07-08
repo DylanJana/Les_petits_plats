@@ -1,13 +1,18 @@
 import { fetchRecipesJSON } from "../api/getData.js";
 /// DropDowns
 import { createLinesInDDIngredients, createLinesInDDAppliances, createLinesInDDUstensils } from "../features/dropdowns/dropdowns.js";
+import { wrapper } from "../features/search/search-bar.js";
 
 export let arrayIngredients = [];
 export let arrayAppliances = [];
 export let arrayUstensils = [];
-let wrapperRecipes = document.querySelector(".wrapper");
+export let arrayRecipes = [];
+export let arrayRecipesUstensilsJSON = [];
+export let arrayRecipesAppliancesInJSON = [];
+export let wrapperRecipes = document.querySelector(".wrapper");
 
 export const dispatchRecipes = () => {
+    wrapperRecipes.innerHTML = '';
     fetchRecipesJSON()
     .then(data =>{
         for(let i = 0; i < data.recipes.length; i++){
@@ -45,9 +50,15 @@ const dispatchRecipesInDom = (recipe) =>{
         </div>
     </div>`;
     wrapperRecipes.appendChild(articleRecipe);
+    arrayRecipes.push(articleRecipe);
+    /* Get Only ustensils recipes */
+    let recipesUstensils = recipe['ustensils'];
+    arrayRecipesUstensilsJSON.push(recipesUstensils);
     let recipesIngredients = recipe["ingredients"];
-    //itemsArray.push(articleRecipe)
     addRecipeIngredientsInCard(recipesIngredients);
+    /* Get Only appliances recipes */
+    let recipesAppliances = recipe['appliance'];
+    arrayRecipesAppliancesInJSON.push(recipesAppliances);
 }
 
 const addRecipeIngredientsInCard = (recipesIngredients) => {
@@ -74,6 +85,7 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
 
 export const dispatchIngredients = (ingredientsInRecipe) => {
     for(let i = 0; i < ingredientsInRecipe.length; i++) {
+        console.log("Tableau des ingredients ", ingredientsInRecipe[i].ingredient)
         let ingredientInRecipe = ingredientsInRecipe[i].ingredient;
         if(arrayIngredients.indexOf(ingredientInRecipe) < 0) {
             arrayIngredients.push(ingredientInRecipe);

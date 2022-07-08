@@ -1,9 +1,9 @@
 
-import {firstDropDown} from "../dropdowns/dropdown-ingredients.js";
+/*import {firstDropDown} from "../dropdowns/dropdown-ingredients.js";
 import {secondDropDown} from "../dropdowns/dropdown-devices.js";
 import {thirdDropDown} from "../dropdowns/dropdown-instruments.js";
 import { searchByTags, displayUnavaiblesRecipes } from "../search/tag-search.js";
-import { reloadWrapper  } from "../search/search-bar.js";
+import { reloadWrapper  } from "../search/search-bar.js";*/
 
 export const createTagTemplate = (tagValue) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');

@@ -1,4 +1,4 @@
-export let searchBoxInstrument = document.querySelector('#searchInstrumentDropDown');
+/*export let searchBoxInstrument = document.querySelector('#searchInstrumentDropDown');
 export let instrumentDropDown = document.querySelector('#instrumentDropDown');
 export let thirdDropDown = [];
 
@@ -46,3 +46,4 @@ export const closeDropDownInstrument = () => {
     searchBoxInstrument.style.display ="none";
     instrumentDropDown.style.display = "inline-flex";
 }
+*/

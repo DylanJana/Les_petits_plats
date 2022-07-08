@@ -1,4 +1,4 @@
-import { fetchRecipesJSON } from "../api/getData.js";
+/*import { fetchRecipesJSON } from "../api/getData.js";
 import { addIngredientInDropDown, displayDropDownIngredient, closeDropDownIngredient } from "../features/dropdowns/dropdown-ingredients.js";
 import { addDeviceInDropDown, displayDropDownDevice, closeDropDownDevice } from "../features/dropdowns/dropdown-devices.js";
 import { addInstrumentInDropDown, displayDropDownInstrument, closeDropDownInstrument } from "../features/dropdowns/dropdown-instruments.js";
@@ -102,3 +102,4 @@ window.onclick = function(event) {
 }
 
 window.findTagValueClick = findTagValueClick;
+*/

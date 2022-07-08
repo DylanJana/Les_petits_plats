@@ -1,4 +1,4 @@
-export let searchBoxDevice = document.querySelector('#searchDeviceDropDown');
+/*export let searchBoxDevice = document.querySelector('#searchDeviceDropDown');
 export let deviceDropDown = document.querySelector('#deviceDropDown');
 export let secondDropDown = [];
 
@@ -29,7 +29,7 @@ export const addDeviceInDropDown = (recipeData) => {
     }
 }
 
-export const displayDropDownDevice = () => {
+const displayDropDownDevice = () => {
     let dropDownDevice = document.querySelector('.btn.btn--quarts.dropdown-toggle');
     let listDevice = document.querySelector('.dropdown--quarts');
     dropDownDevice.addEventListener('click', (e) => {
@@ -41,11 +41,11 @@ export const displayDropDownDevice = () => {
     })
 }
 
-export const closeDropDownDevice = () => {
+const closeDropDownDevice = () => {
     let dropDownDevice = document.querySelector('.btn.btn--quarts');
     let listDevice = document.querySelector('.dropdown--quarts');
     dropDownDevice.classList.remove('btn--dropdown');
-        listDevice.style.display="none";
-        searchBoxDevice.style.display ="none";
-        deviceDropDown.style.display = "inline-flex";
-}
+    listDevice.style.display="none";
+    searchBoxDevice.style.display ="none";
+    deviceDropDown.style.display = "inline-flex";
+}*/

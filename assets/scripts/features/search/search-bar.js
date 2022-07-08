@@ -1,6 +1,6 @@
-import { fetchRecipesJSON } from "../../api/getData.js";
+/*import { fetchRecipesJSON } from "../../api/getData.js";
 import { recipes, addRecipeInDOM, addInDropdown } from "../../pages/app.js";
-import { itemsInDropDown } from "./tag-search.js";
+import { itemsInDropDown } from "./tag-search.js";*/
 
 export let wrapper = document.querySelector('.wrapper');
 let wrapperContainer = document.createElement('div');
