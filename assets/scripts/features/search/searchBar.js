@@ -1,7 +1,11 @@
 import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, arrayUstensils, arrayIngredients, arrayAppliances } from "../../pages/dispatchRecipes.js";
 import { createLinesInDDUstensils, createLinesInDDIngredients, createLinesInDDAppliances } from "../dropdowns/dropdowns.js";
+/*** Search Advanced ***/
+import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../search/searchBardAdvanced.js";
 
-console.log("Array recipes ", arrayRecipesAppliancesInJSON)
+let wrapperContainer = document.createElement('div');
+let btnDisabled = document.querySelectorAll('.btn')
+
 export const searchWordInRecipes = () => {
     let searchBar = document.querySelector("#search");
 
@@ -19,8 +23,8 @@ export const searchWordInRecipes = () => {
 }
 
 const searchRecipes = (query, arrayRecipes) => {
-    let arrayRecipesUnavailables = [];
     let arrayIngredientsAvailables = [];
+    let arrayRecipesUnavailables = [];
     let arrayAppliancesAvailables = [];
     let arrayUstensilsAvailables = [];
     for(let i = 0; i < arrayRecipes.length; i++) {
@@ -38,7 +42,12 @@ const searchRecipes = (query, arrayRecipes) => {
             getUstensilsOfMyRecipe(indexOfCurrentRecipe, arrayUstensilsAvailables);
         }
     }
+    let numberAvailablesRecipes = document.querySelectorAll('.avaible__recipe').length;
+    sorryNotRecipes(numberAvailablesRecipes);
     searchRecipesAfterBackspace(arrayRecipesUnavailables);
+    inputIngredientsSearch(arrayIngredientsAvailables);
+    inputAppliancesSearch(arrayAppliancesAvailables);
+    inputUstensilsSearch(arrayUstensilsAvailables);
 }
 
 const searchRecipesAfterBackspace = (arrayRecipesUnavaibles) => {
@@ -50,6 +59,10 @@ const searchRecipesAfterBackspace = (arrayRecipesUnavaibles) => {
                 searchRecipesMoreThreeChar(query, arrayRecipesUnavaibles);
             } else if(arrayRecipes.length !== arrayRecipesUnavaibles.length) {
                 reloadWrapper(arrayRecipesUnavaibles);
+            }
+            wrapperContainer.style.display = "none";
+            if(wrapperContainer.hasAttribute('style')) {
+                removeClassDisabled();
             }
         }
     })
@@ -90,6 +103,7 @@ const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayIngredie
     createLinesInDDIngredients(arrayIngredientsAvailables);
 }
 
+
 const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAvailables) => {
     for(let i = 0; i < arrayRecipesAppliancesInJSON.length; i++) {
         if( i === indexOfCurrentRecipe) {
@@ -114,4 +128,31 @@ const getUstensilsOfMyRecipe = (indexOfCurrentRecipe, arrayUstensilsAvailables) 
         }
     }
     createLinesInDDUstensils(arrayUstensilsAvailables);
+}
+
+const sorryNotRecipes = (numberAvailablesRecipes) => {
+    if(numberAvailablesRecipes === 0) {
+        wrapperContainer.classList.add('w--100');
+        wrapperContainer.removeAttribute('style');
+        let wrapper = document.querySelector('.wrapper');
+        let messageNoRecipes = `
+        <div class="flex justify-content--center align-items--center w--100">
+            <div class="t--box-a">
+                <p class="paragraph"> Aucune recette ne correspond à votre critère... Vous pouvez chercher " tarte aux pommes", "poisson", etc... </p>
+            </div>
+        </div>
+        `;
+        wrapperContainer.innerHTML = messageNoRecipes;
+        wrapper.appendChild(wrapperContainer);
+
+        for(let i = 0; i < btnDisabled.length; i++) {
+            btnDisabled[i].classList.add("btn--disabled");
+        }
+    }
+}
+
+const removeClassDisabled = () => {
+    for(let i = 0; i < btnDisabled.length; i++) {
+        btnDisabled[i].classList.remove("btn--disabled");
+    }
 }

@@ -247,6 +247,12 @@ ul {
   border-radius: 4px 4px 0 0;
 }
 
+.btn--plain.btn--disabled {
+  pointer-events: none;
+  color: #000;
+  background-color: #E7E7E7;
+}
+
 .dropdown-toggle::after {
   display: none;
 }
@@ -318,7 +324,7 @@ ul {
   color: rgba(255, 255, 255, 0.5);
 }
 
-#closeDropDown {
+#searchIngredientsDropDown {
   display: none;
   width: 94%;
 }

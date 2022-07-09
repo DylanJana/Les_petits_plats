@@ -1,4 +1,4 @@
-let searchBox = document.querySelector('#closeDropDown');
+let searchBox = document.querySelector('#searchIngredientsDropDown');
 let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
 let searchBoxAppliances = document.querySelector('#searchDeviceDropDown');
 let appliancesDropDown = document.querySelector('#deviceDropDown');

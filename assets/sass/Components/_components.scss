@@ -87,6 +87,12 @@
         width: 570px;
         border-radius: 4px 4px 0 0;
     }
+
+    &.btn--disabled {
+        pointer-events: none;
+        color: $color-text;
+        background-color: $color-primary;
+    }
 }
 
 .dropdown-toggle::after {
@@ -150,7 +156,7 @@
     }
 }
 
-#closeDropDown {
+#searchIngredientsDropDown {
     display: none;
     width: 94%;
 }

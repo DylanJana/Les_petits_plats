@@ -1,7 +1,6 @@
 import { fetchRecipesJSON } from "../api/getData.js";
 /// DropDowns
 import { createLinesInDDIngredients, createLinesInDDAppliances, createLinesInDDUstensils } from "../features/dropdowns/dropdowns.js";
-import { wrapper } from "../features/search/search-bar.js";
 
 export let arrayIngredients = [];
 export let arrayAppliances = [];
