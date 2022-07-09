@@ -94,7 +94,7 @@ const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayIngredie
         for(let j = 0; j < arrayIngredients.length; j++) {
             let currentIngredient = arrayIngredients[j];
             if(currentIngredient === currentIngredientsNames[i].innerText.trim()) {
-                if(arrayIngredientsAvailables.indexOf(currentIngredient) < 0) {
+                if((arrayIngredientsAvailables.indexOf(currentIngredient) < 0)) {
                     arrayIngredientsAvailables.push(currentIngredient);
                 }
             }

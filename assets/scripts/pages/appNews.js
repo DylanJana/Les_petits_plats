@@ -6,6 +6,8 @@ import { displayDropDownIngredient, displayDropDownAppliances, displayDropDownUs
 import { searchWordInRecipes } from "../features/search/searchBar.js";
 /*** SearchBard Advanced ***/
 import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../features/search/searchBardAdvanced.js";
+/*** Tags function ***/
+import { findTagValueClick } from "../features/tags/tagsNew.js";
 
 const mainFunction = () => {
     dispatchRecipes();
@@ -18,7 +20,7 @@ const mainFunction = () => {
     inputIngredientsSearch(arrayIngredients);
     inputAppliancesSearch(arrayAppliances);
     inputUstensilsSearch(arrayUstensils);
-
+    window.findTagValueClick = findTagValueClick
 }
 
 mainFunction();
