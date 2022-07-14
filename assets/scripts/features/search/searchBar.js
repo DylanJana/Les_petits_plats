@@ -22,7 +22,7 @@ export const searchWordInRecipes = () => {
     })
 }
 
-const searchRecipes = (query, arrayRecipes) => {
+export const searchRecipes = (query, arrayRecipes) => {
     let arrayIngredientsAvailables = [];
     let arrayRecipesUnavailables = [];
     let arrayAppliancesAvailables = [];
@@ -80,14 +80,14 @@ const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
     }
 }
 
-const reloadWrapper = (arrayRecipesUnavaibles) => {
+export const reloadWrapper = (arrayRecipesUnavaibles) => {
     for(let i = 0; i < arrayRecipesUnavaibles.length; i++) {
         arrayRecipesUnavaibles[i].classList.add('avaible__recipe');
         arrayRecipesUnavaibles[i].removeAttribute('style');
     }
 }
 
-const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayIngredientsAvailables) => {
+export const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayIngredientsAvailables) => {
     let currentListRecipe = currentRecipe.querySelector('.recipe__list');
     let currentIngredientsNames = currentListRecipe.querySelectorAll('li span');
     for(let i = 0; i < currentIngredientsNames.length; i++) {

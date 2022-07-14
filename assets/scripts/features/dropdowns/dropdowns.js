@@ -102,3 +102,11 @@ const addLineInDropDown = (dropDownList, lineItem) => {
     `
         dropDownList.appendChild(liItemIngredient);
 }
+
+export const removeLineInDropDown = (dropDownItems, lineItem) => {
+    for(let i = 0; i < dropDownItems.length; i++) {
+        if(dropDownItems[i].innerText.trim() === lineItem) {
+            dropDownItems[i].style.display ="none";
+        }
+    }
+}
