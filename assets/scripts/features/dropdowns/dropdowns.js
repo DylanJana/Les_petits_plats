@@ -94,7 +94,7 @@ export const createLinesInDDUstensils = (arrayUstensils) => {
     }
 }
 
-const addLineInDropDown = (dropDownList, lineItem) => {
+export const addLineInDropDown = (dropDownList, lineItem) => {
     let liItemIngredient = document.createElement('li');
     liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
     liItemIngredient.innerHTML = `

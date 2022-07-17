@@ -1,4 +1,4 @@
-import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, arrayUstensils, arrayIngredients, arrayAppliances } from "../../pages/dispatchRecipes.js";
+import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, arrayUstensils, arrayIngredients, arrayAppliances, dispatchRecipes } from "../../pages/dispatchRecipes.js";
 import { createLinesInDDUstensils, createLinesInDDIngredients, createLinesInDDAppliances } from "../dropdowns/dropdowns.js";
 /*** Search Advanced ***/
 import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../search/searchBardAdvanced.js";
@@ -104,7 +104,7 @@ export const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayI
 }
 
 
-const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAvailables) => {
+export const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAvailables) => {
     for(let i = 0; i < arrayRecipesAppliancesInJSON.length; i++) {
         if( i === indexOfCurrentRecipe) {
             let currentRecipeAppliancesJSON = arrayRecipesAppliancesInJSON[i];
@@ -116,7 +116,7 @@ const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAvailables
     createLinesInDDAppliances(arrayAppliancesAvailables);
 }
 
-const getUstensilsOfMyRecipe = (indexOfCurrentRecipe, arrayUstensilsAvailables) => {
+export const getUstensilsOfMyRecipe = (indexOfCurrentRecipe, arrayUstensilsAvailables) => {
     for(let i = 0; i < arrayRecipesUstensilsJSON.length; i++) {
         let currentRecipeUstensilsJSON = arrayRecipesUstensilsJSON[i];
         if((arrayRecipesUstensilsJSON.indexOf(currentRecipeUstensilsJSON) === indexOfCurrentRecipe)) {
