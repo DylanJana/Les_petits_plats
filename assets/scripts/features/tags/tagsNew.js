@@ -1,6 +1,7 @@
-import { arrayIngredients, arrayAppliances, arrayUstensils, arrayRecipes, arrayRecipesAppliancesInJSON, dispatchRecipes } from '../../pages/dispatchRecipes.js';
+import { arrayIngredients, arrayAppliances, arrayUstensils, arrayRecipes, arrayRecipesAppliancesInJSON, dispatchRecipes, arrayRecipesUstensilsJSON } from '../../pages/dispatchRecipes.js';
 import {  getIngredientsOfMyRecipe, getAppliancesOfMyRecipe, getUstensilsOfMyRecipe, reloadWrapper, searchRecipes } from '../search/searchBar.js';
 import { removeLineInDropDown, addLineInDropDown } from '../dropdowns/dropdowns.js';
+import { inputIngredientsSearch } from '../search/searchBardAdvanced.js';
 
 let arrayFullTags = [];
 let arrayTagsIngredients = [];
@@ -42,6 +43,7 @@ const createTags = (tagValue) => {
             dropDownUstensils[i].style.display = "none";
         }
     }
+    searchWithRestTags(arrayFullTags);
 }
 
 const createTagIngredient = (tagValue, arrayTagsIngredients) => {
@@ -60,7 +62,6 @@ const createTagIngredient = (tagValue, arrayTagsIngredients) => {
     arrayFullTags.push(tagBoxDiv);
     console.log("Array ingredients ", arrayTagsIngredients);
     console.log("Array full tags ", arrayFullTags);
-    filterRecipeByIngredients(tagValue);
     closeTags(tagBoxDiv, tagValue);
 }
 
@@ -78,7 +79,6 @@ const createTagsAppliance = (tagValue, arrayTagsAppliances) => {
     tagBoxDiv.innerHTML = tagBox;
     arrayTagsAppliances.push(tagValue);
     arrayFullTags.push(tagBoxDiv);
-    filterRecipesByAppliances(tagValue);
     closeTags(tagBoxDiv, tagValue);
     console.log("Array appliances ", arrayTagsAppliances);
     console.log("Array full tags ", arrayFullTags);
@@ -101,6 +101,8 @@ const createTagsUstensils = (tagValue, arrayTagsUstensils) => {
     arrayFullTags.push(tagBoxDiv);
     closeTags(tagBoxDiv, tagValue);
     console.log("Array Ustensils ", arrayTagsUstensils);
+    console.log("Array full tags ", arrayFullTags);
+
 }
 
 console.log("Array I ", arrayIngredients);
@@ -111,6 +113,7 @@ console.log("Array JSON A ", arrayRecipesAppliancesInJSON)
 
 const filterRecipeByIngredients = (tagValue) => {
     let recipesAvaibles = document.querySelectorAll('.avaible__recipe');
+    let arrayIngredients = [];
     arrayIngredientsAvailables = [];
     arrayAppliancesAvailables= [];
     arrayUstensilsAvailables = [];
@@ -134,6 +137,13 @@ const filterRecipeByIngredients = (tagValue) => {
             cleanDropDown(dropDownItems, arrayIngredientsAvailables, arrayTagsIngredients);
         }
     }
+
+    let listIngredients = document.querySelectorAll('.dropdown--tiers ul li a');
+    for(let i = 0; i < listIngredients.length; i++) {
+        arrayIngredients.push(listIngredients[i].innerText)
+    }
+
+    inputIngredientsSearch(arrayIngredients);
 }
 
 const filterRecipesByAppliances = (tagValue) => {
@@ -153,7 +163,7 @@ const filterRecipesByAppliances = (tagValue) => {
                 }
             } else if(recipePast.indexOf(arrayRecipes[i]) < 0) {
                 recipePast.push(arrayRecipes[i]);
-                if(arrayTagsIngredients.length === 0) {
+                if(arrayTagsIngredients.length === 0 && arrayTagsUstensils.length === 0) {
                     arrayRecipes[i].style.display = "inline-flex";
                     arrayRecipes[i].classList.add('avaible__recipe');
                 }
@@ -170,6 +180,46 @@ const filterRecipesByAppliances = (tagValue) => {
     }
 }
 
+const filterRecipeByUstensils = (tagValue) => {
+    let recipePast = [];
+    let indexOfRecipesAvailables = [];
+    let recipesAvaibles = document.querySelectorAll('.avaible__recipe');
+    arrayIngredientsAvailables = [];
+    arrayAppliancesAvailables= [];
+    arrayUstensilsAvailables = [];
+
+    for(let i = 0; i < arrayRecipesUstensilsJSON.length; i++) {
+        for(let j = 0; j < arrayRecipesUstensilsJSON[i].length; j++) {
+            if(arrayRecipesUstensilsJSON[i][j].toLowerCase() === tagValue.toLowerCase()) {
+                let indexOfRecipesWithUstensil = arrayRecipesUstensilsJSON.indexOf(arrayRecipesUstensilsJSON[i]);
+                indexOfRecipesAvailables.push(indexOfRecipesWithUstensil)
+            }
+        }
+    }
+
+    for(let i = 0; i < recipesAvaibles.length; i++) {
+        let indexRecipe = arrayRecipes.indexOf(recipesAvaibles[i]);
+        if(indexOfRecipesAvailables.includes(indexRecipe)) {
+            recipesAvaibles[i].style.display = "inline-flex";
+            recipePast.push(recipesAvaibles[i]);
+        } else {
+            recipesAvaibles[i].style.display = "none";
+            recipesAvaibles[i].classList.remove('avaible__recipe');
+            if(unAvailableRecipe.indexOf(recipesAvaibles[i]) < 0) {
+                unAvailableRecipe.push(recipesAvaibles[i]);
+            }
+        }
+    }
+    
+    for(let i = 0; i < recipePast.length; i++) {
+        let dropDownItems = document.querySelectorAll('.dropdown--fifth ul li');
+        cleanDropDown(dropDownItems, arrayUstensilsAvailables, arrayTagsUstensils);
+        if(recipePast[i].classList.contains('avaible__recipe')) {
+            reloadDropDown(recipePast[i]);
+        }
+    }
+}
+
 const reloadDropDown =  (currentRecipe) => {
     let indexOfCurrentRecipe =  arrayRecipes.indexOf(currentRecipe)
     getIngredientsOfMyRecipe(arrayIngredients, currentRecipe, arrayIngredientsAvailables);
@@ -179,6 +229,8 @@ const reloadDropDown =  (currentRecipe) => {
     cleanDropDown(dropDownItems, arrayIngredientsAvailables, arrayTagsIngredients);
     let dropDownAppliances = document.querySelectorAll('.dropdown--quarts ul li');
     cleanDropDown(dropDownAppliances, arrayAppliancesAvailables, arrayTagsAppliances);
+    let dropDownUstensils = document.querySelectorAll('.dropdown--fifth ul li');
+    cleanDropDown(dropDownUstensils, arrayUstensilsAvailables, arrayTagsUstensils);
 }
 
 const cleanDropDown = (dropDownItems, arrayItemsAvaibles, arrayTagsUses) => {
@@ -197,11 +249,6 @@ const closeTags = (tagBoxDiv, tagValue) => {
         e.preventDefault();
         tagBoxDiv.remove();
         refreshAfterDeleteTag(tagBoxDiv, tagValue);
-        let allRecipesAvailables = document.querySelectorAll('.avaible__recipe');
-        Array.from(allRecipesAvailables);
-        for(let i = 0;  i < allRecipesAvailables.length; i++) {
-            reloadDropDown(allRecipesAvailables[i])
-        }
         searchWithRestTags(arrayFullTags);
     })
 }
@@ -216,7 +263,9 @@ const refreshAfterDeleteTag = (tagBoxDiv, tagValue) => {
         }
     } else if(tagBoxCategory.classList.contains('tag--quarts')) {
             deleteTagAppliance(tagValue);
-    } 
+    } else if(tagBoxCategory.classList.contains('tag--fifth')) {
+            deleteTagUstensils(tagValue);
+    }
 
 
     updateArrayFullTags(tagBoxDiv, tagValue);
@@ -242,6 +291,15 @@ const deleteTagIngredient = (recipeIngredientsList, tagValue, currentRecipe) => 
     if(findIndexIngredientDelete > -1) {
         arrayTagsIngredients.splice(findIndexIngredientDelete, 1);
     }
+
+    for(let i = 0; i < arrayFullTags.length; i++) {
+        let tagBoxCategory = arrayFullTags[i].querySelector('.box__tag__content');
+        if(tagBoxCategory.classList.contains('tag--tiers')) {
+            refreshWrapperByIngredients(unAvailableRecipe,tagBoxCategory.innerText);
+        } else if(tagBoxCategory.classList.contains('tag--fifth')) {
+            refreshWrapperByUstensils(unAvailableRecipe,tagBoxCategory.innerText);
+        }
+    }
 }
 
 const deleteTagAppliance = (tagValue) => {
@@ -255,7 +313,25 @@ const deleteTagAppliance = (tagValue) => {
     for(let i = 0; i < arrayFullTags.length; i++) {
         let tagBoxCategory = arrayFullTags[i].querySelector('.box__tag__content');
         if(tagBoxCategory.classList.contains('tag--tiers')) {
-            refreshWrapperByIngredients(unAvailableRecipe,tagBoxCategory.innerText)
+            refreshWrapperByIngredients(unAvailableRecipe,tagBoxCategory.innerText);
+        } else if(tagBoxCategory.classList.contains('tag--fifth')) {
+            refreshWrapperByUstensils(unAvailableRecipe,tagBoxCategory.innerText);
+        }
+    }
+}
+
+const deleteTagUstensils = (tagValue) => {
+    let findIndexUstensilsDelete = arrayTagsUstensils.indexOf(tagValue);
+    let dropDownUstensils = document.querySelector('.dropdown--fifth ul')
+    addLineInDropDown(dropDownUstensils, tagValue)
+    if(findIndexUstensilsDelete > -1) {
+        arrayTagsUstensils.splice(findIndexUstensilsDelete, 1);
+    }
+
+    for(let i = 0; i < arrayFullTags.length; i++) {
+        let tagBoxCategory = arrayFullTags[i].querySelector('.box__tag__content');
+        if(tagBoxCategory.classList.contains('tag--tiers')) {
+            refreshWrapperByIngredients(unAvailableRecipe,tagBoxCategory.innerText);
         }
     }
 }
@@ -265,19 +341,41 @@ const refreshWrapperByIngredients = (unAvailableRecipe, tagValue) => {
         let recipeList = unAvailableRecipe[i].querySelector('.recipe__list')
         if(recipeList.innerText.toLowerCase().includes(tagValue.toLowerCase())) {
             unAvailableRecipe[i].style.display = "inline-flex";
+            unAvailableRecipe[i].classList.add('avaible__recipe')
             reloadDropDown(unAvailableRecipe[i]);
         }
     }
 }
 
+const refreshWrapperByUstensils = (unAvailableRecipe, tagValue) => {
+    let indexOfRecipesAvailables = [];
+    for(let i = 0; i < arrayRecipesUstensilsJSON.length; i++) {
+        for(let j = 0; j < arrayRecipesUstensilsJSON[i].length; j++) {
+            if(arrayRecipesUstensilsJSON[i][j].toLowerCase() === tagValue.toLowerCase()) {
+                let indexOfRecipesWithUstensil = arrayRecipesUstensilsJSON.indexOf(arrayRecipesUstensilsJSON[i]);
+                indexOfRecipesAvailables.push(indexOfRecipesWithUstensil)
+            }
+        }
+    }
+
+    for(let i = 0; i <  unAvailableRecipe.length; i++) {
+        let indexRecipe = arrayRecipes.indexOf( unAvailableRecipe[i]);
+        if(indexOfRecipesAvailables.includes(indexRecipe)) {
+            unAvailableRecipe[i].style.display = "inline-flex";
+            unAvailableRecipe[i].classList.add('avaible__recipe')
+        }
+    }
+}
+
 const searchWithRestTags = (arrayFullTags) => {
-    console.log("arrayFullTags ", arrayFullTags);
     for(let i = 0; i < arrayFullTags.length; i++) {
         let tagBoxCategory = arrayFullTags[i].querySelector('.box__tag__content');
         if(tagBoxCategory.classList.contains('tag--tiers')) {
             filterRecipeByIngredients(tagBoxCategory.innerText);
         } else if (tagBoxCategory.classList.contains('tag--quarts')) {
             filterRecipesByAppliances(tagBoxCategory.innerText);
+        } else if(tagBoxCategory.classList.contains('tag--fifth')) {
+            filterRecipeByUstensils(tagBoxCategory.innerText);
         }
     }
 }
@@ -291,40 +389,10 @@ const updateArrayFullTags = (tagBoxDiv) => {
     let searchPrincipal = document.querySelector('#search');
     if(((arrayFullTags.length === 0) && (searchPrincipal.value === '')) || ((arrayFullTags.length === 0) && (searchPrincipal.value.length < 3))) {
         dispatchRecipes();
+        inputIngredientsSearch(arrayIngredients);
     } else if((arrayFullTags.length === 0) && (searchPrincipal.value.length >= 3)) {
         reloadWrapper(arrayRecipes);
         searchRecipes(searchPrincipal.value, arrayRecipes);
+        inputIngredientsSearch(arrayIngredients);
     }
 }
-/*********
- * FILTRE PAR TAG TIERS
- * L'UTILISATEUR CHOISIT UN TAG TIERS
-    * POUR CHAQUE RECETTE AYANT LA CLASSE AVAIBLE__RECIPE
-        * JE RÉCUPÉRE la liste des ingrédients
-        * POUR CHAQUE LIGNE DE CHAQUE LISTE, je verifie si elle est égale à mon tag
-        * SI elle est égale à mon TAG J'AJOUTE +1 à mon score
-        * SI mon score est inférieur à 1
-        * JE DISPLAY NONE LA RECETTE
- */
-/**************
- SI le tag appartient à la catégorie tiers
-    JE RÉCUPÉRE SA VALEUR
-    J'AJOUTE SA VALEUR au tableau des ingrédients disponibles
-    JE LANCE la fonction createLinesInDDIngredients()
-SINON SI le tag appartient à la catégorie quarts
-    JE RÉCUPÉRE SA VALEUR
-    J'AJOUTE SA VALEUR au tableau des appareils disponibles
-    JE LANCE la fonction createLinesInDDappliances()
-SINON SI le tag appartient à la catégorie fifth
-    JE RÉCUPÉRE SA VALEUR
-    J'AJOUTE SA VALEUR au tableau des ustensiles disponibles
-    JE LANCE la fonctione createLineInDDustensils
- */
-
-
-/****************
- JE RECUPÉRE TOUTES LES RECETTES DISPONIBLES
- POUR CHAQUE RECETTE DISPONIBLE
-    JE RÉCUPÉRE leur index
-    SI L'INDEX DE LA RECETTE EN COURS est égal À L'INDEX DE l'USTENSILE EN COURS DU TABLEAU ARRAYAPPLIANCESJSON 
- */
