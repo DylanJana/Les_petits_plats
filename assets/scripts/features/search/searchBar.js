@@ -2,12 +2,14 @@ import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, 
 import { createLinesInDDUstensils, createLinesInDDIngredients, createLinesInDDAppliances } from "../dropdowns/dropdowns.js";
 /*** Search Advanced ***/
 import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../search/searchBardAdvanced.js";
+import { mainFunction } from '../../pages/appNews.js';
 
 let wrapperContainer = document.createElement('div');
-let btnDisabled = document.querySelectorAll('.btn')
+let btnDisabled = document.querySelectorAll('.btn');
 
 export const searchWordInRecipes = () => {
     let searchBar = document.querySelector("#search");
+    let alreadyRefresh = 0;
 
     searchBar.addEventListener('keyup', (e) => {
         let query = e.target.value.toLowerCase();
@@ -18,6 +20,10 @@ export const searchWordInRecipes = () => {
             createLinesInDDIngredients(arrayIngredients);
             createLinesInDDAppliances(arrayAppliances);
             createLinesInDDUstensils(arrayUstensils);
+            if(e.keyCode === 8 && alreadyRefresh === 0) {
+                alreadyRefresh++;
+                mainFunction();
+            }
         }
     })
 }

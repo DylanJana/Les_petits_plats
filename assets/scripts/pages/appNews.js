@@ -7,9 +7,9 @@ import { searchWordInRecipes } from "../features/search/searchBar.js";
 /*** SearchBard Advanced ***/
 import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../features/search/searchBardAdvanced.js";
 /*** Tags function ***/
-import { findTagValueClick } from "../features/tags/tagsNew.js";
+import { findTagValueClick } from "../features/tags/createTags.js";
 
-const mainFunction = () => {
+export const mainFunction = () => {
     dispatchRecipes();
     displayDropDownIngredient();
     displayDropDownAppliances();

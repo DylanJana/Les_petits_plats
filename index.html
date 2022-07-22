@@ -11,13 +11,13 @@
     <title>Les Petits Plats</title>
 </head>
 <body>
-    <header class="ly--full-container flex align-items--center justify-content--center" role="heading">
+    <header class="ly--full-container flex align-items--center justify-content--center">
         <div class="mt--md">
             <img src="assets/img/logo.svg" alt="Logo Les Petits Plats" role="link">
         </div>
     </header>
     <main>
-        <section class="ly--lg-container mb--xs">
+        <div class="ly--lg-container mb--xs">
             <form>
                 <label for="search" class="visibility--hidden">Rechercher une recette</label>
                 <div class="search__box">
@@ -25,17 +25,17 @@
                     <span class="fas fa-search"></span>
                 </div>
             </form>
-        </section>
-        <section class="ly--lg-container mb--xs">
+        </div>
+        <div class="ly--lg-container mb--xs">
             <div class="row--has-columns-sm flex flex-wrap box__tag__container">
             </div>
-        </section>
-        <section class="ly--lg-container">
+        </div>
+        <div class="ly--lg-container">
             <div class="row--has-columns-sm">
                 <div class="btn-group column" id="firstGroup">
-                    <div class="btn btn-lg dropdown-toggle btn--plain btn--tiers" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button" >
+                    <div class="btn btn-lg dropdown-toggle btn--plain btn--tiers" data-bs-toggle="dropdown" aria-expanded="false" role="form" >
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="searchIngredientsDropDown">
-                            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un ingrédient">
+                            <input type="text" name="search" class="searchDropdown" placeholder="Rechercher un ingrédient">
                             <span class="fas fa-chevron-up"></span>
                         </div>
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="ingredientsDropDown">
@@ -49,9 +49,9 @@
                     </div>
                 </div>
                 <div class="btn-group column">
-                    <div class="btn btn-lg dropdown-toggle btn--plain btn--quarts" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                    <div class="btn btn-lg dropdown-toggle btn--plain btn--quarts" data-bs-toggle="dropdown" aria-expanded="false" role="form">
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="searchDeviceDropDown">
-                            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un appareil">
+                            <input type="text" name="search" class="searchDropdown" placeholder="Rechercher un appareil">
                             <span class="fas fa-chevron-up"></span>
                         </div>
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="deviceDropDown">
@@ -65,9 +65,9 @@
                     </div>
                 </div>  
                 <div class="btn-group column">
-                    <div class="btn btn-lg dropdown-toggle btn--plain btn--fifth" type="button" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                    <div class="btn btn-lg dropdown-toggle btn--plain btn--fifth" data-bs-toggle="dropdown" aria-expanded="false" role="form">
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="searchInstrumentDropDown">
-                            <input type="text" name="search" id="searchDropdown" placeholder="Rechercher un ustensile">
+                            <input type="text" name="search" class="searchDropdown" placeholder="Rechercher un ustensile">
                             <span class="fas fa-chevron-up"></span>
                         </div>
                         <div class="flex align-items--center justify-content--space-between dropdown__search-box" id="instrumentDropDown">
@@ -81,11 +81,11 @@
                     </div>
                 </div>  
             </div>                                  
-        </section>
-        <section class="ly--lg-container mt--sm">
+        </div>
+        <div class="ly--lg-container mt--sm">
             <div class="row--has-columns-md flex flex-wrap wrapper">
             </div>
-        </section>
+        </div>
     </main>
     <!--Constructor Pattern-->
     <script src="/assets/scripts/pages/appNews.js" type="module"></script>

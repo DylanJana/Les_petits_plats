@@ -1,5 +1,5 @@
 import { createLinesInDDAppliances, createLinesInDDIngredients, createLinesInDDUstensils } from '../dropdowns/dropdowns.js';
-import { arrayTagsIngredients, arrayTagsAppliances, arrayTagsUstensils } from '../tags/tagsNew.js';
+import { arrayTagsIngredients, arrayTagsAppliances, arrayTagsUstensils } from '../tags/createTags.js';
 
 /*** Get input for each dropdown ***/
 let inputIngredientsDD = document.querySelector('#searchIngredientsDropDown input');

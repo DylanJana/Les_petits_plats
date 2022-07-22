@@ -1,4 +1,4 @@
-import { arrayTagsAppliances, arrayTagsIngredients, arrayTagsUstensils } from "../tags/tagsNew.js";
+import { arrayTagsAppliances, arrayTagsIngredients, arrayTagsUstensils } from "../tags/createTags.js";
 
 let searchBox = document.querySelector('#searchIngredientsDropDown');
 let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
@@ -20,7 +20,7 @@ export const displayDropDownIngredient = () => {
     })
 
     document.addEventListener('click', (e) => {
-        if(!e.target.matches('.btn--tiers') && !e.target.matches('#searchDropdown')) {
+        if(!e.target.matches('.btn--tiers') && !e.target.matches('.searchDropdown')) {
             searchBox.style.display ="none";
             ingredientsDropDown.style.display = "inline-flex";
             dropDownIngredients.classList.remove('btn--dropdown');
@@ -52,7 +52,7 @@ export const displayDropDownAppliances = () => {
     })
 
     document.addEventListener('click', (e) => {
-        if(!e.target.matches('.btn--quarts') && !e.target.matches('#searchDropdown')) {
+        if(!e.target.matches('.btn--quarts') && !e.target.matches('.searchDropdown')) {
             listAppliances.style.display="none";
             searchBoxAppliances.style.display ="none";
             appliancesDropDown.style.display = "inline-flex";
@@ -83,7 +83,7 @@ export const displayDropDownUstensils = () => {
     })
 
     document.addEventListener('click', (e) => {
-        if(!e.target.matches('.btn--fifth') && !e.target.matches('#searchDropdown')) {
+        if(!e.target.matches('.btn--fifth') && !e.target.matches('.searchDropdown')) {
             listUstensils.style.display="none";
             searchBoxUstensils.style.display ="none";
             ustensilsDropDown.style.display = "inline-flex";

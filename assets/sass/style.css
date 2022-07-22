@@ -301,26 +301,26 @@ ul {
   padding-right: 24px;
 }
 
-#searchDropdown {
+.searchDropdown {
   background: transparent;
   border: 0;
   color: white;
   width: 100%;
 }
 
-#searchDropdown::-webkit-input-placeholder {
+.searchDropdown::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-#searchDropdown:-ms-input-placeholder {
+.searchDropdown:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-#searchDropdown::-ms-input-placeholder {
+.searchDropdown::-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-#searchDropdown::placeholder {
+.searchDropdown::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
