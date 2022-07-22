@@ -1,6 +1,8 @@
 import { fetchRecipesJSON } from "../api/getData.js";
 /// DropDowns
 import { createLinesInDDIngredients, createLinesInDDAppliances, createLinesInDDUstensils } from "../features/dropdowns/dropdowns.js";
+/*** Search Advanced ***/
+import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../features/search/searchBardAdvanced.js";
 
 export let arrayIngredients = [];
 export let arrayAppliances = [];
@@ -24,6 +26,9 @@ export const dispatchRecipes = () => {
             dispatchIngredients(ingredientsInRecipe);
             dispatchAppareils(appareilInRecipe);
             dispatchUstensiles(ustensilesInRecipe);
+            inputIngredientsSearch(arrayIngredients);
+            inputAppliancesSearch(arrayAppliances);
+            inputUstensilsSearch(arrayUstensils);
         }
         createLinesInDDIngredients(arrayIngredients);
         createLinesInDDAppliances(arrayAppliances);

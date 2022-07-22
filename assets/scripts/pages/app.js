@@ -15,6 +15,7 @@ export const mainFunction = () => {
     displayDropDownAppliances();
     displayDropDownUstensils();
     /*** SearchBar ***/
+
     searchWordInRecipes();
     /*** SearchBard Advanced ***/
     inputIngredientsSearch(arrayIngredients);
