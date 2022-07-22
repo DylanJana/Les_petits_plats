@@ -24,5 +24,3 @@ const mainFunction = () => {
 }
 
 mainFunction();
-
-console.log("ARRAY INGREDIENT ", arrayIngredients)

@@ -1,16 +1,17 @@
 import { arrayIngredients, arrayAppliances, arrayUstensils, arrayRecipes, arrayRecipesAppliancesInJSON, dispatchRecipes, arrayRecipesUstensilsJSON } from '../../pages/dispatchRecipes.js';
 import {  getIngredientsOfMyRecipe, getAppliancesOfMyRecipe, getUstensilsOfMyRecipe, reloadWrapper, searchRecipes } from '../search/searchBar.js';
 import { removeLineInDropDown, addLineInDropDown } from '../dropdowns/dropdowns.js';
-import { inputIngredientsSearch } from '../search/searchBardAdvanced.js';
+import { inputAppliancesSearch, inputIngredientsSearch, inputUstensilsSearch } from '../search/searchBardAdvanced.js';
 
 let arrayFullTags = [];
-let arrayTagsIngredients = [];
-let arrayTagsAppliances = [];
-let arrayTagsUstensils = [];
+export let arrayTagsIngredients = [];
+export let arrayTagsAppliances = [];
+export let arrayTagsUstensils = [];
 let arrayIngredientsAvailables = [];
 let arrayAppliancesAvailables = [];
 let arrayUstensilsAvailables = [];
 let unAvailableRecipe = [];
+let arrayAppliancesSearchAdvanced = [];
 
 export function findTagValueClick(tagValue) {
     createTags(tagValue);
@@ -27,7 +28,7 @@ const createTags = (tagValue) => {
     }
 
     let dropDownAppliances = document.querySelectorAll('.dropdown--quarts ul li');
-    for(let i =0; i < dropDownAppliances.length; i++) {
+    for(let i = 0; i < dropDownAppliances.length; i++) {
         let itemAppliance = dropDownAppliances[i].querySelector('a').innerText;
         if(itemAppliance === tagValue) {
             createTagsAppliance(tagValue, arrayTagsAppliances);
@@ -100,20 +101,10 @@ const createTagsUstensils = (tagValue, arrayTagsUstensils) => {
     arrayTagsUstensils.push(tagValue);
     arrayFullTags.push(tagBoxDiv);
     closeTags(tagBoxDiv, tagValue);
-    console.log("Array Ustensils ", arrayTagsUstensils);
-    console.log("Array full tags ", arrayFullTags);
-
 }
-
-console.log("Array I ", arrayIngredients);
-console.log("Array A ", arrayAppliances);
-console.log("Array U ", arrayUstensils);
-console.log("Array R ", arrayRecipes);
-console.log("Array JSON A ", arrayRecipesAppliancesInJSON)
 
 const filterRecipeByIngredients = (tagValue) => {
     let recipesAvaibles = document.querySelectorAll('.avaible__recipe');
-    let arrayIngredients = [];
     arrayIngredientsAvailables = [];
     arrayAppliancesAvailables= [];
     arrayUstensilsAvailables = [];
@@ -137,13 +128,6 @@ const filterRecipeByIngredients = (tagValue) => {
             cleanDropDown(dropDownItems, arrayIngredientsAvailables, arrayTagsIngredients);
         }
     }
-
-    let listIngredients = document.querySelectorAll('.dropdown--tiers ul li a');
-    for(let i = 0; i < listIngredients.length; i++) {
-        arrayIngredients.push(listIngredients[i].innerText)
-    }
-
-    inputIngredientsSearch(arrayIngredients);
 }
 
 const filterRecipesByAppliances = (tagValue) => {
@@ -227,10 +211,13 @@ const reloadDropDown =  (currentRecipe) => {
     getUstensilsOfMyRecipe(indexOfCurrentRecipe, arrayUstensilsAvailables);
     let dropDownItems = document.querySelectorAll('.dropdown--tiers ul li');
     cleanDropDown(dropDownItems, arrayIngredientsAvailables, arrayTagsIngredients);
+    inputIngredientsSearch(arrayIngredientsAvailables);
     let dropDownAppliances = document.querySelectorAll('.dropdown--quarts ul li');
     cleanDropDown(dropDownAppliances, arrayAppliancesAvailables, arrayTagsAppliances);
+    inputAppliancesSearch(arrayAppliancesAvailables);
     let dropDownUstensils = document.querySelectorAll('.dropdown--fifth ul li');
     cleanDropDown(dropDownUstensils, arrayUstensilsAvailables, arrayTagsUstensils);
+    inputUstensilsSearch(arrayUstensilsAvailables);
 }
 
 const cleanDropDown = (dropDownItems, arrayItemsAvaibles, arrayTagsUses) => {
@@ -332,6 +319,8 @@ const deleteTagUstensils = (tagValue) => {
         let tagBoxCategory = arrayFullTags[i].querySelector('.box__tag__content');
         if(tagBoxCategory.classList.contains('tag--tiers')) {
             refreshWrapperByIngredients(unAvailableRecipe,tagBoxCategory.innerText);
+        } else if(tagBoxCategory.classList.contains('tag--fifth')) {
+            refreshWrapperByUstensils(unAvailableRecipe,tagBoxCategory.innerText);
         }
     }
 }
@@ -394,5 +383,6 @@ const updateArrayFullTags = (tagBoxDiv) => {
         reloadWrapper(arrayRecipes);
         searchRecipes(searchPrincipal.value, arrayRecipes);
         inputIngredientsSearch(arrayIngredients);
+        inputAppliancesSearch(arrayAppliances);
     }
 }

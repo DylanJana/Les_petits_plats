@@ -1,4 +1,5 @@
 import { createLinesInDDAppliances, createLinesInDDIngredients, createLinesInDDUstensils } from '../dropdowns/dropdowns.js';
+import { arrayTagsIngredients, arrayTagsAppliances, arrayTagsUstensils } from '../tags/tagsNew.js';
 
 /*** Get input for each dropdown ***/
 let inputIngredientsDD = document.querySelector('#searchIngredientsDropDown input');
@@ -24,7 +25,7 @@ export const inputIngredientsSearch = (arrayIngredientsAvailables) => {
 const searchIngredientsMoreThreeChar = (query, arrayIngredientsAvailables, refreshDDIngredients) => {
     for(let i = 0; i < arrayIngredientsAvailables.length; i++) {
         if(arrayIngredientsAvailables[i].toLowerCase().includes(query)) {
-            if(refreshDDIngredients.indexOf(arrayIngredientsAvailables[i]) < 0) {
+            if(refreshDDIngredients.indexOf(arrayIngredientsAvailables[i]) < 0 && !arrayTagsIngredients.includes(arrayIngredientsAvailables[i])) {
                 refreshDDIngredients.push(arrayIngredientsAvailables[i]);
             }
         }
@@ -33,6 +34,8 @@ const searchIngredientsMoreThreeChar = (query, arrayIngredientsAvailables, refre
 }
 
 const searchIngredientsLessThreeChar = (e, arrayIngredientsAvailables) => {
+    console.log("arrayIngredientsAvailables ", arrayIngredientsAvailables);
+
     let query = e.target.value.toLowerCase();
         if(query.length < 3 && e.keyCode === 8) {
             createLinesInDDIngredients(arrayIngredientsAvailables);
@@ -58,7 +61,7 @@ export const inputAppliancesSearch = (arrayAppliancesAvailables) => {
 
 const searchAppliancesMoreThreeChar = (query, arrayAppliancesAvailables, refreshDDAppliances) => {
     for(let i = 0; i < arrayAppliancesAvailables.length; i++) {
-        if(arrayAppliancesAvailables[i].toLowerCase().includes(query)) {
+        if(arrayAppliancesAvailables[i].toLowerCase().includes(query) && !arrayTagsAppliances.includes(arrayAppliancesAvailables[i])) {
             if(refreshDDAppliances.indexOf(arrayAppliancesAvailables[i]) < 0) {
                 refreshDDAppliances.push(arrayAppliancesAvailables[i]);
             }
@@ -93,7 +96,7 @@ export const inputUstensilsSearch = (arrayUstensilsAvailables) => {
 
 const searchUstensilsMoreThreeChar = (query, arrayUstensilsAvailables, refreshDDUstensils) => {
     for(let i = 0; i < arrayUstensilsAvailables.length; i++) {
-        if(arrayUstensilsAvailables[i].toLowerCase().includes(query)) {
+        if(arrayUstensilsAvailables[i].toLowerCase().includes(query) && !arrayTagsUstensils.includes(arrayUstensilsAvailables[i])) {
             if(refreshDDUstensils.indexOf(arrayUstensilsAvailables[i]) < 0) {
                 refreshDDUstensils.push(arrayUstensilsAvailables[i]);
             }

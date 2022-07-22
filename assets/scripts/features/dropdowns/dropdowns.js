@@ -1,3 +1,5 @@
+import { arrayTagsAppliances, arrayTagsIngredients, arrayTagsUstensils } from "../tags/tagsNew.js";
+
 let searchBox = document.querySelector('#searchIngredientsDropDown');
 let ingredientsDropDown = document.querySelector('#ingredientsDropDown');
 let searchBoxAppliances = document.querySelector('#searchDeviceDropDown');
@@ -31,7 +33,9 @@ export const createLinesInDDIngredients = (arrayIngredients) => {
     let dropDownIngredients = document.querySelector('.dropdown--tiers ul');
     dropDownIngredients.innerHTML = '';
     for(let i = 0; i < arrayIngredients.length; i++) {
-        addLineInDropDown(dropDownIngredients, arrayIngredients[i])
+        if(!arrayTagsIngredients.includes(arrayIngredients[i])) {
+            addLineInDropDown(dropDownIngredients, arrayIngredients[i])
+        }
     }
 }
 
@@ -61,7 +65,9 @@ export const createLinesInDDAppliances = (arrayAppliances) => {
     let dropDownAppliances = document.querySelector('.dropdown--quarts ul');
     dropDownAppliances.innerHTML = '';
     for(let i = 0; i < arrayAppliances.length; i++) {
-        addLineInDropDown(dropDownAppliances, arrayAppliances[i])
+        if(!arrayTagsAppliances.includes(arrayAppliances[i])) {
+            addLineInDropDown(dropDownAppliances, arrayAppliances[i])
+        }
     }
 }
 
@@ -90,7 +96,9 @@ export const createLinesInDDUstensils = (arrayUstensils) => {
     let dropDownUstensils = document.querySelector('.dropdown--fifth ul');
     dropDownUstensils.innerHTML = '';
     for(let i = 0; i < arrayUstensils.length; i++) {
-        addLineInDropDown(dropDownUstensils, arrayUstensils[i])
+        if(!arrayTagsUstensils.includes(arrayUstensils[i])) {
+            addLineInDropDown(dropDownUstensils, arrayUstensils[i])
+        }
     }
 }
 
