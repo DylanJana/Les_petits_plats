@@ -9,7 +9,6 @@ let btnDisabled = document.querySelectorAll('.btn');
 
 export const searchWordInRecipes = () => {
     let searchBar = document.querySelector("#search");
-    let alreadyRefresh = 0;
 
     searchBar.addEventListener('keyup', (e) => {
         let query = e.target.value.toLowerCase();
@@ -20,8 +19,8 @@ export const searchWordInRecipes = () => {
             createLinesInDDIngredients(arrayIngredients);
             createLinesInDDAppliances(arrayAppliances);
             createLinesInDDUstensils(arrayUstensils);
-            if(e.keyCode === 8 && alreadyRefresh === 0) {
-                alreadyRefresh++;
+
+            if (e.keyCode === 8 && query.length === 2) {
                 mainFunction();
             }
         }
