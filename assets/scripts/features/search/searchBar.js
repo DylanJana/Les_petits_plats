@@ -1,8 +1,7 @@
-import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, arrayUstensils, arrayIngredients, arrayAppliances } from "../../pages/dispatchRecipes.js";
+import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, arrayUstensils, arrayIngredients, arrayAppliances, dispatchRecipes } from "../../pages/dispatchRecipes.js";
 import { createLinesInDDUstensils, createLinesInDDIngredients, createLinesInDDAppliances } from "../dropdowns/dropdowns.js";
 /*** Search Advanced ***/
 import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../search/searchBardAdvanced.js";
-import { mainFunction } from '../../pages/app.js';
 
 let wrapperContainer = document.createElement('div');
 let btnDisabled = document.querySelectorAll('.btn');
@@ -15,13 +14,14 @@ export const searchWordInRecipes = () => {
         
         if(query.length >= 3) {
             searchRecipes(query, arrayRecipes);
+            let numberAvailablesRecipes = document.querySelectorAll('.avaible__recipe').length;
+            sorryNotRecipes(numberAvailablesRecipes);
         } else if(query.length < 3) {
             createLinesInDDIngredients(arrayIngredients);
             createLinesInDDAppliances(arrayAppliances);
             createLinesInDDUstensils(arrayUstensils);
-
-            if (e.keyCode === 8 && query.length === 2) {
-                mainFunction();
+            if(query.length === 2) {
+                dispatchRecipes();
             }
         }
     })
@@ -47,6 +47,7 @@ export const searchRecipes = (query, arrayRecipes) => {
             getUstensilsOfMyRecipe(indexOfCurrentRecipe, arrayUstensilsAvailables);
         }
     }
+    
     let numberAvailablesRecipes = document.querySelectorAll('.avaible__recipe').length;
     sorryNotRecipes(numberAvailablesRecipes);
     searchRecipesAfterBackspace(arrayRecipesUnavailables);
@@ -64,10 +65,8 @@ const searchRecipesAfterBackspace = (arrayRecipesUnavaibles) => {
                 searchRecipesMoreThreeChar(query, arrayRecipesUnavaibles);
             } else if(arrayRecipes.length !== arrayRecipesUnavaibles.length) {
                 reloadWrapper(arrayRecipesUnavaibles);
-            }
-            wrapperContainer.style.display = "none";
-            if(wrapperContainer.hasAttribute('style')) {
-                removeClassDisabled();
+            } else if(query.length <= 3) {
+                    removeClassDisabled();
             }
         }
     })
@@ -81,6 +80,10 @@ const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
         if(recipeUnAvaibleContent.toLowerCase().includes(query)) {
             currentRecipe.classList.add('avaible__recipe');
             currentRecipe.style.display = 'inline-flex';
+            wrapperContainer.style.display = "none";
+            if(wrapperContainer.hasAttribute('style')) {
+                removeClassDisabled();
+            }
         }
     }
 }
