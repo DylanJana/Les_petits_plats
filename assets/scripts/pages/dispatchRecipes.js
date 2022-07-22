@@ -24,7 +24,6 @@ export const dispatchRecipes = () => {
             dispatchIngredients(ingredientsInRecipe);
             dispatchAppareils(appareilInRecipe);
             dispatchUstensiles(ustensilesInRecipe);
-            console.log("recette ---------------------- ", data.recipes[i])
         }
         createLinesInDDIngredients(arrayIngredients);
         createLinesInDDAppliances(arrayAppliances);
@@ -84,7 +83,6 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
 
 export const dispatchIngredients = (ingredientsInRecipe) => {
     for(let i = 0; i < ingredientsInRecipe.length; i++) {
-        console.log("Tableau des ingredients ", ingredientsInRecipe[i].ingredient)
         let ingredientInRecipe = ingredientsInRecipe[i].ingredient;
         if(arrayIngredients.indexOf(ingredientInRecipe) < 0) {
             arrayIngredients.push(ingredientInRecipe);

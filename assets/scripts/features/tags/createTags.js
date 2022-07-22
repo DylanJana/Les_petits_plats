@@ -73,9 +73,6 @@ const createTagsAppliance = (tagValue, arrayTagsAppliances) => {
     arrayTagsAppliances.push(tagValue);
     arrayFullTags.push(tagBoxDiv);
     closeTags(tagBoxDiv, tagValue);
-    console.log("Array appliances ", arrayTagsAppliances);
-    console.log("Array full tags ", arrayFullTags);
-
 }
 
 const createTagsUstensils = (tagValue, arrayTagsUstensils) => {

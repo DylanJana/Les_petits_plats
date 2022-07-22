@@ -34,7 +34,6 @@ const searchIngredientsMoreThreeChar = (query, arrayIngredientsAvailables, refre
 }
 
 const searchIngredientsLessThreeChar = (e, arrayIngredientsAvailables) => {
-    console.log("arrayIngredientsAvailables ", arrayIngredientsAvailables);
 
     let query = e.target.value.toLowerCase();
         if(query.length < 3 && e.keyCode === 8) {
