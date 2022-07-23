@@ -32,11 +32,11 @@ export const displayDropDownIngredient = () => {
 export const createLinesInDDIngredients = (arrayIngredients) => {
     let dropDownIngredients = document.querySelector('.dropdown--tiers ul');
     dropDownIngredients.innerHTML = '';
-    for(let i = 0; i < arrayIngredients.length; i++) {
-        if(!arrayTagsIngredients.includes(arrayIngredients[i])) {
-            addLineInDropDown(dropDownIngredients, arrayIngredients[i])
+    arrayIngredients.forEach(ingredient => {
+        if(!arrayTagsIngredients.includes(ingredient)) {
+            addLineInDropDown(dropDownIngredients, ingredient)
         }
-    }
+    })
 }
 
 
@@ -64,11 +64,11 @@ export const displayDropDownAppliances = () => {
 export const createLinesInDDAppliances = (arrayAppliances) => {
     let dropDownAppliances = document.querySelector('.dropdown--quarts ul');
     dropDownAppliances.innerHTML = '';
-    for(let i = 0; i < arrayAppliances.length; i++) {
-        if(!arrayTagsAppliances.includes(arrayAppliances[i])) {
-            addLineInDropDown(dropDownAppliances, arrayAppliances[i])
+    arrayAppliances.forEach(appliance => {
+        if(!arrayTagsAppliances.includes(appliance)) {
+            addLineInDropDown(dropDownAppliances, appliance)
         }
-    }
+    })
 }
 
 export const displayDropDownUstensils = () => {
@@ -95,11 +95,11 @@ export const displayDropDownUstensils = () => {
 export const createLinesInDDUstensils = (arrayUstensils) => {
     let dropDownUstensils = document.querySelector('.dropdown--fifth ul');
     dropDownUstensils.innerHTML = '';
-    for(let i = 0; i < arrayUstensils.length; i++) {
-        if(!arrayTagsUstensils.includes(arrayUstensils[i])) {
-            addLineInDropDown(dropDownUstensils, arrayUstensils[i])
+    arrayUstensils.forEach(ustensil => {
+        if(!arrayTagsUstensils.includes(ustensil)) {
+            addLineInDropDown(dropDownUstensils, ustensil)
         }
-    }
+    })
 }
 
 export const addLineInDropDown = (dropDownList, lineItem) => {

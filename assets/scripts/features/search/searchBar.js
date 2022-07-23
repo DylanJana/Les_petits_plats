@@ -2,9 +2,8 @@ import { arrayRecipes, arrayRecipesUstensilsJSON, arrayRecipesAppliancesInJSON, 
 import { createLinesInDDUstensils, createLinesInDDIngredients, createLinesInDDAppliances } from "../dropdowns/dropdowns.js";
 /*** Search Advanced ***/
 import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } from "../search/searchBardAdvanced.js";
-
 let wrapperContainer = document.createElement('div');
-let btnDisabled = document.querySelectorAll('.btn');
+let allBtnDisabled = document.querySelectorAll('.btn');
 
 export const searchWordInRecipes = () => {
     let searchBar = document.querySelector("#search");
@@ -32,8 +31,8 @@ export const searchRecipes = (query, arrayRecipes) => {
     let arrayRecipesUnavailables = [];
     let arrayAppliancesAvailables = [];
     let arrayUstensilsAvailables = [];
-    for(let i = 0; i < arrayRecipes.length; i++) {
-        let currentRecipe = arrayRecipes[i];
+
+    const checkRecipeIsAvailabe = (currentRecipe) => {
         let recipeAvaible = currentRecipe.querySelector('.card__recipe__body');
         let recipeAvaibleContent = recipeAvaible.innerText;
         if(!(recipeAvaibleContent.toLowerCase().includes(query))) {
@@ -47,6 +46,8 @@ export const searchRecipes = (query, arrayRecipes) => {
             getUstensilsOfMyRecipe(indexOfCurrentRecipe, arrayUstensilsAvailables);
         }
     }
+
+    arrayRecipes.filter(checkRecipeIsAvailabe);
     
     let numberAvailablesRecipes = document.querySelectorAll('.avaible__recipe').length;
     sorryNotRecipes(numberAvailablesRecipes);
@@ -66,15 +67,15 @@ const searchRecipesAfterBackspace = (arrayRecipesUnavaibles) => {
             } else if(arrayRecipes.length !== arrayRecipesUnavaibles.length) {
                 reloadWrapper(arrayRecipesUnavaibles);
             } else if(query.length <= 3) {
-                    removeClassDisabled();
+                removeClassDisabled();
             }
         }
     })
 }
 
 const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
-    for(let i = 0; i < arrayRecipesUnavaibles.length; i++) {
-        let currentRecipe = arrayRecipesUnavaibles[i];
+
+    const checkRecipeIsAvaibleNow = (currentRecipe) => {
         let unAvailableRecipe = currentRecipe.querySelector('.card__recipe__body');
         let recipeUnAvaibleContent = unAvailableRecipe.innerText;
         if(recipeUnAvaibleContent.toLowerCase().includes(query)) {
@@ -86,55 +87,57 @@ const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
             }
         }
     }
+
+    arrayRecipesUnavaibles.filter(checkRecipeIsAvaibleNow)
 }
 
 export const reloadWrapper = (arrayRecipesUnavaibles) => {
-    for(let i = 0; i < arrayRecipesUnavaibles.length; i++) {
-        arrayRecipesUnavaibles[i].classList.add('avaible__recipe');
-        arrayRecipesUnavaibles[i].removeAttribute('style');
-    }
+    arrayRecipesUnavaibles.forEach(arrayRecipeUnavaible => {
+        arrayRecipeUnavaible.classList.add('avaible__recipe');
+        arrayRecipeUnavaible.removeAttribute('style');
+    })
 }
 
 export const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayIngredientsAvailables) => {
     let currentListRecipe = currentRecipe.querySelector('.recipe__list');
     let currentIngredientsNames = currentListRecipe.querySelectorAll('li span');
-    for(let i = 0; i < currentIngredientsNames.length; i++) {
-        for(let j = 0; j < arrayIngredients.length; j++) {
-            let currentIngredient = arrayIngredients[j];
-            if(currentIngredient === currentIngredientsNames[i].innerText.trim()) {
-                if((arrayIngredientsAvailables.indexOf(currentIngredient) < 0)) {
-                    arrayIngredientsAvailables.push(currentIngredient);
+    currentIngredientsNames.forEach(currentIngredientsName => {
+        arrayIngredients.forEach(ingredient => {
+            if(ingredient === currentIngredientsName.innerText.trim()) {
+                if((arrayIngredientsAvailables.indexOf(ingredient) < 0)) {
+                    arrayIngredientsAvailables.push(ingredient);
                 }
             }
-        }
-    }
+        })
+    })
     createLinesInDDIngredients(arrayIngredientsAvailables);
 }
 
 
 export const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAvailables) => {
-    for(let i = 0; i < arrayRecipesAppliancesInJSON.length; i++) {
-        if( i === indexOfCurrentRecipe) {
-            let currentRecipeAppliancesJSON = arrayRecipesAppliancesInJSON[i];
-            if(arrayAppliancesAvailables.indexOf(currentRecipeAppliancesJSON) < 0) {
-                arrayAppliancesAvailables.push(currentRecipeAppliancesJSON);
+   const indexIsSame = (appliance, index) => {
+        if(index === indexOfCurrentRecipe) {
+            if(arrayAppliancesAvailables.indexOf(appliance) < 0) {
+                arrayAppliancesAvailables.push(appliance);
             }
         }
-    }
+   }
+
+    arrayRecipesAppliancesInJSON.forEach(indexIsSame);
     createLinesInDDAppliances(arrayAppliancesAvailables);
 }
 
 export const getUstensilsOfMyRecipe = (indexOfCurrentRecipe, arrayUstensilsAvailables) => {
-    for(let i = 0; i < arrayRecipesUstensilsJSON.length; i++) {
-        let currentRecipeUstensilsJSON = arrayRecipesUstensilsJSON[i];
-        if((arrayRecipesUstensilsJSON.indexOf(currentRecipeUstensilsJSON) === indexOfCurrentRecipe)) {
-            for(let j= 0; j < currentRecipeUstensilsJSON.length; j++) {
-                if(arrayUstensilsAvailables.indexOf(currentRecipeUstensilsJSON[j]) < 0) {
-                    arrayUstensilsAvailables.push(currentRecipeUstensilsJSON[j])
+    arrayRecipesUstensilsJSON.forEach(ustensil => {
+        if((arrayRecipesUstensilsJSON.indexOf(ustensil) === indexOfCurrentRecipe)) {
+            ustensil.forEach(currentUstensil => {
+                if(arrayUstensilsAvailables.indexOf(currentUstensil) < 0) {
+                    arrayUstensilsAvailables.push(currentUstensil)
                 }
-            }
+            })
         }
-    }
+    })
+
     createLinesInDDUstensils(arrayUstensilsAvailables);
 }
 
@@ -153,14 +156,14 @@ const sorryNotRecipes = (numberAvailablesRecipes) => {
         wrapperContainer.innerHTML = messageNoRecipes;
         wrapper.appendChild(wrapperContainer);
 
-        for(let i = 0; i < btnDisabled.length; i++) {
-            btnDisabled[i].classList.add("btn--disabled");
-        }
+        allBtnDisabled.forEach(btnDisabled => {
+            btnDisabled.classList.add("btn--disabled");
+        })
     }
 }
 
 const removeClassDisabled = () => {
-    for(let i = 0; i < btnDisabled.length; i++) {
-        btnDisabled[i].classList.remove("btn--disabled");
-    }
+    allBtnDisabled.forEach(btnDisabled => {
+        btnDisabled.classList.remove("btn--disabled");
+    })
 }
