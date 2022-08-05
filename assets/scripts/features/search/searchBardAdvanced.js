@@ -6,18 +6,22 @@ let inputIngredientsDD = document.querySelector('#searchIngredientsDropDown inpu
 let inputAppliancesDD = document.querySelector('#searchDeviceDropDown input');
 let inputUstensilsDD = document.querySelector('#searchInstrumentDropDown input');
 
+/*** Search Bar DropDown Ingredients ***/
+// This function search ingredient in ingredients dropdown menu.
 export const inputIngredientsSearch = (arrayIngredientsAvailables) => {
     let refreshDDIngredients = [];
     inputIngredientsDD.addEventListener('keyup', (e) => {
         let query = e.target.value.toLowerCase();
 
         if(query.length >= 3 ) {
+            // If my query contains more than three or three character this function is run
             searchIngredientsMoreThreeChar(query, arrayIngredientsAvailables, refreshDDIngredients);
         }
         refreshDDIngredients = [];
     })
 
     inputIngredientsDD.addEventListener('keyup', (e) => {
+         // If my query contains less than three character this function is run
         searchIngredientsLessThreeChar(e, arrayIngredientsAvailables);
     })
 }
@@ -41,19 +45,21 @@ const searchIngredientsLessThreeChar = (e, arrayIngredientsAvailables) => {
         }
 }
 
-/*** Search Bar DropDown Appareils ***/
+/*** Search Bar DropDown Appliances ***/
 export const inputAppliancesSearch = (arrayAppliancesAvailables) => {
     let refreshDDAppliances = [];
     inputAppliancesDD.addEventListener('keyup', (e) => {
         let query = e.target.value.toLowerCase();
 
         if(query.length >= 3 ) {
+            // If my query contains more than three or three character this function is run
             searchAppliancesMoreThreeChar(query, arrayAppliancesAvailables, refreshDDAppliances);
         }
         refreshDDAppliances = [];
     })
 
     inputAppliancesDD.addEventListener('keyup', (e) => {
+        // If my query contains less than three character this function is run
         searchAppliancesLessThreeChar(e, arrayAppliancesAvailables);
     })
 }
@@ -83,6 +89,7 @@ export const inputUstensilsSearch = (arrayUstensilsAvailables) => {
         let query = e.target.value.toLowerCase();
 
         if(query.length >= 3 ) {
+             // If my query contains less than three character this function is run
             searchUstensilsMoreThreeChar(query, arrayUstensilsAvailables, refreshDDUstensils);
         }
         refreshDDUstensils = [];

@@ -1,3 +1,4 @@
+// Get data of recipes.json
 export async function fetchRecipesJSON(){
     const response = await fetch("/data/recipes.json");
     const data = await response.json();

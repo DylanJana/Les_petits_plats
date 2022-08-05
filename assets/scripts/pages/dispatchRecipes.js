@@ -12,6 +12,7 @@ export let arrayRecipesUstensilsJSON = [];
 export let arrayRecipesAppliancesInJSON = [];
 export let wrapperRecipes = document.querySelector(".wrapper");
 
+// This function show all recipes, all ingredients, appliances and ustensils
 export const dispatchRecipes = () => {
     wrapperRecipes.innerHTML = '';
     fetchRecipesJSON()
@@ -36,6 +37,7 @@ export const dispatchRecipes = () => {
     })
 }
 
+// This function create a template of a recipe
 const dispatchRecipesInDom = (recipe) =>{
     let articleRecipe = document.createElement("article");
     articleRecipe.classList.add('column', 'card__recipe', 'col-lg-4', 'col-12', 'mb--sm',  'flex', 'flex--column', 'avaible__recipe');
@@ -64,6 +66,7 @@ const dispatchRecipesInDom = (recipe) =>{
     arrayRecipesAppliancesInJSON.push(recipesAppliances);
 }
 
+// This function add every ingredient of a recipe in a template recipe
 const addRecipeIngredientsInCard = (recipesIngredients) => {
     let list = document.querySelectorAll('.recipe__list');
 
@@ -86,6 +89,7 @@ const addRecipeIngredientsInCard = (recipesIngredients) => {
     }
 }
 
+// This function add all ingredients once time in arrayIngredients
 export const dispatchIngredients = (ingredientsInRecipe) => {
     for(let i = 0; i < ingredientsInRecipe.length; i++) {
         let ingredientInRecipe = ingredientsInRecipe[i].ingredient;
@@ -95,12 +99,14 @@ export const dispatchIngredients = (ingredientsInRecipe) => {
     }
 }
 
+// This function add all appliances once time in arrayAppliances
 export const dispatchAppareils = (appareilInRecipe) => {
     if(arrayAppliances.indexOf(appareilInRecipe) < 0) {
         arrayAppliances.push(appareilInRecipe);
     }
 }
 
+// This function add all ustensils once time in arrayUstensils
 export const dispatchUstensiles = (ustensilesInRecipe) => {
     for(let i = 0; i < ustensilesInRecipe.length; i++) {
         let ustensileInRecipe = ustensilesInRecipe[i];
