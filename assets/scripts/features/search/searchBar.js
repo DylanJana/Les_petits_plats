@@ -6,9 +6,11 @@ import { inputIngredientsSearch, inputAppliancesSearch, inputUstensilsSearch } f
 let wrapperContainer = document.createElement('div');
 let btnDisabled = document.querySelectorAll('.btn');
 
+// This function is the principal function to search a word in a recipe
 export const searchWordInRecipes = () => {
     let searchBar = document.querySelector("#search");
 
+    // For each letter enter in the search bar this function is run
     searchBar.addEventListener('keyup', (e) => {
         let query = e.target.value.toLowerCase();
         
@@ -27,21 +29,27 @@ export const searchWordInRecipes = () => {
     })
 }
 
+// This function search if my query match with a recipe in my website
 export const searchRecipes = (query, arrayRecipes) => {
     let arrayIngredientsAvailables = [];
     let arrayRecipesUnavailables = [];
     let arrayAppliancesAvailables = [];
     let arrayUstensilsAvailables = [];
+
+     // For each recipes : my query match with her or not ?
     for(let i = 0; i < arrayRecipes.length; i++) {
         let currentRecipe = arrayRecipes[i];
         let recipeAvaible = currentRecipe.querySelector('.card__recipe__body');
         let recipeAvaibleContent = recipeAvaible.innerText;
+
+        // Not match, I remove avaible_recipe class and hide this recipe
         if(!(recipeAvaibleContent.toLowerCase().includes(query))) {
             currentRecipe.classList.remove('avaible__recipe');
             currentRecipe.style.display = 'none';
             arrayRecipesUnavailables.push(currentRecipe);
         } else {
             let indexOfCurrentRecipe = arrayRecipes.indexOf(currentRecipe);
+            // My query match, I refresh my ingredients, appliances, ustensils dropdown menu
             getIngredientsOfMyRecipe(arrayIngredients, currentRecipe, arrayIngredientsAvailables);
             getAppliancesOfMyRecipe(indexOfCurrentRecipe, arrayAppliancesAvailables);
             getUstensilsOfMyRecipe(indexOfCurrentRecipe, arrayUstensilsAvailables);
@@ -56,6 +64,7 @@ export const searchRecipes = (query, arrayRecipes) => {
     inputUstensilsSearch(arrayUstensilsAvailables);
 }
 
+// My user delete a character of my query, I run again my search function
 const searchRecipesAfterBackspace = (arrayRecipesUnavaibles) => {
     let searchBar = document.querySelector("#search");
     searchBar.addEventListener('keyup', (e) => {
@@ -72,6 +81,7 @@ const searchRecipesAfterBackspace = (arrayRecipesUnavaibles) => {
     })
 }
 
+// My user add a character of my query, I check my unavaibles recipes and show an unavaible recipes if match with my query
 const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
     for(let i = 0; i < arrayRecipesUnavaibles.length; i++) {
         let currentRecipe = arrayRecipesUnavaibles[i];
@@ -81,6 +91,7 @@ const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
             currentRecipe.classList.add('avaible__recipe');
             currentRecipe.style.display = 'inline-flex';
             wrapperContainer.style.display = "none";
+             // If wrapper has a attribute style, I remove this attribute
             if(wrapperContainer.hasAttribute('style')) {
                 removeClassDisabled();
             }
@@ -88,6 +99,7 @@ const searchRecipesMoreThreeChar = (query, arrayRecipesUnavaibles) => {
     }
 }
 
+// This function refresh my wrapper
 export const reloadWrapper = (arrayRecipesUnavaibles) => {
     for(let i = 0; i < arrayRecipesUnavaibles.length; i++) {
         arrayRecipesUnavaibles[i].classList.add('avaible__recipe');
@@ -95,6 +107,8 @@ export const reloadWrapper = (arrayRecipesUnavaibles) => {
     }
 }
 
+// For each avaible recipe, I get his ingredients. For each ingredient of my recipe if my ingredient match with a ingredient in this website then
+//I add this ingredient in my array arrayIngredientsAvailables
 export const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayIngredientsAvailables) => {
     let currentListRecipe = currentRecipe.querySelector('.recipe__list');
     let currentIngredientsNames = currentListRecipe.querySelectorAll('li span');
@@ -108,10 +122,12 @@ export const getIngredientsOfMyRecipe = (arrayIngredients, currentRecipe, arrayI
             }
         }
     }
+    // I create lines in my dropdown ingredients menu
     createLinesInDDIngredients(arrayIngredientsAvailables);
 }
 
-
+// For each avaible recipe, I get his appliance. If my appliance match with an appliance in this website then
+//I add him in my arrayAppliancesAvailables array
 export const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAvailables) => {
     for(let i = 0; i < arrayRecipesAppliancesInJSON.length; i++) {
         if( i === indexOfCurrentRecipe) {
@@ -121,9 +137,12 @@ export const getAppliancesOfMyRecipe = (indexOfCurrentRecipe, arrayAppliancesAva
             }
         }
     }
+    // I create lines in my dropdown appliances menu
     createLinesInDDAppliances(arrayAppliancesAvailables);
 }
 
+// For each avaible recipe, I get his ustensils. If my ustensil match with an ustensil in this website then
+//I add him in my  arrayUstensilsAvailables
 export const getUstensilsOfMyRecipe = (indexOfCurrentRecipe, arrayUstensilsAvailables) => {
     for(let i = 0; i < arrayRecipesUstensilsJSON.length; i++) {
         let currentRecipeUstensilsJSON = arrayRecipesUstensilsJSON[i];
@@ -135,9 +154,11 @@ export const getUstensilsOfMyRecipe = (indexOfCurrentRecipe, arrayUstensilsAvail
             }
         }
     }
+    // I create lines in my dropdown ustensils menu
     createLinesInDDUstensils(arrayUstensilsAvailables);
 }
 
+// This function is run when none recipes are avaibles
 const sorryNotRecipes = (numberAvailablesRecipes) => {
     if(numberAvailablesRecipes === 0) {
         wrapperContainer.classList.add('w--100');
@@ -159,6 +180,7 @@ const sorryNotRecipes = (numberAvailablesRecipes) => {
     }
 }
 
+// I remove btn--disabled class on my dropdowns menus. Dropdowns menus are availables !
 const removeClassDisabled = () => {
     for(let i = 0; i < btnDisabled.length; i++) {
         btnDisabled[i].classList.remove("btn--disabled");

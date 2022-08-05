@@ -8,6 +8,7 @@ export let arrayAppliancesAvailables = [];
 export let arrayUstensilsAvailables = [];
 export let unAvailableRecipe = [];
 
+// This function filter recipes of my website with availables ingredients
 export const filterRecipeByIngredients = (tagValue) => {
     let recipesAvaibles = document.querySelectorAll('.avaible__recipe');
     arrayIngredientsAvailables = [];
@@ -35,6 +36,7 @@ export const filterRecipeByIngredients = (tagValue) => {
     }
 }
 
+// This function filter recipes of my website with availables appliances
 export const filterRecipesByAppliances = (tagValue) => {
     let recipePast = [];
     arrayIngredientsAvailables = [];
@@ -69,6 +71,7 @@ export const filterRecipesByAppliances = (tagValue) => {
     }
 }
 
+// This function filter recipes of my website with availables ustensils
 export const filterRecipeByUstensils = (tagValue) => {
     let recipePast = [];
     let indexOfRecipesAvailables = [];

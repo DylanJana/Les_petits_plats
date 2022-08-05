@@ -7,10 +7,13 @@ export let arrayTagsAppliances = [];
 export let arrayTagsUstensils = [];
 
 /*** CREATE TAGS */
+// My user click on a element present in dropdowns menus
 export function findTagValueClick(tagValue) {
     createTags(tagValue);
 };
 
+// This function check if the tag match with an ingredient, appliance or ustensil. 
+// If the tag match with ingredient element, this function create ingredient tag etc...
 const createTags = (tagValue) => {
     let dropDownIngredients = document.querySelectorAll('.dropdown--tiers ul li');
     for(let i = 0; i < dropDownIngredients.length; i++) {
@@ -41,6 +44,7 @@ const createTags = (tagValue) => {
     searchWithRestTags(arrayFullTags);
 }
 
+// This function create tag Ingredient (Background, template etc...)
 const createTagIngredient = (tagValue, arrayTagsIngredients) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
     let tagBoxDiv = document.createElement('div');
@@ -58,6 +62,7 @@ const createTagIngredient = (tagValue, arrayTagsIngredients) => {
     closeTags(tagBoxDiv, tagValue);
 }
 
+// This function create tag Appliance (Background, template etc...)
 const createTagsAppliance = (tagValue, arrayTagsAppliances) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
     let tagBoxDiv = document.createElement('div');
@@ -75,6 +80,7 @@ const createTagsAppliance = (tagValue, arrayTagsAppliances) => {
     closeTags(tagBoxDiv, tagValue);
 }
 
+// This function create tag Ustensils (Background, template etc...)
 const createTagsUstensils = (tagValue, arrayTagsUstensils) => {
     let tagBoxContainer = document.querySelector('.box__tag__container');
     let tagBoxDiv = document.createElement('div');
@@ -92,6 +98,7 @@ const createTagsUstensils = (tagValue, arrayTagsUstensils) => {
     closeTags(tagBoxDiv, tagValue);
 }
 
+// This function is run when user click on cross of a tag
 const closeTags = (tagBoxDiv, tagValue) => {
     let closeTag = tagBoxDiv.querySelector('span');
     closeTag.addEventListener('click', (e) => {
@@ -102,6 +109,7 @@ const closeTags = (tagBoxDiv, tagValue) => {
     })
 }
 
+// This function run a search with the tags remainings
 const searchWithRestTags = (arrayFullTags) => {
     for(let i = 0; i < arrayFullTags.length; i++) {
         let tagBoxCategory = arrayFullTags[i].querySelector('.box__tag__content');

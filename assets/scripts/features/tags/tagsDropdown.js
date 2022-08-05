@@ -5,6 +5,7 @@ import {  getIngredientsOfMyRecipe, getAppliancesOfMyRecipe, getUstensilsOfMyRec
 import { removeLineInDropDown } from '../dropdowns/dropdowns.js';
 import { inputAppliancesSearch, inputIngredientsSearch, inputUstensilsSearch } from '../search/searchBardAdvanced.js';
 
+// This function reload dropdowns after each changes
 export const reloadDropDown =  (currentRecipe) => {
     let indexOfCurrentRecipe =  arrayRecipes.indexOf(currentRecipe)
     getIngredientsOfMyRecipe(arrayIngredients, currentRecipe, arrayIngredientsAvailables);
@@ -21,6 +22,7 @@ export const reloadDropDown =  (currentRecipe) => {
     inputUstensilsSearch(arrayUstensilsAvailables);
 }
 
+// At every time user choose a tag, I run this function to delete the line in my dropdown who match with the tag chooses
 export const cleanDropDown = (dropDownItems, arrayItemsAvaibles, arrayTagsUses) => {
     for(let i = 0; i < arrayItemsAvaibles.length; i++) {
         for(let j = 0; j < arrayTagsUses.length; j++) {
@@ -31,6 +33,7 @@ export const cleanDropDown = (dropDownItems, arrayItemsAvaibles, arrayTagsUses) 
     }
 }
 
+// This function is run to refresh my website with the recipes matches with my ingredients remaining
 export const refreshWrapperByIngredients = (unAvailableRecipe, tagValue) => {
     for(let i = 0; i < unAvailableRecipe.length; i++) {
         let recipeList = unAvailableRecipe[i].querySelector('.recipe__list')
@@ -42,6 +45,7 @@ export const refreshWrapperByIngredients = (unAvailableRecipe, tagValue) => {
     }
 }
 
+// This function is run to refresh my website with the recipes matches with my ustensils remaining
 export const refreshWrapperByUstensils = (unAvailableRecipe, tagValue) => {
     let indexOfRecipesAvailables = [];
     for(let i = 0; i < arrayRecipesUstensilsJSON.length; i++) {
@@ -62,6 +66,7 @@ export const refreshWrapperByUstensils = (unAvailableRecipe, tagValue) => {
     }
 }
 
+// This function is run to refresh my arrayFullTags
 export const updateArrayFullTags = (tagBoxDiv) => {
     let findIndexOfElmt = arrayFullTags.indexOf(tagBoxDiv);
     if(findIndexOfElmt > -1) {
