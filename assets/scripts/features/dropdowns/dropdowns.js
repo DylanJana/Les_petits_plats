@@ -7,6 +7,7 @@ let appliancesDropDown = document.querySelector('#deviceDropDown');
 let searchBoxUstensils = document.querySelector('#searchInstrumentDropDown');
 let ustensilsDropDown = document.querySelector('#instrumentDropDown');
 
+// This function is use to open and close ingredients menu dropdown
 export const displayDropDownIngredient = () => {
     let dropDownIngredients = document.querySelector('.btn.btn--tiers');
     let dropDown = document.querySelector('.dropdown-menu');
@@ -29,6 +30,7 @@ export const displayDropDownIngredient = () => {
     })
 }
 
+// This function is use to create lines in ingredients dropdown menu
 export const createLinesInDDIngredients = (arrayIngredients) => {
     let dropDownIngredients = document.querySelector('.dropdown--tiers ul');
     dropDownIngredients.innerHTML = '';
@@ -39,7 +41,7 @@ export const createLinesInDDIngredients = (arrayIngredients) => {
     }
 }
 
-
+// This function is use to open and close appliances menu dropdown
 export const displayDropDownAppliances = () => {
     let dropDownAppliances = document.querySelector('.btn.btn--quarts.dropdown-toggle');
     let listAppliances = document.querySelector('.dropdown--quarts');
@@ -61,6 +63,7 @@ export const displayDropDownAppliances = () => {
     })
 }
 
+// This function is use to create lines in appliances dropdown menu
 export const createLinesInDDAppliances = (arrayAppliances) => {
     let dropDownAppliances = document.querySelector('.dropdown--quarts ul');
     dropDownAppliances.innerHTML = '';
@@ -71,6 +74,7 @@ export const createLinesInDDAppliances = (arrayAppliances) => {
     }
 }
 
+// This function is use to open and close ustensils menu dropdown
 export const displayDropDownUstensils = () => {
     let dropDownUstensils = document.querySelector('.btn.btn--fifth.dropdown-toggle');
     let listUstensils = document.querySelector('.dropdown--fifth');
@@ -92,6 +96,7 @@ export const displayDropDownUstensils = () => {
     })
 }
 
+// This function is use to create lines in ustensils dropdown menu
 export const createLinesInDDUstensils = (arrayUstensils) => {
     let dropDownUstensils = document.querySelector('.dropdown--fifth ul');
     dropDownUstensils.innerHTML = '';
@@ -102,6 +107,7 @@ export const createLinesInDDUstensils = (arrayUstensils) => {
     }
 }
 
+// This function adds a line to the dropdown menu
 export const addLineInDropDown = (dropDownList, lineItem) => {
     let liItemIngredient = document.createElement('li');
     liItemIngredient.classList.add('col-md-4', 'col-12', 'mb--xxs');
@@ -111,6 +117,7 @@ export const addLineInDropDown = (dropDownList, lineItem) => {
         dropDownList.appendChild(liItemIngredient);
 }
 
+// This function removes a line to the dropdown menu
 export const removeLineInDropDown = (dropDownItems, lineItem) => {
     for(let i = 0; i < dropDownItems.length; i++) {
         if(dropDownItems[i].innerText.trim() === lineItem) {
