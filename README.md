@@ -3,7 +3,7 @@
 - Ouvrez le dossier dans VSCode ou Sublime Text ou autre Éditeur de texte
 - Faire la commande : git init
 - Puis : git clone https://github.com/DylanJana/Les_petits_plats.git
-- Si vous voulez donner un alias au projet : git remote add <alias> https://github.com/DylanJana/Les_petits_plats.git
+- Si vous voulez donner un alias au projet : git remote add votreAlias https://github.com/DylanJana/Les_petits_plats.git
  - Pour récupérer toutes les branches du projet : git fetch --all
   Vous pouvez maintenant naviguer dans le projet :
   - git checkout main pour vous rendre dans la branche main
